@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Minimal Typography - Clean Catalog Style */
+@layer utilities {
+  .text-experimental {
+    font-family: 'Times New Roman', 'Georgia', serif;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    font-weight: 400;
+    text-transform: none;
+  }
+  
+  .text-deconstructed {
+    font-family: 'Times New Roman', 'Georgia', serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    transform: none;
+    display: inline;
+  }
+  
+  .text-deconstructed-alt {
+    font-family: 'Times New Roman', 'Georgia', serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    transform: none;
+    display: inline;
+  }
+  
+  .text-grunge {
+    font-family: 'Times New Roman', 'Georgia', serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-shadow: none;
+  }
+  
+  .text-distorted {
+    font-family: 'Times New Roman', 'Georgia', serif;
+    font-weight: 400;
+    transform: none;
+    display: inline;
+  }
+  
+  .text-crushed {
+    font-family: 'Times New Roman', 'Georgia', serif;
+    font-weight: 400;
+    transform: none;
+    display: inline;
+  }
+  
+  .text-offset {
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+  
+  .text-runoff {
+    word-break: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+  
+  .layout-overlap {
+    position: relative;
+  }
+  
+  .layout-overlap > * {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .layout-overlap > *:nth-child(2) {
+    margin-top: 0;
+    margin-left: 0;
+    z-index: 1;
+    transform: none;
+  }
+  
+  .layout-overlap > *:nth-child(3) {
+    margin-top: 0;
+    margin-left: 0;
+    z-index: 1;
+    transform: none;
+  }
+  
+  .layout-chaos {
+    position: relative;
+  }
+  
+  .layout-chaos > *:nth-child(odd) {
+    transform: none;
+  }
+  
+  .layout-chaos > *:nth-child(even) {
+    transform: none;
+  }
+  
+  .grunge-border {
+    border: 1px solid black;
+    box-shadow: none;
+  }
+  
+  .grunge-bg {
+    background-image: none;
+  }
+  
+  .text-90s {
+    font-family: 'Times New Roman', 'Georgia', serif;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    text-shadow: none;
+  }
+  
+  .cut-up {
+    clip-path: none;
+  }
+  
+  .asymmetric {
+    transform: none;
+  }
+}
+
+/* Archive Grid - 90s Chaotic Layout */
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .archive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .archive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+/* 90s Visual Effects */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Ensure color classes are included - add dummy elements so Tailwind detects them */
+@layer utilities {
+  .color-safelist {
+    @apply text-yellow-200 text-blue-200 text-gray-300 text-red-400;
+  }
+}

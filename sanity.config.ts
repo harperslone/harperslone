@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'harperslone',
 
-  projectId: '7nxxfo2n',
+  projectId: 'n9vrqynh',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
