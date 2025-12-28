@@ -30,9 +30,36 @@ export const projectsQuery = groq`*[_type == "project"] | order(number asc) {
   description,
   mainImage,
   images,
+  gallery,
   tags,
+  themes,
   video,
-  videos
+  videos,
+  subProjects[] {
+    _key,
+    pv,
+    title,
+    description,
+    image,
+    gallery[] {
+      _type,
+      _key,
+      asset->{
+        _id,
+        url,
+        originalFilename,
+        mimeType,
+        metadata {
+          dimensions {
+            width,
+            height
+          }
+        }
+      },
+      caption,
+      alt
+    }
+  }
 }`
 
 export const projectBySlugQuery = groq`*[_type == "project" && slug.current == $slug][0] {
@@ -45,10 +72,37 @@ export const projectBySlugQuery = groq`*[_type == "project" && slug.current == $
   description,
   mainImage,
   images,
+  gallery,
   body,
   tags,
+  themes,
   video,
-  videos
+  videos,
+  subProjects[] {
+    _key,
+    pv,
+    title,
+    description,
+    image,
+    gallery[] {
+      _type,
+      _key,
+      asset->{
+        _id,
+        url,
+        originalFilename,
+        mimeType,
+        metadata {
+          dimensions {
+            width,
+            height
+          }
+        }
+      },
+      caption,
+      alt
+    }
+  }
 }`
 
 export const projectsByCategoryQuery = groq`*[_type == "project" && category == $category] | order(number asc) {

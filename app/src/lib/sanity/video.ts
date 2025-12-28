@@ -1,8 +1,8 @@
 /**
  * Converts YouTube and Vimeo URLs to embed format
  */
-export function getEmbedUrl(url: string | null | undefined): string | null {
-  if (!url) return null
+export function getEmbedUrl(url: string | null | undefined): string | undefined {
+  if (!url) return undefined
 
   // YouTube
   const youtubeRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/
@@ -26,4 +26,10 @@ export function getEmbedUrl(url: string | null | undefined): string | null {
   // Return original URL if no match (might be other video service)
   return url
 }
+
+
+
+
+
+
 

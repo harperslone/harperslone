@@ -81,8 +81,8 @@ export default async function PostPage({
           )}
 
           {post.body && (
-            <div className="mt-8">
-              <PortableText value={post.body} components={portableTextComponents} />
+            <div className="mt-8 space-y-4 text-zinc-700 dark:text-zinc-300">
+              <PortableText value={post.body} />
             </div>
           )}
         </article>

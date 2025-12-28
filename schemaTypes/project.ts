@@ -75,6 +75,32 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'gallery',
+      title: 'Gallery',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+            },
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+      description: 'Gallery of images for the project',
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'array',
@@ -91,6 +117,13 @@ export default defineType({
       of: [{type: 'string'}],
     }),
     defineField({
+      name: 'themes',
+      title: 'Themes',
+      type: 'array',
+      of: [{type: 'string'}],
+      description: 'Add themes or titles for this project',
+    }),
+    defineField({
       name: 'video',
       title: 'Video URL',
       type: 'url',
@@ -102,6 +135,71 @@ export default defineType({
       type: 'array',
       of: [{type: 'url'}],
       description: 'Multiple video embed URLs',
+    }),
+    defineField({
+      name: 'subProjects',
+      title: 'Sub Projects',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'pv',
+              title: 'PV',
+              type: 'string',
+              description: 'PV column',
+            },
+            {
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+            },
+            {
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+            },
+            {
+              name: 'gallery',
+              title: 'Gallery',
+              type: 'array',
+              of: [
+                {
+                  type: 'image',
+                  options: {
+                    hotspot: true,
+                  },
+                },
+                {
+                  type: 'file',
+                  title: 'Video or Audio',
+                  options: {
+                    accept: 'video/*,audio/*,.mov,.mp3,.wav,.ogg,.aac,.flac,.m4a',
+                  },
+                  fields: [
+                    {
+                      name: 'caption',
+                      title: 'Caption',
+                      type: 'string',
+                    },
+                  ],
+                },
+              ],
+              description: 'Gallery images and videos for this sub-project',
+            },
+          ],
+        },
+      ],
+      description: 'Projects within this project',
     }),
   ],
   preview: {

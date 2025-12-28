@@ -1,15 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #ffefd5;
   --foreground: #171717;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,21 +20,27 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
-/* Minimal Typography - Clean Catalog Style */
+/* David Carson-inspired Typography */
 @layer utilities {
   .text-experimental {
-    font-family: 'Times New Roman', 'Georgia', serif;
-    letter-spacing: 0.02em;
-    line-height: 1.2;
-    font-weight: 400;
-    text-transform: none;
+    font-family: 'Arial', 'Helvetica', sans-serif !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.6 !important;
+    font-weight: 400 !important;
+    text-transform: none !important;
+    font-style: normal !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    font-size: 13px !important;
   }
   
   .text-deconstructed {
-    font-family: 'Times New Roman', 'Georgia', serif;
+    font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
     font-weight: 400;
     letter-spacing: 0.01em;
     transform: none;
@@ -44,7 +48,7 @@ body {
   }
   
   .text-deconstructed-alt {
-    font-family: 'Times New Roman', 'Georgia', serif;
+    font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
     font-weight: 400;
     letter-spacing: 0.01em;
     transform: none;
@@ -52,21 +56,21 @@ body {
   }
   
   .text-grunge {
-    font-family: 'Times New Roman', 'Georgia', serif;
+    font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
     font-weight: 400;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     text-shadow: none;
   }
   
   .text-distorted {
-    font-family: 'Times New Roman', 'Georgia', serif;
+    font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
     font-weight: 400;
     transform: none;
     display: inline;
   }
   
   .text-crushed {
-    font-family: 'Times New Roman', 'Georgia', serif;
+    font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
     font-weight: 400;
     transform: none;
     display: inline;
@@ -129,11 +133,15 @@ body {
   }
   
   .text-90s {
-    font-family: 'Times New Roman', 'Georgia', serif;
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: 0.02em;
-    text-shadow: none;
+    font-family: 'Arial', 'Helvetica', sans-serif !important;
+    font-weight: 400 !important;
+    text-transform: none !important;
+    letter-spacing: 0.02em !important;
+    text-shadow: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
   }
   
   .cut-up {
