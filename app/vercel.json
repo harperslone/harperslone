@@ -1,6 +1,6 @@
 {
-  "buildCommand": "VERCEL_FORCE_NO_BUILD_CACHE=1 bash scripts/build.sh",
+  "buildCommand": "rm -rf node_modules/@sanity/cli/templates && npm run build",
   "outputDirectory": ".next",
-  "installCommand": "npm install && node scripts/fix-sanity-templates.js",
+  "installCommand": "npm install && rm -rf node_modules/@sanity/cli/templates",
   "framework": "nextjs"
 }
