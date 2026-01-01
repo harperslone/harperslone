@@ -72,7 +72,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-200 flex flex-col relative overflow-hidden">
       <Navigation />
       
-      <div className="relative z-10 flex w-full flex-1">
+      <div className="relative z-10 flex w-full" style={{ minHeight: 'calc(100vh - 42px)' }}>
         {/* Left Sidebar - Navigation with Expandable Items */}
         <SidebarNavigation projects={allProjects} />
 

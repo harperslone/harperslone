@@ -85,7 +85,7 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
         className={`fixed md:relative w-48 md:w-56 border-r border-black bg-white overflow-y-auto z-40 md:z-auto transition-transform duration-300 ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
-        style={{ height: 'calc(100vh - 50px)', top: '50px' }}
+        style={{ height: '100%', minHeight: 'calc(100vh - 42px)' }}
       >
         <div className="p-8 md:p-12 flex flex-col h-full">
         <ul className="space-y-2 flex-1">
