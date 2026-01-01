@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "node -e \"const fs = require('fs'); const path = require('path'); const file = path.join('node_modules', '@sanity', 'cli', 'templates', 'shopify', 'schemaTypes', 'documents', 'page.ts'); if (fs.existsSync(file)) { fs.renameSync(file, file + '.bak'); }\"",
+    "postinstall": "node scripts/fix-sanity-templates.js",
+    "prebuild": "node scripts/fix-sanity-templates.js",
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
