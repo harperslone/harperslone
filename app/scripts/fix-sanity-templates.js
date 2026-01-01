@@ -6,6 +6,13 @@ function deleteDirectory(dir) {
     if (fs.existsSync(dir)) {
       fs.rmSync(dir, { recursive: true, force: true });
       console.log(`Deleted directory: ${dir}`);
+      // Create an empty .gitkeep file to prevent the directory from being recreated
+      const parentDir = path.dirname(dir);
+      if (!fs.existsSync(parentDir)) {
+        fs.mkdirSync(parentDir, { recursive: true });
+      }
+      // Create a dummy file to replace the directory
+      fs.writeFileSync(dir + '.disabled', '');
       return true;
     }
   } catch (err) {
