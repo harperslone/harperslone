@@ -6,50 +6,66 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-// Delete shopify directory immediately using multiple methods
+// CRITICAL: Rename page.ts files so Next.js won't recognize them as pages
 // This runs at module load time, before Next.js does ANY scanning
-(function deleteShopifyTemplates() {
+(function renameShopifyTemplates() {
   const shopifyDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates', 'shopify');
   const pageFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'page.ts');
   
-  // Try all methods aggressively
-  const methods = [
-    () => execSync(`rm -rf "${shopifyDir}"`, { stdio: 'ignore', timeout: 500 }),
-    () => {
-      if (fs.existsSync(shopifyDir)) {
-        fs.rmSync(shopifyDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
-      }
-    },
-    () => {
-      if (fs.existsSync(pageFile)) {
-        fs.unlinkSync(pageFile);
-      }
-    },
-    () => {
-      if (fs.existsSync(pageFile)) {
-        fs.renameSync(pageFile, pageFile + '.disabled');
-      }
-    },
-    () => {
-      // Last resort: create empty file to block
-      const parent = path.dirname(pageFile);
-      if (!fs.existsSync(parent)) {
-        fs.mkdirSync(parent, { recursive: true });
-      }
-      fs.writeFileSync(pageFile + '.blocked', '');
+  // Method 1: Rename the file (Next.js won't recognize .notapage as a page)
+  try {
+    if (fs.existsSync(pageFile)) {
+      fs.renameSync(pageFile, pageFile + '.notapage');
     }
-  ];
-  
-  for (const method of methods) {
+  } catch (e) {
+    // Method 2: Try deleting the directory
     try {
-      method();
-      // If we successfully deleted, break
-      if (!fs.existsSync(shopifyDir) && !fs.existsSync(pageFile)) {
-        break;
+      if (fs.existsSync(shopifyDir)) {
+        execSync(`rm -rf "${shopifyDir}"`, { stdio: 'ignore', timeout: 500 });
       }
-    } catch (e) {
-      // Continue to next method
+    } catch (e2) {
+      // Method 3: Try Node.js deletion
+      try {
+        if (fs.existsSync(shopifyDir)) {
+          fs.rmSync(shopifyDir, { recursive: true, force: true });
+        }
+      } catch (e3) {
+        // Method 4: Try deleting just the file
+        try {
+          if (fs.existsSync(pageFile)) {
+            fs.unlinkSync(pageFile);
+          }
+        } catch (e4) {
+          // All methods failed
+        }
+      }
     }
+  }
+  
+  // Also scan for any other page.ts files and rename them
+  const templatesDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates');
+  if (fs.existsSync(templatesDir)) {
+    function renamePageFiles(dir: string, depth = 0) {
+      if (depth > 10) return;
+      try {
+        const entries = fs.readdirSync(dir, { withFileTypes: true });
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry.name);
+          if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
+            renamePageFiles(fullPath, depth + 1);
+          } else if (entry.isFile() && entry.name === 'page.ts') {
+            try {
+              fs.renameSync(fullPath, fullPath + '.notapage');
+            } catch (e) {
+              // Ignore errors
+            }
+          }
+        }
+      } catch (e) {
+        // Ignore errors
+      }
+    }
+    renamePageFiles(templatesDir);
   }
 })();
 

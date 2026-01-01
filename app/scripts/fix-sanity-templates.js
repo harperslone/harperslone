@@ -36,13 +36,27 @@ function findAndDeletePageFiles(dir, depth = 0) {
         if (!entry.name.startsWith('.') && entry.name !== 'node_modules') {
           findAndDeletePageFiles(fullPath, depth + 1);
         }
-      } else if (entry.isFile() && (entry.name === 'page.ts' || entry.name === 'page.ts.bak')) {
-        // Delete page.ts files
+      } else if (entry.isFile() && entry.name === 'page.ts') {
+        // Rename page.ts files so Next.js won't recognize them
+        try {
+          fs.renameSync(fullPath, fullPath + '.notapage');
+          console.log(`Renamed: ${fullPath} -> ${fullPath}.notapage`);
+        } catch (err) {
+          // If rename fails, try deleting
+          try {
+            fs.unlinkSync(fullPath);
+            console.log(`Deleted: ${fullPath}`);
+          } catch (err2) {
+            console.error(`Error handling ${fullPath}:`, err.message);
+          }
+        }
+      } else if (entry.isFile() && (entry.name === 'page.ts.bak' || entry.name === 'page.ts.disabled')) {
+        // Delete backup/disabled files
         try {
           fs.unlinkSync(fullPath);
           console.log(`Deleted: ${fullPath}`);
         } catch (err) {
-          console.error(`Error deleting ${fullPath}:`, err.message);
+          // Ignore errors for backup files
         }
       }
     }
