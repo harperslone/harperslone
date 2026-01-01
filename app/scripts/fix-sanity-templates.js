@@ -77,8 +77,27 @@ for (const templatesDir of possibleDirs) {
   if (fs.existsSync(templatesDir)) {
     console.log(`Found templates directory: ${templatesDir}`);
     
-    // First, try to delete the entire shopify subdirectory (where page.ts is)
+    // First, try to create a layout.tsx file to satisfy Next.js
     const shopifyDir = path.join(templatesDir, 'shopify');
+    const pageFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'page.ts');
+    const layoutFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'layout.tsx');
+    
+    if (fs.existsSync(pageFile)) {
+      try {
+        const layoutDir = path.dirname(layoutFile);
+        if (!fs.existsSync(layoutDir)) {
+          fs.mkdirSync(layoutDir, { recursive: true });
+        }
+        fs.writeFileSync(layoutFile, 'export default function Layout({ children }: { children: React.ReactNode }) {\n  return null;\n}\n');
+        console.log(`Created layout.tsx at ${layoutFile}`);
+        found = true;
+        break;
+      } catch (err) {
+        console.error(`Error creating layout: ${err.message}`);
+      }
+    }
+    
+    // If that fails, try to delete the shopify directory
     if (fs.existsSync(shopifyDir)) {
       if (deleteDirectory(shopifyDir)) {
         console.log('Deleted shopify templates directory');

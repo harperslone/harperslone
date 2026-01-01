@@ -6,66 +6,34 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-// CRITICAL: Rename page.ts files so Next.js won't recognize them as pages
-// This runs at module load time, before Next.js does ANY scanning
-(function renameShopifyTemplates() {
+// CRITICAL: Create a dummy layout.tsx file where Next.js expects it
+// This satisfies Next.js's requirement and prevents the error
+(function createDummyLayout() {
   const shopifyDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates', 'shopify');
   const pageFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'page.ts');
+  const layoutFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'layout.tsx');
   
-  // Method 1: Rename the file (Next.js won't recognize .notapage as a page)
-  try {
-    if (fs.existsSync(pageFile)) {
-      fs.renameSync(pageFile, pageFile + '.notapage');
-    }
-  } catch (e) {
-    // Method 2: Try deleting the directory
+  // If page.ts exists, create a layout.tsx to satisfy Next.js
+  if (fs.existsSync(pageFile)) {
     try {
-      if (fs.existsSync(shopifyDir)) {
-        execSync(`rm -rf "${shopifyDir}"`, { stdio: 'ignore', timeout: 500 });
+      const layoutDir = path.dirname(layoutFile);
+      if (!fs.existsSync(layoutDir)) {
+        fs.mkdirSync(layoutDir, { recursive: true });
       }
-    } catch (e2) {
-      // Method 3: Try Node.js deletion
+      // Create a minimal layout that returns null
+      fs.writeFileSync(layoutFile, `export default function Layout({ children }: { children: React.ReactNode }) {\n  return null;\n}\n`);
+    } catch (e) {
+      // If that fails, try to rename/delete the page file
       try {
-        if (fs.existsSync(shopifyDir)) {
-          fs.rmSync(shopifyDir, { recursive: true, force: true });
-        }
-      } catch (e3) {
-        // Method 4: Try deleting just the file
+        fs.renameSync(pageFile, pageFile + '.notapage');
+      } catch (e2) {
         try {
-          if (fs.existsSync(pageFile)) {
-            fs.unlinkSync(pageFile);
-          }
-        } catch (e4) {
+          fs.unlinkSync(pageFile);
+        } catch (e3) {
           // All methods failed
         }
       }
     }
-  }
-  
-  // Also scan for any other page.ts files and rename them
-  const templatesDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates');
-  if (fs.existsSync(templatesDir)) {
-    function renamePageFiles(dir: string, depth = 0) {
-      if (depth > 10) return;
-      try {
-        const entries = fs.readdirSync(dir, { withFileTypes: true });
-        for (const entry of entries) {
-          const fullPath = path.join(dir, entry.name);
-          if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
-            renamePageFiles(fullPath, depth + 1);
-          } else if (entry.isFile() && entry.name === 'page.ts') {
-            try {
-              fs.renameSync(fullPath, fullPath + '.notapage');
-            } catch (e) {
-              // Ignore errors
-            }
-          }
-        }
-      } catch (e) {
-        // Ignore errors
-      }
-    }
-    renamePageFiles(templatesDir);
   }
 })();
 
