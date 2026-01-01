@@ -14,14 +14,16 @@ export default function CustomCursor() {
       
       // Check if hovering over clickable image elements
       const target = e.target as HTMLElement
-      const isOverImage = target.closest('.cursor-red-dot') || 
-                         target.closest('img') || 
-                         target.closest('video') ||
-                         target.tagName === 'IMG' ||
-                         target.tagName === 'VIDEO' ||
-                         (target.closest('div') && target.closest('div')?.classList.contains('cursor-red-dot'))
+      const isOverImage = Boolean(
+        target.closest('.cursor-red-dot') || 
+        target.closest('img') || 
+        target.closest('video') ||
+        target.tagName === 'IMG' ||
+        target.tagName === 'VIDEO' ||
+        (target.closest('div') && target.closest('div')?.classList.contains('cursor-red-dot'))
+      )
       
-      setIsHovering(isOverImage || false)
+      setIsHovering(isOverImage)
     }
 
     const handleMouseLeave = () => {

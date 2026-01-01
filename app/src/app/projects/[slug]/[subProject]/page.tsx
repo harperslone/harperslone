@@ -962,7 +962,7 @@ export default async function SubProjectPage({
                       { label: 'seoul map retail graphic', indices: [8, 9] }
                     ].map((row, rowIndex) => {
                       const rowImages = row.indices
-                        .map(index => foundSubProject.gallery[index])
+                        .map(index => foundSubProject.gallery?.[index])
                         .filter((item: any) => item !== undefined)
                       
                       if (rowImages.length === 0) return null
@@ -1002,7 +1002,7 @@ export default async function SubProjectPage({
                   <div className="mb-8 w-full">
                     {(() => {
                       // Use images at indices 10 and 11 (after the 5 rows which use indices 0-9)
-                      const newRowImages = [foundSubProject.gallery[10], foundSubProject.gallery[11]].filter((item: any) => item !== undefined)
+                      const newRowImages = [foundSubProject.gallery?.[10], foundSubProject.gallery?.[11]].filter((item: any) => item !== undefined)
                       
                       if (newRowImages.length === 0) return null
                       
@@ -1041,7 +1041,7 @@ export default async function SubProjectPage({
                   <div className="mb-8 w-full">
                     {(() => {
                       // Use the image at index 12 (after the 5 rows which use indices 0-9 and the new row which uses indices 10-11)
-                      const additionalImage = foundSubProject.gallery[12]
+                      const additionalImage = foundSubProject.gallery?.[12]
                       
                       if (!additionalImage) return null
                       
