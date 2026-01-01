@@ -1,5 +1,37 @@
 import type { NextConfig } from "next";
 
+// Delete problematic files before Next.js config is evaluated
+try {
+  const fs = require('fs');
+  const path = require('path');
+  const templatesDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates');
+  if (fs.existsSync(templatesDir)) {
+    function deletePageFiles(dir: string, depth = 0) {
+      if (depth > 10) return;
+      try {
+        const entries = fs.readdirSync(dir, { withFileTypes: true });
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry.name);
+          if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
+            deletePageFiles(fullPath, depth + 1);
+          } else if (entry.isFile() && (entry.name === 'page.ts' || entry.name === 'page.ts.bak')) {
+            try {
+              fs.unlinkSync(fullPath);
+            } catch (e) {
+              // Ignore errors
+            }
+          }
+        }
+      } catch (e) {
+        // Ignore errors
+      }
+    }
+    deletePageFiles(templatesDir);
+  }
+} catch (e) {
+  // Ignore errors during config load
+}
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
