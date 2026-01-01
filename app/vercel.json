@@ -1,6 +1,6 @@
 {
   "buildCommand": "rm -rf node_modules/@sanity/cli/templates && npm run build",
   "outputDirectory": ".next",
-  "installCommand": "npm install && rm -rf node_modules/@sanity/cli/templates",
+  "installCommand": "rm -rf node_modules && npm install --prefer-offline=false && rm -rf node_modules/@sanity/cli/templates",
   "framework": "nextjs"
 }
