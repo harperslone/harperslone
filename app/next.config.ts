@@ -4,37 +4,37 @@ import type { NextConfig } from "next";
 // This MUST run synchronously before Next.js does ANY file scanning
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
-// Delete shopify directory immediately - this runs at module load time
+// Delete shopify directory immediately using multiple methods
 (function deleteShopifyTemplates() {
   try {
     const shopifyDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates', 'shopify');
-    if (fs.existsSync(shopifyDir)) {
-      // Force delete with multiple attempts
-      for (let i = 0; i < 5; i++) {
-        try {
+    const pageFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'page.ts');
+    
+    // Method 1: Try using shell command (most reliable)
+    try {
+      execSync(`rm -rf "${shopifyDir}"`, { stdio: 'ignore' });
+    } catch (e) {
+      // Method 2: Try Node.js fs.rmSync
+      try {
+        if (fs.existsSync(shopifyDir)) {
           fs.rmSync(shopifyDir, { recursive: true, force: true });
-          break; // Success, exit loop
-        } catch (e) {
-          if (i === 4) {
-            // Last attempt failed, try deleting the specific file
-            const pageFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'page.ts');
+        }
+      } catch (e2) {
+        // Method 3: Try deleting just the file
+        try {
+          if (fs.existsSync(pageFile)) {
+            fs.unlinkSync(pageFile);
+          }
+        } catch (e3) {
+          // Method 4: Try renaming the file
+          try {
             if (fs.existsSync(pageFile)) {
-              try {
-                fs.unlinkSync(pageFile);
-              } catch (e2) {
-                // Try renaming as last resort
-                try {
-                  fs.renameSync(pageFile, pageFile + '.disabled');
-                } catch (e3) {
-                  // Give up
-                }
-              }
+              fs.renameSync(pageFile, pageFile + '.disabled');
             }
-          } else {
-            // Wait a bit before retry
-            const start = Date.now();
-            while (Date.now() - start < 50) {}
+          } catch (e4) {
+            // All methods failed, but continue anyway
           }
         }
       }
