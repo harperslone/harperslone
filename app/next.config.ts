@@ -1,63 +1,48 @@
 import type { NextConfig } from "next";
 
-// Delete problematic files/directories before Next.js config is evaluated
-// This runs synchronously when Next.js loads the config, right before page scanning
-try {
-  const fs = require('fs');
-  const path = require('path');
-  const templatesDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates');
-  
-  if (fs.existsSync(templatesDir)) {
-    // Delete the entire shopify directory (where page.ts is)
-    const shopifyDir = path.join(templatesDir, 'shopify');
+// CRITICAL: Delete problematic files/directories IMMEDIATELY when this config loads
+// This MUST run synchronously before Next.js does ANY file scanning
+const fs = require('fs');
+const path = require('path');
+
+// Delete shopify directory immediately - this runs at module load time
+(function deleteShopifyTemplates() {
+  try {
+    const shopifyDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates', 'shopify');
     if (fs.existsSync(shopifyDir)) {
-      try {
-        // Use synchronous deletion with force to ensure it's gone
-        fs.rmSync(shopifyDir, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 });
-      } catch (e) {
-        // If directory deletion fails, try deleting the specific file
-        const pageFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'page.ts');
-        if (fs.existsSync(pageFile)) {
-          try {
-            fs.unlinkSync(pageFile);
-          } catch (e2) {
-            // Last resort: try to rename it
-            try {
-              fs.renameSync(pageFile, pageFile + '.bak');
-            } catch (e3) {
-              // Ignore all errors
+      // Force delete with multiple attempts
+      for (let i = 0; i < 5; i++) {
+        try {
+          fs.rmSync(shopifyDir, { recursive: true, force: true });
+          break; // Success, exit loop
+        } catch (e) {
+          if (i === 4) {
+            // Last attempt failed, try deleting the specific file
+            const pageFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'page.ts');
+            if (fs.existsSync(pageFile)) {
+              try {
+                fs.unlinkSync(pageFile);
+              } catch (e2) {
+                // Try renaming as last resort
+                try {
+                  fs.renameSync(pageFile, pageFile + '.disabled');
+                } catch (e3) {
+                  // Give up
+                }
+              }
             }
+          } else {
+            // Wait a bit before retry
+            const start = Date.now();
+            while (Date.now() - start < 50) {}
           }
         }
       }
     }
-    
-    // Also scan for any other page.ts files in templates
-    function deletePageFiles(dir: string, depth = 0) {
-      if (depth > 10) return;
-      try {
-        const entries = fs.readdirSync(dir, { withFileTypes: true });
-        for (const entry of entries) {
-          const fullPath = path.join(dir, entry.name);
-          if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
-            deletePageFiles(fullPath, depth + 1);
-          } else if (entry.isFile() && (entry.name === 'page.ts' || entry.name === 'page.ts.bak')) {
-            try {
-              fs.unlinkSync(fullPath);
-            } catch (e) {
-              // Ignore errors
-            }
-          }
-        }
-      } catch (e) {
-        // Ignore errors
-      }
-    }
-    deletePageFiles(templatesDir);
+  } catch (e) {
+    // Silently fail - we'll try again in webpack config
   }
-} catch (e) {
-  // Ignore errors during config load
-}
+})();
 
 const nextConfig: NextConfig = {
   images: {
