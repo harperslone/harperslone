@@ -61,6 +61,12 @@ const nextConfig: NextConfig = {
       'node_modules/@sanity/cli/**/*',
     ],
   },
+  // Try to prevent Next.js from scanning node_modules
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+  // Experimental: Try to configure page discovery
+  experimental: {
+    // This might help exclude certain paths
+  },
   webpack: (config, { isServer }) => {
     // Ignore Sanity CLI template files that shouldn't be processed
     const webpack = require('webpack');
