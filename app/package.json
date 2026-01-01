@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "node scripts/fix-sanity-templates.js",
-    "prebuild": "node scripts/fix-sanity-templates.js",
+    "postinstall": "rm -rf node_modules/@sanity/cli/templates 2>/dev/null || true",
     "dev": "next dev",
-    "build": "rm -rf node_modules/@sanity/cli/templates 2>/dev/null || true; next build",
+    "build": "rm -rf node_modules/@sanity/cli/templates 2>/dev/null || true && next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -28,8 +27,10 @@
     "@types/react-dom": "^18",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
-    "ignore-loader": "^0.1.2",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@sanity/cli": "npm:empty-npm-package@1.0.0"
   }
 }
