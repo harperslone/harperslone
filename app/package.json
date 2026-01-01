@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "node -e \"const fs = require('fs'); const path = require('path'); const file = path.join('node_modules', '@sanity', 'cli', 'templates', 'shopify', 'schemaTypes', 'documents', 'page.ts'); if (fs.existsSync(file)) { fs.renameSync(file, file + '.bak'); }\"",
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
