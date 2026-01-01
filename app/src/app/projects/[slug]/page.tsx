@@ -98,7 +98,7 @@ export default async function ProjectPage({
                     {/* Title */}
                     {subProject.title && (
                       <div className="text-black" style={{ fontSize: '16px', fontWeight: 400 }}>
-                        {subProject.title}
+                        {subProject.title.toLowerCase()}
                       </div>
                     )}
                   </div>

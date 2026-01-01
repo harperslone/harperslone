@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface SubProject {
   _key: string
@@ -25,6 +25,7 @@ interface SidebarNavigationProps {
 
 export default function SidebarNavigation({ projects }: SidebarNavigationProps) {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set())
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const toggleItem = (itemId: string) => {
     setOpenItems(prev => {
@@ -45,9 +46,48 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
     return !excludedSlugs.includes(slug)
   })
 
+  // Debug: Log work project data in sidebar
+  useEffect(() => {
+    const workProject = mainNavItems.find(p => p.slug?.current?.toLowerCase() === 'work')
+    if (workProject) {
+      console.log('SidebarNavigation - Work project:', {
+        title: workProject.title,
+        subProjectsCount: workProject.subProjects?.length,
+        subProjects: workProject.subProjects?.map(sp => ({
+          _key: sp._key,
+          title: sp.title,
+          pv: sp.pv
+        }))
+      })
+    }
+  }, [mainNavItems])
+
   return (
-    <aside className="w-48 md:w-56 border-r border-black bg-white overflow-y-auto" style={{ height: 'calc(100vh - 50px)' }}>
-      <div className="p-8 md:p-12 flex flex-col h-full">
+    <>
+      {/* Mobile menu button */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="md:hidden fixed top-14 left-4 z-30 bg-white border border-black p-2"
+        aria-label="Toggle menu"
+      >
+        <span className="text-black" style={{ fontSize: '13px' }}>menu</span>
+      </button>
+
+      {/* Mobile overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      <aside 
+        className={`fixed md:relative w-48 md:w-56 border-r border-black bg-white overflow-y-auto z-40 md:z-auto transition-transform duration-300 ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        }`}
+        style={{ height: 'calc(100vh - 50px)', top: '50px' }}
+      >
+        <div className="p-8 md:p-12 flex flex-col h-full">
         <ul className="space-y-2 flex-1">
           {mainNavItems.map((project) => {
             const isOpen = openItems.has(project._id)
@@ -72,8 +112,8 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
                       className="flex-1 text-left group hover:opacity-80 transition-opacity cursor-pointer"
                     >
                       <span 
-                        className="font-normal lowercase text-90s text-black"
-                        style={{ fontSize: '13px' }}
+                        className="lowercase text-black"
+                        style={{ fontSize: '13px', fontWeight: 700, fontFamily: 'Arial, Helvetica, sans-serif', letterSpacing: '0.02em' }}
                       >
                         {project.title.toLowerCase()}
                       </span>
@@ -84,8 +124,8 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
                       className="flex-1 block group hover:opacity-80 transition-opacity"
                     >
                       <span 
-                        className="font-normal lowercase text-90s text-black"
-                        style={{ fontSize: '13px' }}
+                        className="lowercase text-black"
+                        style={{ fontSize: '13px', fontWeight: 700, fontFamily: 'Arial, Helvetica, sans-serif', letterSpacing: '0.02em' }}
                       >
                         {project.title.toLowerCase()}
                       </span>
@@ -117,30 +157,65 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
                 {/* Sub Navigation - Appears Below Main Item */}
                 {isOpen && hasSubProjects && (
                   <ul className="ml-4 mt-1 space-y-2">
-                    {project.subProjects?.map((subProject) => {
+                    {project.subProjects
+                      ?.filter((subProject) => {
+                        // Filter out rivegaucherivedroit from print project
+                        const subProjectTitle = (subProject.title || subProject.pv || '').toLowerCase()
+                        const isPrint = project.slug.current?.toLowerCase() === 'print' || 
+                                       project.title?.toLowerCase() === 'print'
+                        if (isPrint && subProjectTitle === 'rivegaucherivedroit') {
+                          return false
+                        }
+                        return true
+                      })
+                      ?.map((subProject, index) => {
                       // Create a slug from the sub-project title or pv
                       const createSlug = (text: string) => {
+                        // For Japanese characters, use the exact title (Next.js will handle URL encoding)
+                        const hasJapanese = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(text)
+                        if (hasJapanese) {
+                          // Return the exact title - Next.js Link component will handle encoding
+                          return text
+                        }
+                        // For non-Japanese, use the standard slug format
                         return text
                           .toLowerCase()
                           .replace(/[^a-z0-9]+/g, '-')
                           .replace(/^-+|-+$/g, '')
                       }
                       
-                      const subProjectTitle = (subProject.title || subProject.pv || subProject.description || 'untitled').toLowerCase()
+                      const subProjectTitle = subProject.title || subProject.pv || subProject.description || 'untitled'
                       const subProjectSlug = createSlug(subProjectTitle)
                       const subProjectHref = `/projects/${project.slug.current}/${subProjectSlug}`
                       
+                      // Debug log for ALL work subprojects
+                      if (isWork) {
+                        console.log(`Work subproject ${index}:`, {
+                          _key: subProject._key,
+                          title: subProject.title,
+                          pv: subProject.pv,
+                          subProjectTitle,
+                          subProjectSlug,
+                          fullSubProject: subProject
+                        })
+                      }
+                      
+                      // Check if _key exists
+                      if (!subProject._key) {
+                        console.error('Subproject missing _key:', subProject)
+                      }
+                      
                       return (
-                        <li key={subProject._key}>
+                        <li key={subProject._key || `subproject-${index}`}>
                           <Link
                             href={subProjectHref}
                             className="block hover:opacity-80 transition-opacity"
                           >
                             <span 
                               className="font-normal lowercase text-90s text-black"
-                              style={{ fontSize: '10px' }}
+                              style={{ fontSize: '13px' }}
                             >
-                              {subProjectTitle}
+                              {subProjectTitle.toLowerCase()}
                             </span>
                           </Link>
                         </li>
@@ -152,14 +227,9 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
             )
           })}
         </ul>
-
-        {/* Yellow Dot - Return to Home */}
-        <div className="mt-auto pt-8">
-          <Link href="/" className="block w-4 h-4 bg-yellow-400 rounded-full hover:opacity-80 transition-opacity" title="Return to home">
-          </Link>
-        </div>
       </div>
-    </aside>
+      </aside>
+    </>
   )
 }
 

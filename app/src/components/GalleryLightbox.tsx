@@ -10,6 +10,9 @@ interface GalleryLightboxProps {
   columns?: number
   imageSize?: number // Image dimension (width and height) - options: 400, 800, 1200, 1600, 2000, 2400
   firstImageSize?: number // Optional different size for the first image
+  rotateImageIndex?: number // Optional index of image to rotate (in degrees, negative for counter-clockwise)
+  gap?: number // Optional custom gap size in pixels
+  center?: boolean // Center the gallery instead of stretching to full width
 }
 
 // Helper function to check if item is audio
@@ -18,15 +21,17 @@ function isAudio(item: any): boolean {
   const mimeType = item.asset?.mimeType || ''
   const url = item.asset?.url || ''
   
-  // Check mimeType for audio
+  // Check URL extension for audio files first (most reliable)
+  // Exclude .mov files as they are typically video files
+  if (url.match(/\.(mp3|wav|ogg|aac|flac|m4a|wma|opus)$/i)) return true
+  
+  // Check mimeType for audio (but .mov files with audio/quicktime are usually video)
   if (mimeType.startsWith('audio/')) {
-    // .mov files with audio/quicktime are audio-only, not video
-    if (mimeType === 'audio/quicktime' && url.match(/\.mov$/i)) return true
+    // Only treat as audio if it's NOT a .mov file
+    // .mov files with audio/quicktime mimeType are typically video files
+    if (url.match(/\.mov$/i)) return false
     return true
   }
-  
-  // Check URL extension for audio files
-  if (url.match(/\.(mp3|wav|ogg|aac|flac|m4a|wma|opus)$/i)) return true
   
   return false
 }
@@ -34,27 +39,33 @@ function isAudio(item: any): boolean {
 // Helper function to check if item is a video
 function isVideo(item: any): boolean {
   if (!item) return false
+  const url = item.asset?.url || ''
+  const mimeType = item.asset?.mimeType || ''
+  
   // Check _type field
   if (item._type === 'file') {
     // For file types, check URL extension first (most reliable)
-    const url = item.asset?.url || ''
-    // Check mimeType - but .mov files can have audio/quicktime mimeType
-    const mimeType = item.asset?.mimeType || ''
-    
-    // If it's audio, it's not video
-    if (isAudio(item)) return false
-    
-    // Check for video file extensions
+    // .mov files are video files (even if mimeType is audio/quicktime)
     if (url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)) {
-      return true
+      // Double-check it's not actually audio
+      if (!isAudio(item)) return true
     }
     if (mimeType.startsWith('video/')) return true
+    // .mov files with audio/quicktime mimeType are typically video files
+    if (mimeType === 'audio/quicktime' && url.match(/\.mov$/i)) return true
   }
+  
   // Check mimeType in asset (includes video/quicktime for .mov)
-  if (item.asset?.mimeType?.startsWith('video/')) return true
+  if (mimeType.startsWith('video/')) return true
+  // .mov files with audio/quicktime mimeType are typically video files
+  if (mimeType === 'audio/quicktime' && url.match(/\.mov$/i)) return true
+  
   // Check URL extension for video files
-  const url = item.asset?.url || ''
-  if (url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)) return true
+  if (url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)) {
+    // Double-check it's not actually audio
+    if (!isAudio(item)) return true
+  }
+  
   // Check if asset exists and has url but no image-specific fields
   if (item.asset?.url && !item.asset?.metadata?.dimensions && !isAudio(item)) {
     // If it has a URL but no dimensions and it's not audio, it might be a video
@@ -79,7 +90,17 @@ function getMediaUrl(item: any): string | null {
   }
 }
 
-export default function GalleryLightbox({ images, title, columns = 5, imageSize = 800, firstImageSize }: GalleryLightboxProps) {
+// Helper function to check if an image is landscape (width > height)
+function isLandscape(item: any): boolean {
+  if (!item || isVideo(item) || isAudio(item)) return false
+  const dimensions = item.asset?.metadata?.dimensions
+  if (dimensions && dimensions.width && dimensions.height) {
+    return dimensions.width > dimensions.height
+  }
+  return false
+}
+
+export default function GalleryLightbox({ images, title, columns = 5, imageSize = 800, firstImageSize, rotateImageIndex, gap, center = false }: GalleryLightboxProps) {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
 
   const openLightbox = (index: number) => {
@@ -108,18 +129,64 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
     <>
       {/* Gallery Grid - configurable columns */}
       {images && Array.isArray(images) && images.length > 0 && (
-        <div 
-          className={`grid`} 
-          style={{ 
-            gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-            gap: imageSize > 800 ? '24px' : '16px',
-            maxWidth: columns === 1 
-              ? (imageSize > 800 ? `${imageSize}px` : '100%')
-              : imageSize > 800 
-                ? `${imageSize * columns + (24 * (columns - 1))}px`
-                : `${imageSize * columns + (16 * (columns - 1))}px`
-          }}
-        >
+        (() => {
+          // Check if any images are landscape (will be 300px, unless imageSize is explicitly 200px or less)
+          const hasLandscapeImages = images.some((item: any) => isLandscape(item))
+          // Use 300px for maxWidth calculation if there are landscape images, unless imageSize is 200px or less
+          // This allows explicit 200px sizing to override the landscape 300px default
+          const maxImageSize = (hasLandscapeImages && imageSize > 200) ? 300 : imageSize
+          
+          // Calculate column widths - use firstImageSize for first column if provided
+          const firstColSize = firstImageSize || imageSize
+          const gapSize = gap !== undefined ? gap : (maxImageSize > 800 ? 24 : 16)
+          
+          // Determine grid template columns
+          let gridTemplateColumns = ''
+          
+          if (columns === 1) {
+            gridTemplateColumns = '1fr'
+          } else if (maxImageSize <= 400) {
+            // For small images, use fixed pixel widths
+            // When center is true, use fixed widths to prevent wrapping
+            if (center) {
+              gridTemplateColumns = `repeat(${columns}, ${maxImageSize}px)`
+            } else if (firstImageSize && columns === 2) {
+              gridTemplateColumns = `minmax(0, ${firstColSize}px) minmax(0, ${imageSize}px)`
+            } else {
+              gridTemplateColumns = `repeat(${columns}, minmax(0, ${maxImageSize}px))`
+            }
+          } else {
+            // For larger images (800px+), use flexible columns
+            gridTemplateColumns = `repeat(${columns}, 1fr)`
+          }
+          
+          // Calculate minimum width needed for all columns when center is true
+          const minWidth = center && maxImageSize <= 400 
+            ? `${columns * maxImageSize + (columns - 1) * gapSize}px`
+            : 'auto'
+          
+          return (
+            <div 
+              className={`grid gallery-container`} 
+              style={{ 
+                gridTemplateColumns: gridTemplateColumns,
+                gap: `${gapSize}px`,
+                columnGap: `${gapSize}px`,
+                rowGap: `${gapSize}px`,
+                width: center ? minWidth : '100%',
+                minWidth: center ? minWidth : 'auto',
+                maxWidth: center ? minWidth : '100%',
+                alignItems: 'start',
+                justifyItems: center ? 'center' : 'start',
+                display: 'grid',
+                boxSizing: 'border-box',
+                overflowX: center ? 'visible' : 'auto',
+                WebkitOverflowScrolling: 'touch',
+                margin: center ? '0 auto' : '0',
+                gridAutoFlow: 'row',
+                gridAutoRows: 'auto'
+              }}
+            >
           {images.map((galleryItem: any, index: number) => {
             try {
               if (!galleryItem) return null
@@ -159,7 +226,7 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
               return (
                 <div 
                   key={index} 
-                  className="relative w-full cursor-pointer hover:opacity-80 transition-opacity"
+                  className="relative cursor-red-dot hover:opacity-80 transition-opacity"
                   onClick={() => openLightbox(index)}
                 >
                   {isAudioItem ? (
@@ -209,32 +276,61 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
                       </div>
                     </div>
                   ) : (
-                    <div className="relative w-full" style={{ 
-                      minHeight: (index === 0 && firstImageSize ? firstImageSize : imageSize) > 800 ? `${(index === 0 && firstImageSize ? firstImageSize : imageSize) * 0.6}px` : 'auto'
-                    }}>
-                      <Image
-                        src={mediaUrl}
-                        alt={`${title || 'Gallery'} image ${index + 1}`}
-                        width={index === 0 && firstImageSize ? firstImageSize : imageSize}
-                        height={index === 0 && firstImageSize ? firstImageSize : imageSize}
-                        className={(index === 0 && firstImageSize ? firstImageSize : imageSize) > 800 ? "h-auto" : columns === 1 ? "h-auto" : "w-full h-auto"}
-                        style={(index === 0 && firstImageSize ? firstImageSize : imageSize) > 800 ? {
-                          width: '100%',
-                          maxWidth: `${index === 0 && firstImageSize ? firstImageSize : imageSize}px`,
-                          height: 'auto',
-                          objectFit: 'contain'
-                        } : columns === 1 ? {
-                          width: `${index === 0 && firstImageSize ? firstImageSize : imageSize}px`,
-                          maxWidth: `${index === 0 && firstImageSize ? firstImageSize : imageSize}px`,
-                          height: 'auto',
-                          objectFit: 'contain'
-                        } : {
-                          width: '100%',
-                          height: 'auto',
-                          objectFit: 'contain'
-                        }}
-                      />
-                    </div>
+                    (() => {
+                      // Determine the size for this image: 300px for landscape (unless imageSize is 200px or less), otherwise use imageSize
+                      const isLandscapeImage = isLandscape(galleryItem)
+                      // If imageSize is 200px or less, use it even for landscape images
+                      const currentImageSize = (isLandscapeImage && imageSize > 200) ? 300 : (index === 0 && firstImageSize ? firstImageSize : imageSize)
+                      const needsRotation = rotateImageIndex !== undefined && index === rotateImageIndex
+                      
+                      // Get image dimensions for rotation calculation
+                      const imgWidth = galleryItem?.asset?.metadata?.dimensions?.width || currentImageSize
+                      const imgHeight = galleryItem?.asset?.metadata?.dimensions?.height || currentImageSize
+                      
+                      // Calculate dimensions after rotation
+                      const rotatedWidth = needsRotation ? imgHeight * (currentImageSize / imgWidth) : currentImageSize
+                      const rotatedHeight = needsRotation ? imgWidth * (currentImageSize / imgHeight) : currentImageSize
+                      
+                      return (
+                        <div 
+                          className="relative" 
+                          style={{ 
+                            width: '100%',
+                            maxWidth: needsRotation ? `${rotatedHeight}px` : `${currentImageSize}px`,
+                            height: needsRotation ? `${rotatedWidth}px` : 'auto',
+                            minHeight: !needsRotation && currentImageSize > 800 ? `${currentImageSize * 0.6}px` : (needsRotation ? `${rotatedWidth}px` : 'auto'),
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            justifyContent: 'flex-start',
+                            overflow: 'visible'
+                          }}
+                        >
+                          <div style={{
+                            transform: needsRotation ? 'rotate(-270deg)' : 'none',
+                            transformOrigin: 'center center',
+                            width: '100%',
+                            maxWidth: needsRotation ? `${rotatedHeight}px` : `${currentImageSize}px`,
+                            height: needsRotation ? `${rotatedWidth}px` : 'auto'
+                          }}>
+                            <Image
+                              src={mediaUrl}
+                              alt={`${title || 'Gallery'} image ${index + 1}`}
+                              width={needsRotation ? imgHeight : currentImageSize}
+                              height={needsRotation ? imgWidth : currentImageSize}
+                              className="h-auto"
+                              style={{
+                                width: '100%',
+                                maxWidth: needsRotation ? `${rotatedHeight}px` : `${currentImageSize}px`,
+                                height: 'auto',
+                                objectFit: 'contain',
+                                display: 'block'
+                              }}
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            />
+                          </div>
+                        </div>
+                      )
+                    })()
                   )}
                 </div>
               )
@@ -243,7 +339,9 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
               return null
             }
           })}
-        </div>
+            </div>
+          )
+        })()
       )}
 
       {/* Lightbox Modal */}

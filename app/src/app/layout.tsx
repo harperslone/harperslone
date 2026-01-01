@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   title: "Portfolio Archive",
   description: "Experimental portfolio inspired by David Carson and BLESS Service",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
 };
 
 export default function RootLayout({
@@ -14,9 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+      </head>
       <body
         className="antialiased"
       >
+        <CustomCursor />
         {children}
         
         {/* Four Dots - Return to Home (Right Bottom) - Cross Formation - Always Visible */}
