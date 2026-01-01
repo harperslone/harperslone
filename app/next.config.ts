@@ -1,41 +1,59 @@
 import type { NextConfig } from "next";
 
 // Delete problematic files/directories before Next.js config is evaluated
+// This runs synchronously when Next.js loads the config, right before page scanning
 try {
   const fs = require('fs');
   const path = require('path');
   const templatesDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates');
+  
   if (fs.existsSync(templatesDir)) {
-    // First, try to delete the entire shopify directory (where page.ts is)
+    // Delete the entire shopify directory (where page.ts is)
     const shopifyDir = path.join(templatesDir, 'shopify');
     if (fs.existsSync(shopifyDir)) {
       try {
-        fs.rmSync(shopifyDir, { recursive: true, force: true });
+        // Use synchronous deletion with force to ensure it's gone
+        fs.rmSync(shopifyDir, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 });
       } catch (e) {
-        // If that fails, try deleting individual page.ts files
-        function deletePageFiles(dir: string, depth = 0) {
-          if (depth > 10) return;
+        // If directory deletion fails, try deleting the specific file
+        const pageFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'page.ts');
+        if (fs.existsSync(pageFile)) {
           try {
-            const entries = fs.readdirSync(dir, { withFileTypes: true });
-            for (const entry of entries) {
-              const fullPath = path.join(dir, entry.name);
-              if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
-                deletePageFiles(fullPath, depth + 1);
-              } else if (entry.isFile() && (entry.name === 'page.ts' || entry.name === 'page.ts.bak')) {
-                try {
-                  fs.unlinkSync(fullPath);
-                } catch (e) {
-                  // Ignore errors
-                }
-              }
+            fs.unlinkSync(pageFile);
+          } catch (e2) {
+            // Last resort: try to rename it
+            try {
+              fs.renameSync(pageFile, pageFile + '.bak');
+            } catch (e3) {
+              // Ignore all errors
             }
-          } catch (e) {
-            // Ignore errors
           }
         }
-        deletePageFiles(templatesDir);
       }
     }
+    
+    // Also scan for any other page.ts files in templates
+    function deletePageFiles(dir: string, depth = 0) {
+      if (depth > 10) return;
+      try {
+        const entries = fs.readdirSync(dir, { withFileTypes: true });
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry.name);
+          if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
+            deletePageFiles(fullPath, depth + 1);
+          } else if (entry.isFile() && (entry.name === 'page.ts' || entry.name === 'page.ts.bak')) {
+            try {
+              fs.unlinkSync(fullPath);
+            } catch (e) {
+              // Ignore errors
+            }
+          }
+        }
+      } catch (e) {
+        // Ignore errors
+      }
+    }
+    deletePageFiles(templatesDir);
   }
 } catch (e) {
   // Ignore errors during config load

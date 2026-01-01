@@ -6,7 +6,7 @@
     "postinstall": "node scripts/fix-sanity-templates.js",
     "prebuild": "node scripts/fix-sanity-templates.js",
     "dev": "next dev",
-    "build": "node -e \"const fs=require('fs'),path=require('path');const d=path.join('node_modules','@sanity','cli','templates');if(fs.existsSync(d)){function del(dir,depth=0){if(depth>10)return;try{fs.readdirSync(dir,{withFileTypes:true}).forEach(e=>{const p=path.join(dir,e.name);if(e.isDirectory()&&!e.name.startsWith('.')&&e.name!=='node_modules')del(p,depth+1);else if(e.isFile()&&(e.name==='page.ts'||e.name==='page.ts.bak'))try{fs.unlinkSync(p);}catch(_){}});}catch(_){}}del(d);}\" && next build --webpack",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
