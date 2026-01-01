@@ -6,7 +6,7 @@
     "postinstall": "node scripts/fix-sanity-templates.js",
     "prebuild": "node scripts/fix-sanity-templates.js",
     "dev": "next dev",
-    "build": "rm -rf node_modules/@sanity/cli/templates 2>/dev/null || true; next build --webpack",
+    "build": "rm -rf node_modules/@sanity/cli/templates 2>/dev/null || true; next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -17,7 +17,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "groq": "^5.1.0",
     "next": "15.1.0",
-    "next-sanity": "^12.0.5",
+    "next-sanity": "9.8.36",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
