@@ -1,7 +1,20 @@
 const fs = require('fs');
 const path = require('path');
 
-function findAndRenamePageFiles(dir, depth = 0) {
+function deleteDirectory(dir) {
+  try {
+    if (fs.existsSync(dir)) {
+      fs.rmSync(dir, { recursive: true, force: true });
+      console.log(`Deleted directory: ${dir}`);
+      return true;
+    }
+  } catch (err) {
+    console.error(`Error deleting directory ${dir}:`, err.message);
+  }
+  return false;
+}
+
+function findAndDeletePageFiles(dir, depth = 0) {
   // Limit recursion depth to avoid infinite loops
   if (depth > 10) return;
   
@@ -14,30 +27,15 @@ function findAndRenamePageFiles(dir, depth = 0) {
       if (entry.isDirectory()) {
         // Skip .git, node_modules subdirectories, etc.
         if (!entry.name.startsWith('.') && entry.name !== 'node_modules') {
-          findAndRenamePageFiles(fullPath, depth + 1);
+          findAndDeletePageFiles(fullPath, depth + 1);
         }
-      } else if (entry.isFile() && entry.name === 'page.ts') {
-        // Delete page.ts files (more aggressive than renaming)
+      } else if (entry.isFile() && (entry.name === 'page.ts' || entry.name === 'page.ts.bak')) {
+        // Delete page.ts files
         try {
           fs.unlinkSync(fullPath);
           console.log(`Deleted: ${fullPath}`);
         } catch (err) {
-          // If deletion fails, try renaming as fallback
-          try {
-            const newPath = fullPath + '.bak';
-            fs.renameSync(fullPath, newPath);
-            console.log(`Renamed: ${fullPath} -> ${newPath}`);
-          } catch (renameErr) {
-            console.error(`Error handling ${fullPath}:`, err.message);
-          }
-        }
-      } else if (entry.isFile() && entry.name === 'page.ts.bak') {
-        // Also delete .bak files to ensure clean state
-        try {
-          fs.unlinkSync(fullPath);
-          console.log(`Deleted backup: ${fullPath}`);
-        } catch (err) {
-          // Ignore errors for backup files
+          console.error(`Error deleting ${fullPath}:`, err.message);
         }
       }
     }
@@ -56,8 +54,21 @@ const possibleDirs = [
 let found = false;
 for (const templatesDir of possibleDirs) {
   if (fs.existsSync(templatesDir)) {
+    console.log(`Found templates directory: ${templatesDir}`);
+    
+    // First, try to delete the entire shopify subdirectory (where page.ts is)
+    const shopifyDir = path.join(templatesDir, 'shopify');
+    if (fs.existsSync(shopifyDir)) {
+      if (deleteDirectory(shopifyDir)) {
+        console.log('Deleted shopify templates directory');
+        found = true;
+        break;
+      }
+    }
+    
+    // If that fails, scan and delete individual page.ts files
     console.log(`Scanning: ${templatesDir}`);
-    findAndRenamePageFiles(templatesDir);
+    findAndDeletePageFiles(templatesDir);
     found = true;
     break;
   }
@@ -66,6 +77,6 @@ for (const templatesDir of possibleDirs) {
 if (!found) {
   console.log('Templates directory not found in any expected location');
 } else {
-  console.log('Done scanning for page.ts files');
+  console.log('Done processing templates');
 }
 

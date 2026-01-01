@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node scripts/fix-sanity-templates.js && npm run build",
+  "buildCommand": "node scripts/fix-sanity-templates.js && sleep 1 && npm run build",
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "framework": "nextjs"
