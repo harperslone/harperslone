@@ -20,6 +20,34 @@ const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
     // Ignore Sanity CLI template files that shouldn't be processed
     const webpack = require('webpack');
+    const fs = require('fs');
+    const path = require('path');
+    
+    // Aggressively delete page.ts files before webpack processes them
+    const templatesDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates');
+    if (fs.existsSync(templatesDir)) {
+      function deletePageFiles(dir: string, depth = 0) {
+        if (depth > 10) return;
+        try {
+          const entries = fs.readdirSync(dir, { withFileTypes: true });
+          for (const entry of entries) {
+            const fullPath = path.join(dir, entry.name);
+            if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
+              deletePageFiles(fullPath, depth + 1);
+            } else if (entry.isFile() && (entry.name === 'page.ts' || entry.name === 'page.ts.bak')) {
+              try {
+                fs.unlinkSync(fullPath);
+              } catch (e) {
+                // Ignore errors
+              }
+            }
+          }
+        } catch (e) {
+          // Ignore errors
+        }
+      }
+      deletePageFiles(templatesDir);
+    }
     
     // Add IgnorePlugin to exclude template files from all contexts
     config.plugins.push(

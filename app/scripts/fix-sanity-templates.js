@@ -17,13 +17,27 @@ function findAndRenamePageFiles(dir, depth = 0) {
           findAndRenamePageFiles(fullPath, depth + 1);
         }
       } else if (entry.isFile() && entry.name === 'page.ts') {
-        // Rename page.ts to page.ts.bak
-        const newPath = fullPath + '.bak';
+        // Delete page.ts files (more aggressive than renaming)
         try {
-          fs.renameSync(fullPath, newPath);
-          console.log(`Renamed: ${fullPath} -> ${newPath}`);
+          fs.unlinkSync(fullPath);
+          console.log(`Deleted: ${fullPath}`);
         } catch (err) {
-          console.error(`Error renaming ${fullPath}:`, err.message);
+          // If deletion fails, try renaming as fallback
+          try {
+            const newPath = fullPath + '.bak';
+            fs.renameSync(fullPath, newPath);
+            console.log(`Renamed: ${fullPath} -> ${newPath}`);
+          } catch (renameErr) {
+            console.error(`Error handling ${fullPath}:`, err.message);
+          }
+        }
+      } else if (entry.isFile() && entry.name === 'page.ts.bak') {
+        // Also delete .bak files to ensure clean state
+        try {
+          fs.unlinkSync(fullPath);
+          console.log(`Deleted backup: ${fullPath}`);
+        } catch (err) {
+          // Ignore errors for backup files
         }
       }
     }
