@@ -1,5 +1,6 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "rm -rf node_modules/@sanity/cli && npm run build",
+  "installCommand": "npm install && rm -rf node_modules/@sanity/cli",
   "outputDirectory": ".next",
   "framework": "nextjs"
 }
