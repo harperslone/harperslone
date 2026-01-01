@@ -1,5 +1,5 @@
 {
-  "buildCommand": "rm -rf node_modules/@sanity/cli/templates/shopify 2>/dev/null || true && node scripts/fix-sanity-templates.js && npm run build",
+  "buildCommand": "rm -rf node_modules/@sanity/cli/templates/shopify 2>/dev/null; node scripts/fix-sanity-templates.js; npm run build",
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "framework": "nextjs"
