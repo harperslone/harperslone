@@ -6,7 +6,7 @@
     "postinstall": "node scripts/fix-sanity-templates.js",
     "prebuild": "node scripts/fix-sanity-templates.js",
     "dev": "next dev",
-    "build": "node -e \"require('fs').rmSync('node_modules/@sanity/cli/templates/shopify',{recursive:true,force:true});\" 2>/dev/null || true && next build --webpack",
+    "build": "rm -rf node_modules/@sanity/cli/templates/shopify 2>/dev/null || true; next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
