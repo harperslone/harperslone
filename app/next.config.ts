@@ -1,40 +1,20 @@
 import type { NextConfig } from "next";
 
-// CRITICAL: Delete problematic files/directories IMMEDIATELY when this config loads
-// This MUST run synchronously before Next.js does ANY file scanning
+// CRITICAL: Delete templates directory IMMEDIATELY when this config loads
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-// CRITICAL: Create a dummy layout.tsx file where Next.js expects it
-// This satisfies Next.js's requirement and prevents the error
-(function createDummyLayout() {
-  const shopifyDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates', 'shopify');
-  const pageFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'page.ts');
-  const layoutFile = path.join(shopifyDir, 'schemaTypes', 'documents', 'layout.tsx');
-  
-  // If page.ts exists, create a layout.tsx to satisfy Next.js
-  if (fs.existsSync(pageFile)) {
-    try {
-      const layoutDir = path.dirname(layoutFile);
-      if (!fs.existsSync(layoutDir)) {
-        fs.mkdirSync(layoutDir, { recursive: true });
-      }
-      // Create a minimal layout that returns null
-      fs.writeFileSync(layoutFile, `export default function Layout({ children }: { children: React.ReactNode }) {\n  return null;\n}\n`);
-    } catch (e) {
-      // If that fails, try to rename/delete the page file
-      try {
-        fs.renameSync(pageFile, pageFile + '.notapage');
-      } catch (e2) {
-        try {
-          fs.unlinkSync(pageFile);
-        } catch (e3) {
-          // All methods failed
-        }
-      }
+(function deleteTemplates() {
+  const templatesDir = path.join(process.cwd(), 'node_modules', '@sanity', 'cli', 'templates');
+  try {
+    execSync(`rm -rf "${templatesDir}"`, { stdio: 'ignore' });
+  } catch (e) {}
+  try {
+    if (fs.existsSync(templatesDir)) {
+      fs.rmSync(templatesDir, { recursive: true, force: true });
     }
-  }
+  } catch (e) {}
 })();
 
 const nextConfig: NextConfig = {

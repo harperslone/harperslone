@@ -1,5 +1,5 @@
 {
-  "buildCommand": "bash scripts/build.sh",
+  "buildCommand": "VERCEL_FORCE_NO_BUILD_CACHE=1 bash scripts/build.sh",
   "outputDirectory": ".next",
   "installCommand": "npm install && node scripts/fix-sanity-templates.js",
   "framework": "nextjs"
