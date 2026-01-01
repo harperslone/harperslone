@@ -15,7 +15,7 @@
     "@sanity/image-url": "^2.0.2",
     "@tailwindcss/typography": "^0.5.19",
     "groq": "^5.1.0",
-    "next": "15.3.3",
+    "next": "15.3.4",
     "next-sanity": "9.8.36",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -26,7 +26,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^9",
-    "eslint-config-next": "15.3.3",
+    "eslint-config-next": "15.3.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
