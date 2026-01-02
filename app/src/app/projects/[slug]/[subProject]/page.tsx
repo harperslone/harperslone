@@ -1507,87 +1507,26 @@ export default async function SubProjectPage({
                   </>
                 )}
                 
-                {/* Special layout for boutique romantique: description, SequentialGallery on left, first image on right */}
+                {/* Boutique romantique - single sequential gallery with all images */}
                 {isBoutiqueRomantique && foundSubProject.gallery && foundSubProject.gallery.length > 0 && (
-                  <div className="mb-8">
-                    {/* Description above all rows */}
-                    <div 
-                      className="mb-8 text-black font-normal lowercase text-90s"
-                      style={{ 
-                        fontSize: '13px',
-                        lineHeight: '1.4',
-                        letterSpacing: '0.1px',
-                        textAlign: 'left'
-                      }}
-                    >
-                      boutique romantique with my books
-                    </div>
-                    
+                  <div className="mb-8 w-full">
                     {(() => {
-                      // Exclude cherry blossom image (keep it only in solo gallery)
-                      const cherryBlossomFilename = 'BC4A3E71-C7EF-4CB9-89F2-08A2C1BF4CEF.JPG'
-                      const filteredGallery = foundSubProject.gallery.filter((item: any) => {
-                        if (!item || !item.asset) return false
-                        const originalFilename = item.asset?.originalFilename || ''
-                        const isCherryBlossom = originalFilename === cherryBlossomFilename || originalFilename.endsWith(cherryBlossomFilename)
-                        return !isCherryBlossom
+                      // Sort images so "start" caption comes first
+                      const sortedGallery = [...foundSubProject.gallery].sort((a: any, b: any) => {
+                        const captionA = a.caption?.toLowerCase() || ''
+                        const captionB = b.caption?.toLowerCase() || ''
+                        if (captionA === 'start') return -1
+                        if (captionB === 'start') return 1
+                        return 0
                       })
                       
-                      if (filteredGallery.length === 0) return null
-                      
-                      const firstImage = filteredGallery[0]
-                      const remainingImages = filteredGallery.slice(1)
-                      
                       return (
-                        <div className="flex items-start gap-8 w-full">
-                          {/* SequentialGallery on the left with remaining images */}
-                          {remainingImages.length > 0 && (
-                            <div className="flex-1">
-                              <SequentialGallery 
-                                images={remainingImages} 
-                                title={foundSubProject.title || 'Gallery'}
-                                description={''}
-                                customMaxWidth={512}
-                              />
-                            </div>
-                          )}
-                          
-                          {/* First image on the right */}
-                          {firstImage && (
-                            <div className="flex-shrink-0">
-                              <GalleryLightbox 
-                                images={[firstImage]} 
-                                title={foundSubProject.title || 'Gallery'}
-                                columns={1}
-                                imageSize={400}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })()}
-                  </div>
-                )}
-                
-                {/* 6x1 Gallery for boutique romantique - last 6 images */}
-                {isBoutiqueRomantique && foundSubProject.gallery && foundSubProject.gallery.length >= 6 && (
-                  <div className="mt-8 mb-8 w-full" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    {(() => {
-                      // Get the last 6 images from the gallery
-                      const last6Images = foundSubProject.gallery.slice(-6)
-                      
-                      if (last6Images.length < 6) return null
-                      
-                      return (
-                        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                          <GalleryLightbox 
-                            images={last6Images} 
-                            title={foundSubProject.title || 'Gallery'}
-                            columns={6}
-                            imageSize={200}
-                            center={true}
-                          />
-                        </div>
+                        <SequentialGallery 
+                          images={sortedGallery} 
+                          title={foundSubProject.title || 'Gallery'}
+                          description={foundSubProject.description || ''}
+                          customMaxWidth={500}
+                        />
                       )
                     })()}
                   </div>
