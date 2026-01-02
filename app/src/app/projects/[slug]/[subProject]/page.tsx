@@ -2209,7 +2209,7 @@ export default async function SubProjectPage({
                 </div>
                 
                 {/* Description box above sequential gallery */}
-                <div className="mt-8 mb-6 w-full flex justify-center">
+                <div className="mt-8 mb-6 w-full">
                   <p className="text-sm text-gray-700">imagery/content for social media</p>
                 </div>
                 
