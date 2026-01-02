@@ -148,17 +148,20 @@ export default function SequentialGallery({ images, title, description, maxWidth
         
         {/* Current Image Display - Fixed center position with arrows on both sides */}
         <div 
-          className="relative w-full flex items-center justify-center sequential-gallery-container"
+          className="relative w-full sequential-gallery-container"
           style={{ 
-            minHeight: '300px',
+            minHeight: '500px',
             position: 'relative',
             paddingTop: '20px',
             paddingBottom: '20px',
             maxWidth: '100%',
-            margin: '0 auto'
+            margin: '0 auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
           }}
         >
-          {/* Left arrow - fixed position, always centered vertically */}
+          {/* Left arrow - fixed position at center of container */}
           {validImages.length > 1 && (
             <div 
               className="flex items-center justify-center cursor-pointer hover:opacity-70 transition-opacity z-10 sequential-arrow-left"
@@ -166,7 +169,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
               style={{ 
                 position: 'absolute',
                 top: '50%',
-                left: '20px',
+                left: '40px',
                 transform: 'translateY(-50%)',
                 width: '24px',
                 height: '24px'
@@ -202,11 +205,10 @@ export default function SequentialGallery({ images, title, description, maxWidth
                 maxWidth === 'xl' ? '1200px' : 
                 '1100px'
               ),
-              width: '100%',
-              paddingLeft: validImages.length > 1 ? '60px' : '0',
-              paddingRight: validImages.length > 1 ? '60px' : '0',
+              width: 'auto',
+              paddingLeft: validImages.length > 1 ? '80px' : '0',
+              paddingRight: validImages.length > 1 ? '80px' : '0',
               boxSizing: 'border-box',
-              margin: '0 auto',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
@@ -304,7 +306,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
             )}
           </div>
           
-          {/* Right arrow - fixed position, always centered vertically */}
+          {/* Right arrow - fixed position at center of container */}
           {validImages.length > 1 && (
             <div 
               className="flex items-center justify-center cursor-pointer hover:opacity-70 transition-opacity z-10 sequential-arrow-right"
@@ -312,7 +314,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
               style={{ 
                 position: 'absolute',
                 top: '50%',
-                right: '20px',
+                right: '40px',
                 transform: 'translateY(-50%)',
                 width: '24px',
                 height: '24px'
