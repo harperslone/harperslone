@@ -2155,6 +2155,29 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
+                {/* 2x1 grid with double1, double2 images */}
+                <div className="mb-12 w-full flex justify-center">
+                  {(() => {
+                    const doubleImages = foundSubProject.gallery.filter((item: any) => {
+                      const caption = item.caption || ''
+                      return caption === 'double1' || caption === 'double2'
+                    })
+                    
+                    if (doubleImages.length === 0) return null
+                    
+                    return (
+                      <GalleryLightbox 
+                        images={doubleImages} 
+                        title={foundSubProject.title || 'Gallery'}
+                        columns={2}
+                        imageSize={350}
+                        gap={20}
+                        center={true}
+                      />
+                    )
+                  })()}
+                </div>
+                
                 {/* Main Gallery - TIF files only (riso prints) */}
                 <div className="mb-12 w-full flex justify-center">
                   {(() => {
