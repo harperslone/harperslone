@@ -2388,8 +2388,8 @@ export default async function SubProjectPage({
                   {/* SequentialGallery on the right */}
                   <div className="flex-1">
                   {(() => {
-                    // Get only images (no videos) from the gallery, excluding special images
-                    const allImages = foundSubProject.gallery.filter((item: any) => {
+                    // Get only images for social media - exclude videos and special captioned images
+                    const socialMediaImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
                       
                       // Exclude videos
@@ -2398,20 +2398,28 @@ export default async function SubProjectPage({
                       const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
                       if (isVideo) return false
                       
-                      // Exclude "alaia in the atelier" image
+                      // Exclude images with special captions
                       const caption = item.caption?.toLowerCase() || ''
                       if (caption.includes('alaia in the atelier')) return false
+                      if (caption === 'row1' || caption === 'row2') return false
+                      if (caption.startsWith('book')) return false
+                      if (caption.includes('paris color')) return false
+                      if (caption.includes('marithe francois girbaud')) return false
                       
-                      // Also exclude by filename if it matches the special images
+                      // Exclude the first 19 images (riso prints) and the 3 special images
                       const originalFilename = item.asset?.originalFilename || ''
-                      if (originalFilename === 'img20250422_11143742.jpg') return false
+                      const specialFilenames = [
+                        'img20250422_11141080.jpg',
+                        'img20250422_11175977.jpg',
+                        'img20250422_11143742.jpg'
+                      ]
+                      if (specialFilenames.includes(originalFilename)) return false
                       
                       return true
                     })
                     
-                    // Get the last 29 images, but exclude the last 8 (2 for 2x1 gallery + 6 for second sequential gallery)
-                    const totalImages = allImages.length
-                    const lastImages = allImages.slice(Math.max(0, totalImages - 37), totalImages - 8)
+                    // Skip first 19 (riso prints in main gallery)
+                    const lastImages = socialMediaImages.slice(19)
                     
                     if (lastImages.length === 0) return null
                     
