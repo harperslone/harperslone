@@ -1842,7 +1842,7 @@ export default async function SubProjectPage({
                 
                 {/* 6-image Gallery for Tokyo (6x1 row) - Gallery with v1-v6 images, centered */}
                 {isTokyo && foundSubProject.gallery && foundSubProject.gallery.length > 0 && (
-                  <div className="mt-16 mb-8 w-full" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <div className="mt-16 mb-8 md:mt-16 md:mb-8 w-full tokyo-gallery" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     {(() => {
                       // Find images by specific captions (v1, v2, v3, v4, v5, v6)
                       const targetCaptions = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6']
