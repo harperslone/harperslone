@@ -45,28 +45,24 @@ export default async function Home() {
     allProjects = []
   }
 
-  // Generate colored dots positions with links
-  const coloredDots = Array.from({ length: 40 }, (_, i) => {
-    const colors = [
-      { color: '#bfdbfe', slug: 'work' }, // pale blue → work
-      { color: '#fef08a', slug: 'projects' }, // pale yellow → projects
-      { color: '#fce7f3', slug: 'exhibitions' }, // pale pink → exhibitions
-      { color: '#d1fae5', slug: 'print' } // pale green → print
-    ]
-    const colorData = colors[i % colors.length]
-    const size = Math.random() * 20 + 10 // 10-30px
-    const top = Math.random() * 60 + 20 // 20-80%
-    const left = Math.random() * 60 + 20 // 20-80%
-    return { color: colorData.color, slug: colorData.slug, size, top, left }
-  })
-  
-  // Generate black dots for contact page
-  const blackDots = Array.from({ length: 10 }, (_, i) => {
-    const size = Math.random() * 15 + 8 // 8-23px
-    const top = Math.random() * 60 + 20 // 20-80%
-    const left = Math.random() * 60 + 20 // 20-80%
-    return { size, top, left }
-  })
+  // Generate small scattered squares (like musica viva 1959 poster)
+  const scatteredSquares = [
+    { color: '#3b82f6', top: 8, left: 75 },   // blue
+    { color: '#ef4444', top: 18, left: 62 },  // red
+    { color: '#fbbf24', top: 22, left: 78 },  // yellow
+    { color: '#ef4444', top: 28, left: 55 },  // red
+    { color: '#3b82f6', top: 32, left: 42 },  // blue
+    { color: '#000000', top: 38, left: 58 },  // black
+    { color: '#fbbf24', top: 42, left: 35 },  // yellow
+    { color: '#3b82f6', top: 45, left: 72 },  // blue
+    { color: '#ef4444', top: 52, left: 48 },  // red
+    { color: '#fbbf24', top: 55, left: 65 },  // yellow
+    { color: '#000000', top: 58, left: 38 },  // black
+    { color: '#3b82f6', top: 62, left: 55 },  // blue
+    { color: '#ef4444', top: 68, left: 42 },  // red
+    { color: '#000000', top: 72, left: 62 },  // black
+    { color: '#fbbf24', top: 78, left: 52 },  // yellow
+  ]
 
   return (
     <div className="min-h-screen bg-gray-200 flex flex-col relative overflow-hidden">
