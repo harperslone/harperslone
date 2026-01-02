@@ -126,13 +126,13 @@ export default async function Home() {
                 />
               ))}
               
-              {/* Vertical text columns along left edge - musica viva style */}
+              {/* Vertical text columns along left edge - reading upward */}
               <div 
                 className="absolute text-black"
                 style={{
-                  bottom: '2%',
-                  left: '2%',
-                  transform: 'rotate(-45deg)',
+                  bottom: '50%',
+                  left: '3%',
+                  transform: 'rotate(-45deg) rotate(-90deg)',
                   transformOrigin: 'bottom left',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -140,74 +140,62 @@ export default async function Home() {
                 <div 
                   style={{
                     display: 'flex',
-                    flexDirection: 'row',
-                    gap: 'clamp(4px, 0.6vw, 8px)',
-                    alignItems: 'flex-end',
+                    flexDirection: 'column',
+                    gap: 'clamp(8px, 1.2vw, 16px)',
+                    alignItems: 'flex-start',
                   }}
                 >
-                  {/* Column 1 - Date/Info */}
+                  {/* Row 1 - Date/Info */}
                   <div 
                     style={{
-                      writingMode: 'vertical-rl',
-                      transform: 'rotate(180deg)',
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
-                      lineHeight: '1.2',
+                      lineHeight: '1.4',
                       letterSpacing: '0.1px',
                     }}
                   >
-                    <div>archive design</div>
-                    <div>portfolio 2024</div>
-                    <div style={{ marginTop: '8px' }}>based in paris</div>
-                    <div>available worldwide</div>
+                    <span>archive design · portfolio 2024 · based in paris · available worldwide</span>
                   </div>
                   
-                  {/* Column 2 - Services Group 1 */}
+                  {/* Row 2 - Services */}
                   <div 
                     style={{
-                      writingMode: 'vertical-rl',
-                      transform: 'rotate(180deg)',
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
-                      lineHeight: '1.2',
+                      lineHeight: '1.4',
                       letterSpacing: '0.1px',
                     }}
                   >
-                    <div>image</div>
-                    <div>video</div>
-                    <div>identity</div>
-                    <div>book</div>
-                    <div>magazine</div>
-                    <div>print</div>
-                    <div>poster</div>
+                    <span>image · video · identity · book · magazine · print · poster</span>
                   </div>
                   
-                  {/* Column 3 - Services Group 2 */}
+                  {/* Row 3 - More Services */}
                   <div 
                     style={{
-                      writingMode: 'vertical-rl',
-                      transform: 'rotate(180deg)',
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
-                      lineHeight: '1.2',
+                      lineHeight: '1.4',
                       letterSpacing: '0.1px',
                     }}
                   >
-                    <div>retail graphics</div>
-                    <div>brand design</div>
-                    <div>brand strategy</div>
-                    <div>content direction</div>
-                    <div>type design</div>
-                    <div>product design</div>
-                    <div>creative direction</div>
-                    <div>graphic design</div>
-                    <div>styling</div>
+                    <span>retail graphics · brand design · brand strategy · content direction</span>
                   </div>
                   
-                  {/* Column 4 - Projects */}
+                  {/* Row 4 - Even More Services */}
                   <div 
                     style={{
-                      writingMode: 'vertical-rl',
-                      transform: 'rotate(180deg)',
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
-                      lineHeight: '1.3',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                    }}
+                  >
+                    <span>type design · product design · creative direction · graphic design · styling</span>
+                  </div>
+                  
+                  {/* Row 5 - Projects */}
+                  <div 
+                    style={{
+                      display: 'flex',
+                      gap: 'clamp(8px, 1vw, 16px)',
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
                     }}
                   >
                     {allProjects.map((project, idx) => {
@@ -227,12 +215,12 @@ export default async function Home() {
                 </div>
               </div>
               
-              {/* Large name on right side - like "musica viva" */}
+              {/* Large name */}
               <div 
                 className="absolute text-black font-bold"
                 style={{
-                  top: '15%',
-                  right: '15%',
+                  top: '20%',
+                  right: '20%',
                   transform: 'rotate(-45deg)',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                   fontSize: 'clamp(24px, 5vw, 56px)',
