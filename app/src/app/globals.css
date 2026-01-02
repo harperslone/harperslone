@@ -8,8 +8,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Helvetica Neue", Helvetica, sans-serif;
+  --font-mono: "Helvetica Neue", Helvetica, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,6 +28,10 @@ body {
 
 /* Force Helvetica on all elements */
 *, *::before, *::after {
+  font-family: "Helvetica Neue", Helvetica, sans-serif !important;
+}
+
+html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5, h6 {
   font-family: "Helvetica Neue", Helvetica, sans-serif !important;
 }
 
