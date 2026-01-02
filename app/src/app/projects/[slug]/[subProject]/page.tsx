@@ -2355,7 +2355,7 @@ export default async function SubProjectPage({
                   </div>
                   
                   {/* Gallery on the right */}
-                  <div className="flex-1">
+                  <div className="flex-1 flex justify-end">
                     {(() => {
                       // Get images with caption "row1" or "row2"
                       const rowImages = foundSubProject.gallery.filter((item: any) => {
