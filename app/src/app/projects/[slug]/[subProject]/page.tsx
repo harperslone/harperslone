@@ -2347,25 +2347,21 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
-                {/* 2x1 Gallery with last 2 uploaded images - above sequential gallery */}
+                {/* 2x1 Gallery with row1 and row2 images - above sequential gallery */}
                 <div className="mt-8 mb-8 flex justify-center">
                   {(() => {
-                    // Get the last 2 images for the 2x1 gallery
-                    const allNonVideoImages = foundSubProject.gallery.filter((item: any) => {
+                    // Get images with caption "row1" or "row2"
+                    const rowImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
-                      const mimeType = item.asset?.mimeType || ''
-                      const url = item.asset?.url || ''
-                      const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
-                      return !isVideo
+                      const caption = item.caption?.toLowerCase() || ''
+                      return caption === 'row1' || caption === 'row2'
                     })
                     
-                    const last2Images = allNonVideoImages.slice(-2)
-                    
-                    if (last2Images.length < 2) return null
+                    if (rowImages.length < 2) return null
                     
                     return (
                       <GalleryLightbox 
-                        images={last2Images} 
+                        images={rowImages} 
                         title={foundSubProject.title || 'Gallery'}
                         columns={2}
                         imageSize={250}
