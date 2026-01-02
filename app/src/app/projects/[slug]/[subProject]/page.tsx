@@ -2138,7 +2138,7 @@ export default async function SubProjectPage({
               </div>
             )}
             
-            {/* The Parisian Vintage - Special Layout: Main 5x3 grid, Special 3x1 gallery, Video gallery */}
+            {/* The Parisian Vintage - Simplified Layout: TIF files in grid, JPG files in sequential gallery */}
             {isParisianVintage && foundSubProject.gallery && (
               <div>
                 {/* Description box above main gallery */}
@@ -2146,69 +2146,22 @@ export default async function SubProjectPage({
                   <p className="text-sm text-gray-700">riso prints for palette & formes project</p>
                 </div>
                 
-                {/* Main Gallery - 5x3 grid for The Parisian Vintage */}
+                {/* Main Gallery - TIF files only (riso prints) */}
                 <div className="mb-8">
                   {(() => {
-                    // For The Parisian Vintage, show all images in a 5x3 grid (15 images)
-                    // Exclude the special images (tomato tie, blue bag, alaia in the atelier)
-                    // Also exclude the last 23 images (they go in SequentialGallery)
-                    const specialFilenames = [
-                      'img20250422_11141080.jpg',
-                      'img20250422_11175977.jpg',
-                      'img20250422_11143742.jpg'
-                    ]
-                    
-                    // First, get all non-video images to determine which are the last 23
-                    const allNonVideoImages = foundSubProject.gallery.filter((item: any) => {
+                    // Get only TIF files (riso prints)
+                    const tifImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
-                      const mimeType = item.asset?.mimeType || ''
+                      const filename = item.asset?.originalFilename || ''
                       const url = item.asset?.url || ''
-                      const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
-                      return !isVideo
+                      return filename.toLowerCase().endsWith('.tif') || url.toLowerCase().includes('.tif')
                     })
                     
-                    // Get the last 31 images for SequentialGallery + 2x1 gallery (to exclude them here)
-                    // 29 for sequential gallery + 2 for side-by-side gallery = 31
-                    const last31Images = allNonVideoImages.slice(-31)
-                    const last31Keys = new Set(last31Images.map((item: any) => item._key || item.asset?._ref))
-                    
-                    const allImages = foundSubProject.gallery.filter((item: any) => {
-                      if (!item || !item.asset) return false
-                      
-                      // Check if it's a video - exclude videos from image gallery
-                      const mimeType = item.asset?.mimeType || ''
-                      const url = item.asset?.url || ''
-                      const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
-                      if (isVideo) return false
-                      
-                      // Exclude last 31 images (they go in SequentialGallery + 2x1 gallery)
-                      const itemKey = item._key || item.asset?._ref
-                      if (last31Keys.has(itemKey)) return false
-                      
-                      // Check if it's an image with valid URL
-                      const imageUrl = urlFor(item)?.url()
-                      if (!imageUrl) return false
-                      
-                      // Exclude special images by filename
-                      const originalFilename = item.asset?.originalFilename || ''
-                      const isSpecial = specialFilenames.some(filename => 
-                        originalFilename === filename || originalFilename.endsWith(filename)
-                      )
-                      
-                      // Exclude cherry blossom image (keep it only in solo gallery)
-                      const isCherryBlossom = originalFilename === 'BC4A3E71-C7EF-4CB9-89F2-08A2C1BF4CEF.JPG' || originalFilename.endsWith('BC4A3E71-C7EF-4CB9-89F2-08A2C1BF4CEF.JPG')
-                      
-                      return !isSpecial && !isCherryBlossom
-                    })
-                    
-                    if (allImages.length === 0) return null
-                    
-                    // Show first 19 images in the main gallery (to include the riso prints + a few more)
-                    const mainGalleryImages = allImages.slice(0, 19)
+                    if (tifImages.length === 0) return null
                     
                     return (
                       <GalleryLightbox 
-                        images={mainGalleryImages} 
+                        images={tifImages} 
                         title={foundSubProject.title || 'Gallery'}
                         columns={5}
                         imageSize={400}
@@ -2217,33 +2170,35 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
-                {/* Special 3x1 Gallery for tomato tie, blue bag, and alaia in the atelier - appears underneath main gallery */}
-                <div className="mt-8 mb-8">
+                {/* Description box above sequential gallery */}
+                <div className="mt-8 mb-6">
+                  <p className="text-sm text-gray-700">imagery/content for social media</p>
+                </div>
+                
+                {/* Sequential Gallery - JPG files only (social media content) */}
+                <div className="mb-8">
                   {(() => {
-                    // Find images by specific filenames
-                    const targetFilenames = [
-                      'img20250422_11141080.jpg',
-                      'img20250422_11175977.jpg',
-                      'img20250422_11143742.jpg'
-                    ]
+                    // Get only JPG files (social media images)
+                    const jpgImages = foundSubProject.gallery.filter((item: any) => {
+                      if (!item || !item.asset) return false
+                      const filename = item.asset?.originalFilename || ''
+                      const url = item.asset?.url || ''
+                      // Exclude TIF files (they're in the main gallery)
+                      const isTif = filename.toLowerCase().endsWith('.tif') || url.toLowerCase().includes('.tif')
+                      // Exclude videos
+                      const isVideo = url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
+                      return !isTif && !isVideo
+                    })
                     
-                    const specialImages = targetFilenames
-                      .map(filename => {
-                        return foundSubProject.gallery?.find((item: any) => {
-                          const originalFilename = item.asset?.originalFilename || ''
-                          return originalFilename === filename || originalFilename.endsWith(filename)
-                        })
-                      })
-                      .filter((item: any) => item !== undefined)
-                    
-                    if (specialImages.length === 0) return null
+                    if (jpgImages.length === 0) return null
                     
                     return (
-                      <GalleryLightbox 
-                        images={specialImages} 
+                      <SequentialGallery 
+                        images={jpgImages} 
                         title={foundSubProject.title || 'Gallery'}
-                        columns={3}
-                        imageSize={400}
+                        description={''}
+                        customMaxWidth={300}
+                        hideCaptions={true}
                       />
                     )
                   })()}
@@ -2286,162 +2241,6 @@ export default async function SubProjectPage({
                       </div>
                     )
                   })()}
-                </div>
-                
-                {/* 2x1 Gallery with row1 and row2 images - above sequential gallery */}
-                <div className="mt-8 mb-8 w-full">
-                  <div className="flex flex-col md:flex-row items-start justify-between gap-8">
-                    {/* Description on the left */}
-                    <div className="flex-shrink-0">
-                      <p className="text-sm text-gray-700 whitespace-nowrap">in tokyo with my favorite polka dot accessories</p>
-                    </div>
-                    
-                    {/* Gallery on the right - use ml-auto to push to right */}
-                    <div className="flex-shrink-0 ml-auto">
-                      {(() => {
-                        // Get images with caption "row1" or "row2"
-                        const rowImages = foundSubProject.gallery.filter((item: any) => {
-                          if (!item || !item.asset) return false
-                          const caption = item.caption?.toLowerCase() || ''
-                          return caption === 'row1' || caption === 'row2'
-                        })
-                        
-                        if (rowImages.length < 2) return null
-                        
-                        return (
-                          <GalleryLightbox 
-                            images={rowImages} 
-                            title={foundSubProject.title || 'Gallery'}
-                            columns={2}
-                            imageSize={250}
-                          />
-                        )
-                      })()}
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Row layout: Description on left, SequentialGallery on right */}
-                <div className="mt-8 mb-8 flex flex-row items-start gap-8">
-                  {/* Description on the left */}
-                  <div className="flex-shrink-0">
-                    <p className="text-sm text-gray-700 whitespace-nowrap">imagery/content for social media</p>
-                  </div>
-                  
-                  {/* SequentialGallery on the right */}
-                  <div className="flex-1">
-                  {(() => {
-                    // Get only images for social media - exclude videos and special captioned images
-                    const socialMediaImages = foundSubProject.gallery.filter((item: any) => {
-                      if (!item || !item.asset) return false
-                      
-                      // Exclude videos
-                      const mimeType = item.asset?.mimeType || ''
-                      const url = item.asset?.url || ''
-                      const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
-                      if (isVideo) return false
-                      
-                      // Exclude images with special captions
-                      const caption = item.caption?.toLowerCase() || ''
-                      if (caption.includes('alaia in the atelier')) return false
-                      if (caption === 'row1' || caption === 'row2') return false
-                      if (caption.startsWith('book')) return false
-                      if (caption.includes('paris color')) return false
-                      if (caption.includes('marithe francois girbaud')) return false
-                      
-                      // Exclude the first 19 images (riso prints) and the 3 special images
-                      const originalFilename = item.asset?.originalFilename || ''
-                      const specialFilenames = [
-                        'img20250422_11141080.jpg',
-                        'img20250422_11175977.jpg',
-                        'img20250422_11143742.jpg'
-                      ]
-                      if (specialFilenames.includes(originalFilename)) return false
-                      
-                      return true
-                    })
-                    
-                    // Skip first 19 (riso prints in main gallery)
-                    const lastImages = socialMediaImages.slice(19)
-                    
-                    if (lastImages.length === 0) return null
-                    
-                    return (
-                      <SequentialGallery 
-                        images={lastImages} 
-                        title={foundSubProject.title || 'Gallery'}
-                        description={''}
-                        customMaxWidth={300}
-                        hideCaptions={true}
-                      />
-                    )
-                  })()}
-                  </div>
-                </div>
-                
-                {/* Second SequentialGallery - book/magazine images (book1-book6) */}
-                <div className="mt-8 mb-8 flex flex-col md:flex-row items-start gap-8">
-                  {/* Description on the left */}
-                  <div className="flex-shrink-0">
-                    <p className="text-sm text-gray-700 whitespace-nowrap">spreads from shoe obsessed zine - 2023</p>
-                  </div>
-                  
-                  {/* SequentialGallery on the right */}
-                  <div className="flex-1">
-                    {(() => {
-                      // Get the 6 book/magazine images by caption (book1-book6)
-                      const bookImages = foundSubProject.gallery.filter((item: any) => {
-                        if (!item || !item.asset) return false
-                        const caption = item.caption?.toLowerCase() || ''
-                        return caption === 'book1' || caption === 'book2' || caption === 'book3' || 
-                               caption === 'book4' || caption === 'book5' || caption === 'book6'
-                      })
-                      
-                      if (bookImages.length === 0) return null
-                      
-                      return (
-                        <SequentialGallery 
-                          images={bookImages} 
-                          title={foundSubProject.title || 'Gallery'}
-                          description={''}
-                          customMaxWidth={350}
-                          hideCaptions={true}
-                        />
-                      )
-                    })()}
-                  </div>
-                </div>
-                
-                {/* Third SequentialGallery - paris color & marithe francois girbaud images */}
-                <div className="mt-8 mb-8 flex flex-col md:flex-row items-start gap-8">
-                  {/* Description on the left */}
-                  <div className="w-full md:w-48 flex-shrink-0">
-                    <p className="text-sm text-gray-700">other print projects - 2023</p>
-                  </div>
-                  
-                  {/* SequentialGallery on the right */}
-                  <div className="flex-1">
-                    {(() => {
-                      // Get images with captions containing "paris color" or "marithe francois girbaud"
-                      const parisImages = foundSubProject.gallery.filter((item: any) => {
-                        if (!item || !item.asset) return false
-                        const caption = item.caption?.toLowerCase() || ''
-                        return caption.includes('paris color') || caption.includes('marithe francois girbaud')
-                      })
-                      
-                      if (parisImages.length === 0) return null
-                      
-                      return (
-                        <SequentialGallery 
-                          images={parisImages} 
-                          title={foundSubProject.title || 'Gallery'}
-                          description={''}
-                          customMaxWidth={350}
-                          hideCaptions={false}
-                        />
-                      )
-                    })()}
-                  </div>
                 </div>
               </div>
             )}
