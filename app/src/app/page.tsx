@@ -77,7 +77,7 @@ export default async function Home() {
         <SidebarNavigation projects={allProjects} />
 
         {/* Main Content Area - Swiss Style Poster Design */}
-        <main className="flex-1 relative z-10 flex items-center justify-center p-8 md:p-16">
+        <main className="flex-1 relative z-10 flex items-center justify-center p-4 md:p-16 homepage-main">
           <div className="relative w-full max-w-4xl" style={{ aspectRatio: '1/1', maxHeight: '90vh' }}>
             {/* Dark gray corners */}
             <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-gray-400 z-0" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}></div>
@@ -87,7 +87,7 @@ export default async function Home() {
             
             {/* White rotated square (diamond) */}
             <div 
-              className="absolute top-1/2 left-1/2 bg-white z-10"
+              className="absolute top-1/2 left-1/2 bg-white z-10 homepage-diamond"
               style={{
                 width: '70%',
                 height: '70%',
