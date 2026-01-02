@@ -295,6 +295,10 @@ export default function SequentialGallery({ images, title, description, maxWidth
                 {(() => {
                   const imageNumber = currentIndex + 1
                   const caption = currentItem.caption || currentItem.alt || ''
+                  // If caption already starts with n°, just use the caption as-is
+                  if (caption && caption.startsWith('n°')) {
+                    return caption
+                  }
                   // If there's a caption, combine it with the number, otherwise just show the number
                   if (caption) {
                     return `n°${imageNumber} ${caption}`
