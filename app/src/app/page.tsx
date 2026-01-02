@@ -126,12 +126,14 @@ export default async function Home() {
                 />
               ))}
               
-              {/* Text aligned with bottom-left edge of diamond */}
+              {/* Vertical text columns along left edge - musica viva style */}
               <div 
                 className="absolute text-black"
                 style={{
-                  bottom: '8%',
-                  left: '8%',
+                  bottom: '2%',
+                  left: '2%',
+                  transform: 'rotate(-45deg)',
+                  transformOrigin: 'bottom left',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
@@ -139,37 +141,34 @@ export default async function Home() {
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    gap: 'clamp(6px, 1vw, 12px)',
-                    alignItems: 'flex-start',
+                    gap: 'clamp(4px, 0.6vw, 8px)',
+                    alignItems: 'flex-end',
                   }}
                 >
                   {/* Column 1 - Date/Info */}
                   <div 
                     style={{
-                      fontSize: 'clamp(6px, 0.7vw, 9px)',
-                      lineHeight: '1.4',
-                      letterSpacing: '0.2px',
-                      transform: 'rotate(-45deg)',
-                      transformOrigin: 'top left',
-                      whiteSpace: 'nowrap',
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.2',
+                      letterSpacing: '0.1px',
                     }}
                   >
                     <div>archive design</div>
                     <div>portfolio 2024</div>
-                    <div style={{ marginTop: '4px' }}>based in paris</div>
+                    <div style={{ marginTop: '8px' }}>based in paris</div>
                     <div>available worldwide</div>
                   </div>
                   
                   {/* Column 2 - Services Group 1 */}
                   <div 
                     style={{
-                      fontSize: 'clamp(6px, 0.7vw, 9px)',
-                      lineHeight: '1.4',
-                      letterSpacing: '0.2px',
-                      transform: 'rotate(-45deg)',
-                      transformOrigin: 'top left',
-                      whiteSpace: 'nowrap',
-                      marginLeft: 'clamp(30px, 5vw, 60px)',
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.2',
+                      letterSpacing: '0.1px',
                     }}
                   >
                     <div>image</div>
@@ -184,13 +183,11 @@ export default async function Home() {
                   {/* Column 3 - Services Group 2 */}
                   <div 
                     style={{
-                      fontSize: 'clamp(6px, 0.7vw, 9px)',
-                      lineHeight: '1.4',
-                      letterSpacing: '0.2px',
-                      transform: 'rotate(-45deg)',
-                      transformOrigin: 'top left',
-                      whiteSpace: 'nowrap',
-                      marginLeft: 'clamp(30px, 5vw, 60px)',
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.2',
+                      letterSpacing: '0.1px',
                     }}
                   >
                     <div>retail graphics</div>
@@ -207,12 +204,10 @@ export default async function Home() {
                   {/* Column 4 - Projects */}
                   <div 
                     style={{
-                      fontSize: 'clamp(6px, 0.7vw, 9px)',
-                      lineHeight: '1.4',
-                      transform: 'rotate(-45deg)',
-                      transformOrigin: 'top left',
-                      whiteSpace: 'nowrap',
-                      marginLeft: 'clamp(30px, 5vw, 60px)',
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.3',
                     }}
                   >
                     {allProjects.map((project, idx) => {
@@ -232,15 +227,15 @@ export default async function Home() {
                 </div>
               </div>
               
-              {/* Large name aligned with diamond edge */}
+              {/* Large name on right side - like "musica viva" */}
               <div 
                 className="absolute text-black font-bold"
                 style={{
-                  top: '25%',
-                  right: '25%',
+                  top: '15%',
+                  right: '15%',
                   transform: 'rotate(-45deg)',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                  fontSize: 'clamp(20px, 4vw, 48px)',
+                  fontSize: 'clamp(24px, 5vw, 56px)',
                   letterSpacing: '-1px',
                   whiteSpace: 'nowrap',
                 }}
