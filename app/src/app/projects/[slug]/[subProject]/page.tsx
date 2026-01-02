@@ -2314,6 +2314,45 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
+                {/* Sequential Gallery - styling and marithe francois girbaud images with captions */}
+                <div className="mb-12 w-full flex justify-center">
+                  {(() => {
+                    // Get images with captions containing "styling" or "marithe francois girbaud"
+                    const stylingImages = foundSubProject.gallery.filter((item: any) => {
+                      const caption = item.caption || ''
+                      return caption.includes('styling') || caption.includes('marithe francois girbaud')
+                    })
+                    
+                    // Sort by number in caption
+                    stylingImages.sort((a: any, b: any) => {
+                      const aCaption = a.caption || ''
+                      const bCaption = b.caption || ''
+                      // Extract number from n°X format
+                      const aMatch = aCaption.match(/n°(\d+)/)
+                      const bMatch = bCaption.match(/n°(\d+)/)
+                      const aNum = aMatch ? parseInt(aMatch[1]) : 999
+                      const bNum = bMatch ? parseInt(bMatch[1]) : 999
+                      // Group by type (styling first, then marithe)
+                      const aIsStyling = aCaption.includes('styling') ? 0 : 1
+                      const bIsStyling = bCaption.includes('styling') ? 0 : 1
+                      if (aIsStyling !== bIsStyling) return aIsStyling - bIsStyling
+                      return aNum - bNum
+                    })
+                    
+                    if (stylingImages.length === 0) return null
+                    
+                    return (
+                      <SequentialGallery 
+                        images={stylingImages} 
+                        title={foundSubProject.title || 'Gallery'}
+                        description={''}
+                        customMaxWidth={300}
+                        hideCaptions={false}
+                      />
+                    )
+                  })()}
+                </div>
+                
                 {/* Video gallery - appears as last gallery, muted */}
                 <div className="mt-8 mb-12 w-full flex justify-center">
                   {(() => {
