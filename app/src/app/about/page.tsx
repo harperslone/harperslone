@@ -14,7 +14,7 @@ export default function About() {
             by intuition and color-based inspiration. Capturing the beauty of her physical environment while creating imagined spaces.
           </p>
           <p className="font-normal text-black" style={{ fontSize: '13px' }}>
-            Graduate of Parsons School of Design, Art, Media, Technology
+            Graduate of Parsons School of Design (Art, Media, Technology)
           </p>
         </div>
         
