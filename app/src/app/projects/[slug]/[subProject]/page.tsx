@@ -2155,6 +2155,11 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
+                {/* Description box above 2x1 gallery */}
+                <div className="mt-8 mb-6 w-full">
+                  <p className="text-sm text-gray-700">polka dot accessories on holiday in tokyo</p>
+                </div>
+                
                 {/* 2x1 grid with double1, double2 images */}
                 <div className="mb-12 w-full flex justify-center">
                   {(() => {
