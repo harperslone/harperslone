@@ -10,9 +10,8 @@ export default function About() {
       <main className="flex-1 relative z-10 flex items-center justify-center p-8 md:p-12">
         <div className="max-w-2xl w-full text-center space-y-4">
           <p className="font-normal text-black leading-relaxed" style={{ fontSize: '13px' }}>
-            &ldquo;Slone (b. 2001) is a visual artist and photographer, whose practice is driven
-            by intuition and color-based inspiration. Capturing the beauty of her physical environment while also
-            conjuring imagined spaces through her work.&rdquo;
+            &ldquo;Slone (b.2001) is a visual artist and photographer, whose practice is driven
+            by intuition and color-based inspiration. Capturing the beauty of her physical environment while creating imagined spaces.&rdquo;
           </p>
           <p className="font-normal text-black" style={{ fontSize: '13px' }}>
             Graduate of Parsons School of Design, Art, Media, Technology
