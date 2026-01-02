@@ -467,7 +467,7 @@ export default async function SubProjectPage({
             {/* Special layout for bts - Description + Sequential Gallery */}
             {isBts && (
               <>
-                {/* Description for bts */}
+                {/* First Description for bts (title + n°1) */}
                 {foundSubProject.description && (
                   <div 
                     className="mb-8 text-black font-normal lowercase text-90s"
@@ -478,19 +478,19 @@ export default async function SubProjectPage({
                       textAlign: 'left'
                     }}
                   >
-                    {foundSubProject.description.split('\n').map((line: string, index: number) => {
-                      const parts = line.split(/(\*\*.*?\*\*)/g)
-                      return (
-                        <div key={index} className="mb-2">
-                          {parts.map((part, partIndex) => {
-                            if (part.startsWith('**') && part.endsWith('**')) {
-                              return <strong key={partIndex}>{part.slice(2, -2)}</strong>
-                            }
-                            return <span key={partIndex}>{part}</span>
-                          })}
+                    {(() => {
+                      // Split by double newlines to separate sections
+                      const sections = foundSubProject.description.split('\n\n')
+                      // Take first two sections (title + n°1)
+                      const firstSections = sections.slice(0, 2)
+                      return firstSections.map((section: string, sectionIndex: number) => (
+                        <div key={sectionIndex} className="mb-2">
+                          {section.split('\n').map((line: string, lineIndex: number) => (
+                            <div key={lineIndex}>{line}</div>
+                          ))}
                         </div>
-                      )
-                    })}
+                      ))
+                    })()}
                   </div>
                 )}
                 
@@ -502,6 +502,34 @@ export default async function SubProjectPage({
                       customMaxWidth={500}
                       hideCaptions={true}
                     />
+                  </div>
+                )}
+                
+                {/* Second Description for bts (n°2) */}
+                {foundSubProject.description && (
+                  <div 
+                    className="mb-8 text-black font-normal lowercase text-90s"
+                    style={{ 
+                      fontSize: '13px',
+                      lineHeight: '1.85',
+                      letterSpacing: '0.2px',
+                      textAlign: 'left'
+                    }}
+                  >
+                    {(() => {
+                      // Split by double newlines to separate sections
+                      const sections = foundSubProject.description.split('\n\n')
+                      // Take remaining sections (n°2, etc.)
+                      const remainingSections = sections.slice(2)
+                      if (remainingSections.length === 0) return null
+                      return remainingSections.map((section: string, sectionIndex: number) => (
+                        <div key={sectionIndex} className="mb-2">
+                          {section.split('\n').map((line: string, lineIndex: number) => (
+                            <div key={lineIndex}>{line}</div>
+                          ))}
+                        </div>
+                      ))
+                    })()}
                   </div>
                 )}
                 
