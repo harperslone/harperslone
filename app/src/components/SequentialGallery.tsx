@@ -133,7 +133,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
               const displayLine = line
               const parts = displayLine.split(/(\*\*.*?\*\*)/g)
               return (
-                <div key={index} style={{ marginBottom: isFirstLine ? '6px' : '2px', fontWeight: 'normal' }}>
+                <div key={index} style={{ marginBottom: isFirstLine ? '12px' : '1px', fontWeight: 'normal', lineHeight: isFirstLine ? '1.4' : '1.2' }}>
                   {parts.map((part, partIndex) => {
                     if (part.startsWith('**') && part.endsWith('**')) {
                       return <strong key={partIndex}>{part.slice(2, -2)}</strong>
