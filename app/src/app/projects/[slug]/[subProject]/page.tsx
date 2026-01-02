@@ -2348,14 +2348,14 @@ export default async function SubProjectPage({
                 </div>
                 
                 {/* 2x1 Gallery with row1 and row2 images - above sequential gallery */}
-                <div className="mt-8 mb-8 flex flex-col md:flex-row items-start gap-8">
+                <div className="mt-8 mb-8 flex flex-col md:flex-row items-start gap-8 w-full">
                   {/* Description on the left */}
-                  <div className="w-full md:w-48 flex-shrink-0">
-                    <p className="text-sm text-gray-700">in tokyo with my favorite polka dot accessories</p>
+                  <div className="flex-shrink-0">
+                    <p className="text-sm text-gray-700 whitespace-nowrap">in tokyo with my favorite polka dot accessories</p>
                   </div>
                   
                   {/* Gallery on the right */}
-                  <div className="flex-1 flex justify-end">
+                  <div className="flex-1 flex justify-end items-start">
                     {(() => {
                       // Get images with caption "row1" or "row2"
                       const rowImages = foundSubProject.gallery.filter((item: any) => {
