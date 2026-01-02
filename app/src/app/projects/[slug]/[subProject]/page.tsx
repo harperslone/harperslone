@@ -2274,6 +2274,41 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
+                {/* Description box above other print projects gallery */}
+                <div className="mt-8 mb-6 w-full">
+                  <p className="text-sm text-gray-700">other print projects</p>
+                </div>
+                
+                {/* Sequential Gallery - m1-m8 images (other print projects) */}
+                <div className="mb-12 w-full flex justify-center">
+                  {(() => {
+                    // Get images with captions m1 through m8
+                    const mImages = foundSubProject.gallery.filter((item: any) => {
+                      const caption = item.caption || ''
+                      return /^m[1-8]$/.test(caption)
+                    })
+                    
+                    // Sort by m number
+                    mImages.sort((a: any, b: any) => {
+                      const aNum = parseInt((a.caption || '').replace('m', ''))
+                      const bNum = parseInt((b.caption || '').replace('m', ''))
+                      return aNum - bNum
+                    })
+                    
+                    if (mImages.length === 0) return null
+                    
+                    return (
+                      <SequentialGallery 
+                        images={mImages} 
+                        title={foundSubProject.title || 'Gallery'}
+                        description={''}
+                        customMaxWidth={300}
+                        hideCaptions={true}
+                      />
+                    )
+                  })()}
+                </div>
+                
                 {/* Video gallery - appears as last gallery, muted */}
                 <div className="mt-8 mb-12 w-full flex justify-center">
                   {(() => {
