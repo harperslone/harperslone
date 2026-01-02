@@ -2348,26 +2348,34 @@ export default async function SubProjectPage({
                 </div>
                 
                 {/* 2x1 Gallery with row1 and row2 images - above sequential gallery */}
-                <div className="mt-8 mb-8 flex justify-center">
-                  {(() => {
-                    // Get images with caption "row1" or "row2"
-                    const rowImages = foundSubProject.gallery.filter((item: any) => {
-                      if (!item || !item.asset) return false
-                      const caption = item.caption?.toLowerCase() || ''
-                      return caption === 'row1' || caption === 'row2'
-                    })
-                    
-                    if (rowImages.length < 2) return null
-                    
-                    return (
-                      <GalleryLightbox 
-                        images={rowImages} 
-                        title={foundSubProject.title || 'Gallery'}
-                        columns={2}
-                        imageSize={250}
-                      />
-                    )
-                  })()}
+                <div className="mt-8 mb-8 flex flex-col md:flex-row items-start gap-8">
+                  {/* Description on the left */}
+                  <div className="w-full md:w-48 flex-shrink-0">
+                    <p className="text-sm text-gray-700">in tokyo with my favorite polka dot accessories</p>
+                  </div>
+                  
+                  {/* Gallery on the right */}
+                  <div className="flex-1">
+                    {(() => {
+                      // Get images with caption "row1" or "row2"
+                      const rowImages = foundSubProject.gallery.filter((item: any) => {
+                        if (!item || !item.asset) return false
+                        const caption = item.caption?.toLowerCase() || ''
+                        return caption === 'row1' || caption === 'row2'
+                      })
+                      
+                      if (rowImages.length < 2) return null
+                      
+                      return (
+                        <GalleryLightbox 
+                          images={rowImages} 
+                          title={foundSubProject.title || 'Gallery'}
+                          columns={2}
+                          imageSize={250}
+                        />
+                      )
+                    })()}
+                  </div>
                 </div>
                 
                 {/* Row layout: Description on left, SequentialGallery on right */}
