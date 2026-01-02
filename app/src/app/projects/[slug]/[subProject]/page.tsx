@@ -2336,8 +2336,8 @@ export default async function SubProjectPage({
                       return true
                     })
                     
-                    // Get the last 20 images (the ones at the bottom of the Sanity list)
-                    const lastImages = allImages.slice(-20)
+                    // Get the last 23 images (including the 3 newest)
+                    const lastImages = allImages.slice(-23)
                     
                     if (lastImages.length === 0) return null
                     
