@@ -1,9 +1,7 @@
 import {client} from '@/lib/sanity/client'
 import {projectsQuery} from '@/lib/sanity/queries'
-import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 import SidebarNavigation from '@/components/SidebarNavigation'
-import ClickableDot from '@/components/ClickableDot'
 import ProjectLink from '@/components/ProjectLink'
 
 interface Project {
@@ -92,87 +90,137 @@ export default async function Home() {
                 overflow: 'visible'
               }}
             >
-              {/* Colored dots scattered inside */}
-              {coloredDots.map((dot, i) => (
-                <ClickableDot
+              {/* Scattered small squares (musica viva style) */}
+              {scatteredSquares.map((sq, i) => (
+                <div
                   key={i}
-                  color={dot.color}
-                  slug={dot.slug}
-                  size={dot.size}
-                  top={dot.top}
-                  left={dot.left}
-                />
-              ))}
-              
-              {/* Grey dots for contact page */}
-              {blackDots.map((dot, i) => (
-                <Link
-                  key={`black-${i}`}
-                  href="/contact"
-                  className="absolute rounded-full hover:opacity-80 transition-opacity cursor-red-dot z-20"
+                  className="absolute"
                   style={{
-                    width: `${dot.size}px`,
-                    height: `${dot.size}px`,
-                    backgroundColor: '#A7ACB4',
-                    top: `${dot.top}%`,
-                    left: `${dot.left}%`,
+                    width: 'clamp(6px, 1vw, 12px)',
+                    height: 'clamp(6px, 1vw, 12px)',
+                    backgroundColor: sq.color,
+                    top: `${sq.top}%`,
+                    left: `${sq.left}%`,
                     transform: 'rotate(-45deg)',
                   }}
-                  aria-label="Go to contact page"
                 />
               ))}
               
-              {/* Swiss Style text content - inside the white diamond */}
+              {/* Vertical text columns along left edge - musica viva 1959 style */}
               <div 
                 className="absolute text-black"
                 style={{
-                  bottom: '15%',
-                  left: '15%',
+                  bottom: '5%',
+                  left: '5%',
                   transform: 'rotate(-45deg)',
+                  transformOrigin: 'bottom left',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                  maxWidth: '40%',
                 }}
               >
-                {/* Header info */}
-                <div style={{ fontSize: 'clamp(6px, 0.8vw, 9px)', lineHeight: '1.4', letterSpacing: '0.3px', marginBottom: 'clamp(4px, 0.5vw, 8px)' }}>
-                  <div>archive design portfolio</div>
-                  <div>2024</div>
+                <div 
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: 'clamp(8px, 1.2vw, 16px)',
+                    alignItems: 'flex-end',
+                  }}
+                >
+                  {/* Column 1 - Date/Info */}
+                  <div 
+                    style={{
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                      fontSize: 'clamp(5px, 0.6vw, 8px)',
+                      lineHeight: '1.3',
+                      letterSpacing: '0.2px',
+                    }}
+                  >
+                    <div>archive design</div>
+                    <div>portfolio 2024</div>
+                    <div style={{ marginTop: '6px' }}>based in paris</div>
+                    <div>available worldwide</div>
+                  </div>
+                  
+                  {/* Column 2 - Services Group 1 */}
+                  <div 
+                    style={{
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                      fontSize: 'clamp(5px, 0.6vw, 8px)',
+                      lineHeight: '1.3',
+                      letterSpacing: '0.2px',
+                    }}
+                  >
+                    <div>image</div>
+                    <div>video</div>
+                    <div>identity</div>
+                    <div>book</div>
+                    <div>magazine</div>
+                    <div>print</div>
+                    <div>poster</div>
+                  </div>
+                  
+                  {/* Column 3 - Services Group 2 */}
+                  <div 
+                    style={{
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                      fontSize: 'clamp(5px, 0.6vw, 8px)',
+                      lineHeight: '1.3',
+                      letterSpacing: '0.2px',
+                    }}
+                  >
+                    <div>retail graphics</div>
+                    <div>brand design</div>
+                    <div>brand strategy</div>
+                    <div>content direction</div>
+                    <div>type design</div>
+                    <div>product design</div>
+                    <div>creative direction</div>
+                    <div>graphic design</div>
+                    <div>styling</div>
+                  </div>
+                  
+                  {/* Column 4 - Projects */}
+                  <div 
+                    style={{
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                      fontSize: 'clamp(5px, 0.6vw, 8px)',
+                      lineHeight: '1.4',
+                    }}
+                  >
+                    {allProjects.map((project, idx) => {
+                      const slug = project.slug?.current?.toLowerCase() || project.title?.toLowerCase() || ''
+                      let bgColor = 'transparent'
+                      
+                      if (slug === 'projects') bgColor = '#fef08a'
+                      else if (slug === 'work') bgColor = '#bfdbfe'
+                      else if (slug === 'exhibitions') bgColor = '#fce7f3'
+                      else if (slug === 'print') bgColor = '#d1fae5'
+                      
+                      return (
+                        <ProjectLink key={idx} project={project} bgColor={bgColor} />
+                      )
+                    })}
+                  </div>
                 </div>
-                
-                {/* Name - Large */}
-                <div className="font-bold" style={{ fontSize: 'clamp(16px, 3vw, 32px)', letterSpacing: '-0.5px', marginBottom: 'clamp(8px, 1vw, 16px)' }}>
-                  harper slone
-                </div>
-                
-                {/* Services - horizontal layout */}
-                <div style={{ fontSize: 'clamp(5px, 0.6vw, 7px)', lineHeight: '1.5', letterSpacing: '0.2px', marginBottom: 'clamp(8px, 1vw, 16px)' }}>
-                  <div>image · video · identity · book · magazine</div>
-                  <div>print · poster · retail graphics · brand design</div>
-                  <div>brand strategy · content direction · type design</div>
-                  <div>product design · creative direction · styling</div>
-                </div>
-                
-                {/* Projects */}
-                <div style={{ fontSize: 'clamp(5px, 0.6vw, 7px)', marginBottom: 'clamp(8px, 1vw, 16px)' }}>
-                  {allProjects.map((project, idx) => {
-                    const slug = project.slug?.current?.toLowerCase() || project.title?.toLowerCase() || ''
-                    let bgColor = 'transparent'
-                    
-                    if (slug === 'projects') bgColor = '#fef08a'
-                    else if (slug === 'work') bgColor = '#bfdbfe'
-                    else if (slug === 'exhibitions') bgColor = '#fce7f3'
-                    else if (slug === 'print') bgColor = '#d1fae5'
-                    
-                    return (
-                      <ProjectLink key={idx} project={project} bgColor={bgColor} />
-                    )
-                  })}
-                </div>
-                
-                {/* Location */}
-                <div style={{ fontSize: 'clamp(5px, 0.6vw, 7px)', letterSpacing: '0.2px' }}>
-                  <div>based in paris · available worldwide</div>
-                </div>
+              </div>
+              
+              {/* Large name on right side - like "musica viva" in the poster */}
+              <div 
+                className="absolute text-black font-bold"
+                style={{
+                  top: '50%',
+                  right: '10%',
+                  transform: 'rotate(-45deg) translateY(-50%)',
+                  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                  fontSize: 'clamp(18px, 4vw, 48px)',
+                  letterSpacing: '-1px',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                harper slone
               </div>
             </div>
         </div>
