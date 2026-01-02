@@ -150,7 +150,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
         <div 
           className="relative w-full sequential-gallery-container"
           style={{ 
-            minHeight: '500px',
+            minHeight: customMaxWidth ? `${Math.min(customMaxWidth + 100, 400)}px` : '400px',
             position: 'relative',
             paddingTop: '20px',
             paddingBottom: '20px',
@@ -198,12 +198,12 @@ export default function SequentialGallery({ images, title, description, maxWidth
           <div 
             className="flex flex-col justify-center items-center sequential-image-container"
             style={{ 
-              maxWidth: customMaxWidth ? `${customMaxWidth}px` : (
-                maxWidth === 'xs' ? '600px' : 
-                maxWidth === 'sm' ? '800px' : 
-                maxWidth === 'md' ? '1000px' : 
-                maxWidth === 'xl' ? '1200px' : 
-                '1100px'
+              maxWidth: customMaxWidth ? `${customMaxWidth + 160}px` : (
+                maxWidth === 'xs' ? '460px' : 
+                maxWidth === 'sm' ? '560px' : 
+                maxWidth === 'md' ? '660px' : 
+                maxWidth === 'xl' ? '860px' : 
+                '760px'
               ),
               width: 'auto',
               paddingLeft: validImages.length > 1 ? '80px' : '0',
@@ -264,13 +264,13 @@ export default function SequentialGallery({ images, title, description, maxWidth
                   alt={currentItem.caption || currentItem.alt || `${title || 'Gallery'} image ${currentIndex + 1}`}
                   style={{ 
                     maxWidth: customMaxWidth ? `${customMaxWidth}px` : (
-                      maxWidth === 'xs' ? '600px' : 
-                      maxWidth === 'sm' ? '800px' : 
-                      maxWidth === 'md' ? '1000px' : 
-                      maxWidth === 'xl' ? '1200px' : 
-                      '1100px'
+                      maxWidth === 'xs' ? '300px' : 
+                      maxWidth === 'sm' ? '400px' : 
+                      maxWidth === 'md' ? '500px' : 
+                      maxWidth === 'xl' ? '700px' : 
+                      '600px'
                     ),
-                    maxHeight: '80vh',
+                    maxHeight: customMaxWidth ? `${customMaxWidth + 150}px` : '500px',
                     width: 'auto',
                     height: 'auto',
                     objectFit: 'contain'
