@@ -2460,6 +2460,30 @@ export default async function SubProjectPage({
                     })()}
                   </div>
                 </div>
+                
+                {/* Third SequentialGallery - paris color & marithe francois girbaud images */}
+                <div className="mt-8 mb-8">
+                  {(() => {
+                    // Get images with captions containing "paris color" or "marithe francois girbaud"
+                    const parisImages = foundSubProject.gallery.filter((item: any) => {
+                      if (!item || !item.asset) return false
+                      const caption = item.caption?.toLowerCase() || ''
+                      return caption.includes('paris color') || caption.includes('marithe francois girbaud')
+                    })
+                    
+                    if (parisImages.length === 0) return null
+                    
+                    return (
+                      <SequentialGallery 
+                        images={parisImages} 
+                        title={foundSubProject.title || 'Gallery'}
+                        description={''}
+                        customMaxWidth={350}
+                        hideCaptions={true}
+                      />
+                    )
+                  })()}
+                </div>
               </div>
             )}
             
