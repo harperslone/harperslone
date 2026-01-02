@@ -2343,13 +2343,15 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
-                {/* Description box above SequentialGallery */}
-                <div className="mt-8 mb-6">
-                  <p className="text-sm text-gray-700">imagery/content for social media</p>
-                </div>
-                
-                {/* SequentialGallery with last 29 uploaded images */}
-                <div className="mb-8 w-full">
+                {/* Row layout: Description on left, SequentialGallery on right */}
+                <div className="mt-8 mb-8 flex flex-row items-start gap-8">
+                  {/* Description on the left */}
+                  <div className="w-48 flex-shrink-0">
+                    <p className="text-sm text-gray-700">imagery/content for social media</p>
+                  </div>
+                  
+                  {/* SequentialGallery on the right */}
+                  <div className="flex-1">
                   {(() => {
                     // Get only images (no videos) from the gallery, excluding special images
                     const allImages = foundSubProject.gallery.filter((item: any) => {
@@ -2387,6 +2389,7 @@ export default async function SubProjectPage({
                       />
                     )
                   })()}
+                  </div>
                 </div>
               </div>
             )}
