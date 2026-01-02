@@ -2348,10 +2348,10 @@ export default async function SubProjectPage({
                   <p className="text-sm text-gray-700">imagery/content for social media</p>
                 </div>
                 
-                {/* SequentialGallery with last 24 uploaded images */}
+                {/* SequentialGallery with last 29 uploaded images */}
                 <div className="mb-8 w-full">
                   {(() => {
-                    // Get only images (no videos) from the gallery
+                    // Get only images (no videos) from the gallery, excluding special images
                     const allImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
                       
@@ -2360,6 +2360,14 @@ export default async function SubProjectPage({
                       const url = item.asset?.url || ''
                       const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
                       if (isVideo) return false
+                      
+                      // Exclude "alaia in the atelier" image
+                      const caption = item.caption?.toLowerCase() || ''
+                      if (caption.includes('alaia in the atelier')) return false
+                      
+                      // Also exclude by filename if it matches the special images
+                      const originalFilename = item.asset?.originalFilename || ''
+                      if (originalFilename === 'img20250422_11143742.jpg') return false
                       
                       return true
                     })
