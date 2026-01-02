@@ -2102,6 +2102,27 @@ export default async function SubProjectPage({
                   )}
                 </div>
                 
+                {/* 3x1 grid with row1, row2, row3 images */}
+                <div className="mb-8">
+                  {(() => {
+                    const rowImages = foundSubProject.gallery.filter((item: any) => {
+                      const caption = item.caption || ''
+                      return caption === 'row1' || caption === 'row2' || caption === 'row3'
+                    })
+                    
+                    if (rowImages.length === 0) return null
+                    
+                    return (
+                      <GalleryLightbox 
+                        images={rowImages} 
+                        title={foundSubProject.title || 'Gallery'}
+                        columns={3}
+                        imageSize={300}
+                      />
+                    )
+                  })()}
+                </div>
+                
                 {/* Description box above riso prints gallery */}
                 <div className="mb-6">
                   <p className="text-sm text-gray-700">riso prints for palette & formes project</p>
