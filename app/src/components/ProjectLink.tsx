@@ -37,7 +37,7 @@ export default function ProjectLink({ project, bgColor }: ProjectLinkProps) {
   return (
     <button
       onClick={handleClick}
-      className="inline-block hover:opacity-70 transition-opacity cursor-red-dot"
+      className="inline-block hover:opacity-70 transition-opacity cursor-red-dot homepage-project-link"
       style={{ 
         fontSize: 'clamp(9px, 1.1vw, 13px)',
         color: '#000000',

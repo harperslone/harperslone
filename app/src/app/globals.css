@@ -284,4 +284,22 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
   .homepage-dot {
     transform: rotate(-45deg) scale(0.4) !important;
   }
+  
+  /* Make project links half size on mobile */
+  .homepage-project-link {
+    font-size: 5px !important;
+    padding: 2px 6px !important;
+    transform: scale(0.5) !important;
+    transform-origin: right center !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Make project links smaller on tablets */
+  .homepage-project-link {
+    font-size: 7px !important;
+    padding: 3px 8px !important;
+    transform: scale(0.6) !important;
+    transform-origin: right center !important;
+  }
 }
