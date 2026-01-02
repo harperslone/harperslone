@@ -4,9 +4,21 @@ import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
-  title: "Portfolio Archive",
-  description: "Experimental portfolio inspired by David Carson and BLESS Service",
+  title: "Harper Slone Designs",
+  description: "Visual artist and photographer based in Paris",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+  openGraph: {
+    title: "Harper Slone Designs",
+    description: "Visual artist and photographer based in Paris",
+    url: "https://www.harperslone.com",
+    siteName: "Harper Slone Designs",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Harper Slone Designs",
+    description: "Visual artist and photographer based in Paris",
+  },
 };
 
 export default function RootLayout({
