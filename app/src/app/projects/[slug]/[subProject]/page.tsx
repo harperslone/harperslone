@@ -2421,28 +2421,36 @@ export default async function SubProjectPage({
                 </div>
                 
                 {/* Second SequentialGallery - book/magazine images (book1-book6) */}
-                <div className="mt-8 mb-8">
-                  {(() => {
-                    // Get the 6 book/magazine images by caption (book1-book6)
-                    const bookImages = foundSubProject.gallery.filter((item: any) => {
-                      if (!item || !item.asset) return false
-                      const caption = item.caption?.toLowerCase() || ''
-                      return caption === 'book1' || caption === 'book2' || caption === 'book3' || 
-                             caption === 'book4' || caption === 'book5' || caption === 'book6'
-                    })
-                    
-                    if (bookImages.length === 0) return null
-                    
-                    return (
-                      <SequentialGallery 
-                        images={bookImages} 
-                        title={foundSubProject.title || 'Gallery'}
-                        description={''}
-                        customMaxWidth={350}
-                        hideCaptions={true}
-                      />
-                    )
-                  })()}
+                <div className="mt-8 mb-8 flex flex-col md:flex-row items-start gap-8">
+                  {/* Description on the left */}
+                  <div className="w-full md:w-48 flex-shrink-0">
+                    <p className="text-sm text-gray-700">spreads from shoe obsessed zine - 2023</p>
+                  </div>
+                  
+                  {/* SequentialGallery on the right */}
+                  <div className="flex-1">
+                    {(() => {
+                      // Get the 6 book/magazine images by caption (book1-book6)
+                      const bookImages = foundSubProject.gallery.filter((item: any) => {
+                        if (!item || !item.asset) return false
+                        const caption = item.caption?.toLowerCase() || ''
+                        return caption === 'book1' || caption === 'book2' || caption === 'book3' || 
+                               caption === 'book4' || caption === 'book5' || caption === 'book6'
+                      })
+                      
+                      if (bookImages.length === 0) return null
+                      
+                      return (
+                        <SequentialGallery 
+                          images={bookImages} 
+                          title={foundSubProject.title || 'Gallery'}
+                          description={''}
+                          customMaxWidth={350}
+                          hideCaptions={true}
+                        />
+                      )
+                    })()}
+                  </div>
                 </div>
               </div>
             )}

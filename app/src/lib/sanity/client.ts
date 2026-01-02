@@ -22,3 +22,4 @@ export const client = createClient({
   useCdn: false, // Set to false to avoid caching issues - ensures fresh data
 })
 
+
