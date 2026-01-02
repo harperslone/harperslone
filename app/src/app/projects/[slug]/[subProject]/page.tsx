@@ -2343,6 +2343,35 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
+                {/* Side by side gallery with last 2 uploaded images */}
+                <div className="mt-8 mb-8">
+                  {(() => {
+                    // Get the last 2 images for the side-by-side gallery
+                    const allNonVideoImages = foundSubProject.gallery.filter((item: any) => {
+                      if (!item || !item.asset) return false
+                      const mimeType = item.asset?.mimeType || ''
+                      const url = item.asset?.url || ''
+                      const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
+                      return !isVideo
+                    })
+                    
+                    const last2Images = allNonVideoImages.slice(-2)
+                    
+                    if (last2Images.length < 2) return null
+                    
+                    return (
+                      <div className="flex justify-center">
+                        <GalleryLightbox 
+                          images={last2Images} 
+                          title={foundSubProject.title || 'Gallery'}
+                          columns={2}
+                          imageSize={300}
+                        />
+                      </div>
+                    )
+                  })()}
+                </div>
+                
                 {/* Row layout: Description on left, SequentialGallery on right */}
                 <div className="mt-8 mb-8 flex flex-row items-start gap-8">
                   {/* Description on the left */}
@@ -2374,8 +2403,9 @@ export default async function SubProjectPage({
                       return true
                     })
                     
-                    // Get the last 29 images (including recent additions)
-                    const lastImages = allImages.slice(-29)
+                    // Get the last 29 images, but exclude the last 2 (they're in side-by-side gallery)
+                    const totalImages = allImages.length
+                    const lastImages = allImages.slice(Math.max(0, totalImages - 31), totalImages - 2)
                     
                     if (lastImages.length === 0) return null
                     
