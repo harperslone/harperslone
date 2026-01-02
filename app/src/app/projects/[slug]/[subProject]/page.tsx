@@ -2381,8 +2381,8 @@ export default async function SubProjectPage({
                 {/* Row layout: Description on left, SequentialGallery on right */}
                 <div className="mt-8 mb-8 flex flex-row items-start gap-8">
                   {/* Description on the left */}
-                  <div className="w-48 flex-shrink-0">
-                    <p className="text-sm text-gray-700">imagery/content for social media</p>
+                  <div className="flex-shrink-0">
+                    <p className="text-sm text-gray-700 whitespace-nowrap">imagery/content for social media</p>
                   </div>
                   
                   {/* SequentialGallery on the right */}
