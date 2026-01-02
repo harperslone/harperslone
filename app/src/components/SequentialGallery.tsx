@@ -150,8 +150,8 @@ export default function SequentialGallery({ images, title, description, maxWidth
         <div 
           className="relative w-full flex items-center justify-center sequential-gallery-container"
           style={{ 
-            minHeight: '300px',
-            height: 'auto',
+            minHeight: '400px',
+            height: '400px',
             position: 'relative',
             paddingTop: '20px',
             paddingBottom: '20px',
@@ -166,9 +166,8 @@ export default function SequentialGallery({ images, title, description, maxWidth
               onClick={goToPrevious}
               style={{ 
                 position: 'absolute',
-                top: '50%',
+                top: '200px',
                 left: '20px',
-                transform: 'translateY(-50%)',
                 width: '24px',
                 height: '24px'
               }}
@@ -192,10 +191,14 @@ export default function SequentialGallery({ images, title, description, maxWidth
             </div>
           )}
           
-          {/* Image, Video, or Audio - always centered in container */}
+          {/* Image, Video, or Audio - always centered in fixed container */}
           <div 
             className="flex flex-col justify-center items-center sequential-image-container"
             style={{ 
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
               maxWidth: customMaxWidth ? `${customMaxWidth}px` : (
                 maxWidth === 'xs' ? '600px' : 
                 maxWidth === 'sm' ? '800px' : 
@@ -203,11 +206,8 @@ export default function SequentialGallery({ images, title, description, maxWidth
                 maxWidth === 'xl' ? '1200px' : 
                 '1100px'
               ),
-              width: '100%',
-              paddingLeft: validImages.length > 1 ? '60px' : '0',
-              paddingRight: validImages.length > 1 ? '60px' : '0',
+              width: 'calc(100% - 120px)',
               boxSizing: 'border-box',
-              margin: '0 auto',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
@@ -313,9 +313,8 @@ export default function SequentialGallery({ images, title, description, maxWidth
               onClick={goToNext}
               style={{ 
                 position: 'absolute',
-                top: '50%',
+                top: '200px',
                 right: '20px',
-                transform: 'translateY(-50%)',
                 width: '24px',
                 height: '24px'
               }}
