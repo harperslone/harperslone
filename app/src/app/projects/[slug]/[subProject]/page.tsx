@@ -2343,10 +2343,10 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
-                {/* Side by side gallery with last 2 uploaded images */}
-                <div className="mt-8 mb-8">
+                {/* 2x1 Gallery with last 2 uploaded images - above sequential gallery */}
+                <div className="mt-8 mb-8 flex justify-center">
                   {(() => {
-                    // Get the last 2 images for the side-by-side gallery
+                    // Get the last 2 images for the 2x1 gallery
                     const allNonVideoImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
                       const mimeType = item.asset?.mimeType || ''
@@ -2360,14 +2360,12 @@ export default async function SubProjectPage({
                     if (last2Images.length < 2) return null
                     
                     return (
-                      <div className="flex justify-center">
-                        <GalleryLightbox 
-                          images={last2Images} 
-                          title={foundSubProject.title || 'Gallery'}
-                          columns={2}
-                          imageSize={300}
-                        />
-                      </div>
+                      <GalleryLightbox 
+                        images={last2Images} 
+                        title={foundSubProject.title || 'Gallery'}
+                        columns={2}
+                        imageSize={250}
+                      />
                     )
                   })()}
                 </div>
