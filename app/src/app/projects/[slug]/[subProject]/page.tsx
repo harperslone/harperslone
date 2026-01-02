@@ -494,14 +494,13 @@ export default async function SubProjectPage({
                   </div>
                 )}
                 
-                {/* First Gallery for bts - 4x3 grid with first 12 images */}
+                {/* First Sequential Gallery for bts - first 12 images */}
                 {foundSubProject.gallery && foundSubProject.gallery.length > 0 && (
                   <div className="mb-8 w-full">
-                    <GalleryLightbox 
+                    <SequentialGallery 
                       images={foundSubProject.gallery.slice(0, 12)} 
-                      title="bts"
-                      columns={4}
-                      imageSize={200}
+                      customMaxWidth={500}
+                      hideCaptions={true}
                     />
                   </div>
                 )}

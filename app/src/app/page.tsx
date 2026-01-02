@@ -155,7 +155,7 @@ export default async function Home() {
                   {/* Archive Design Portfolio */}
                   <div style={{ fontSize: 'clamp(9px, 1.1vw, 13px)', marginBottom: 'clamp(2px, 0.3vw, 4px)', marginLeft: '0', paddingLeft: '0' }}>
                     archive design portfolio
-                  </div>
+        </div>
                   
                   {/* Projects */}
                   <div style={{ marginBottom: 'clamp(8px, 1vw, 16px)', marginLeft: '0', paddingLeft: '0' }}>
@@ -208,8 +208,8 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </main>
+        </div>
+      </main>
       </div>
     </div>
   )
