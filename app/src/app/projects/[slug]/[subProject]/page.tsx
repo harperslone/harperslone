@@ -2185,7 +2185,7 @@ export default async function SubProjectPage({
               </>
             )}
             
-            {/* SequentialGallery for image/styling */}
+            {/* SequentialGallery for image/styling - shows all images including latest additions */}
             {isLaMode && foundSubProject.gallery && foundSubProject.gallery.length > 0 && (
               <div className="mb-8 w-full">
                 <SequentialGallery 
