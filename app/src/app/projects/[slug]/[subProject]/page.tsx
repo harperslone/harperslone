@@ -1652,7 +1652,7 @@ export default async function SubProjectPage({
                 
                 {/* Tokyo 6x1 Gallery - Black and white images in a single row */}
                 {isTokyo && foundSubProject.gallery && (
-                  <div className="mt-16 mb-16 w-full" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <div className="mt-16 mb-16 md:mt-16 md:mb-16 w-full tokyo-gallery" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     {(() => {
                       // Find images by specific filenames
                       const targetFilenames = [
