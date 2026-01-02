@@ -182,53 +182,56 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
 @media (max-width: 768px) {
   .homepage-projects-text {
     top: 5% !important;
-    left: 45% !important;
+    left: 48% !important;
   }
   
   .homepage-projects-list {
-    font-size: 10px !important;
-    gap: 6px !important;
+    font-size: 9px !important;
+    gap: 4px !important;
   }
   
   .homepage-location {
-    font-size: 9px !important;
+    font-size: 8px !important;
   }
   
   .homepage-name {
-    font-size: 20px !important;
-    top: 25% !important;
-    right: 15% !important;
+    font-size: 18px !important;
+    top: 30% !important;
+    right: 18% !important;
   }
   
   /* Scale down dots on tablet */
   .homepage-dot {
-    transform: rotate(-45deg) scale(0.7) !important;
+    transform: rotate(-45deg) scale(0.6) !important;
   }
 }
 
 @media (max-width: 480px) {
   .homepage-projects-text {
-    top: 3% !important;
-    left: 40% !important;
+    top: 2% !important;
+    left: 52% !important;
   }
   
   .homepage-projects-list {
-    font-size: 8px !important;
-    gap: 4px !important;
+    font-size: 7px !important;
+    gap: 3px !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
   }
   
   .homepage-location {
-    font-size: 7px !important;
+    font-size: 6px !important;
+    margin-top: 2px !important;
   }
   
   .homepage-name {
-    font-size: 16px !important;
-    top: 28% !important;
-    right: 12% !important;
+    font-size: 14px !important;
+    top: 35% !important;
+    right: 15% !important;
   }
   
   /* Scale down dots even more on phone */
   .homepage-dot {
-    transform: rotate(-45deg) scale(0.5) !important;
+    transform: rotate(-45deg) scale(0.4) !important;
   }
 }
