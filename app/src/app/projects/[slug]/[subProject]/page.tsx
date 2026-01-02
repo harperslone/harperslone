@@ -2320,17 +2320,11 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
-                {/* SequentialGallery with last uploaded images */}
+                {/* SequentialGallery with last 20 uploaded images */}
                 <div className="mt-8 mb-8 w-full">
                   {(() => {
-                    // Get the last uploaded images (excluding videos and special images)
-                    const specialFilenames = [
-                      'img20250422_11141080.jpg',
-                      'img20250422_11175977.jpg',
-                      'img20250422_11143742.jpg'
-                    ]
-                    
-                    const allValidImages = foundSubProject.gallery.filter((item: any) => {
+                    // Get only images (no videos) from the gallery
+                    const allImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
                       
                       // Exclude videos
@@ -2339,24 +2333,11 @@ export default async function SubProjectPage({
                       const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
                       if (isVideo) return false
                       
-                      // Check if it's an image with valid URL
-                      const imageUrl = urlFor(item)?.url()
-                      if (!imageUrl) return false
-                      
-                      // Exclude special images
-                      const originalFilename = item.asset?.originalFilename || ''
-                      const isSpecial = specialFilenames.some(filename => 
-                        originalFilename === filename || originalFilename.endsWith(filename)
-                      )
-                      
-                      // Exclude cherry blossom image
-                      const isCherryBlossom = originalFilename === 'BC4A3E71-C7EF-4CB9-89F2-08A2C1BF4CEF.JPG' || originalFilename.endsWith('BC4A3E71-C7EF-4CB9-89F2-08A2C1BF4CEF.JPG')
-                      
-                      return !isSpecial && !isCherryBlossom
+                      return true
                     })
                     
-                    // Get the last 10 images (or all if less than 10)
-                    const lastImages = allValidImages.slice(-10)
+                    // Get the last 20 images (the ones at the bottom of the Sanity list)
+                    const lastImages = allImages.slice(-20)
                     
                     if (lastImages.length === 0) return null
                     
