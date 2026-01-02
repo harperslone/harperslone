@@ -1692,7 +1692,7 @@ export default async function SubProjectPage({
                 
                 {/* 6x1 Gallery - Last gallery with specific images (skip for cote d'azur and paris) */}
                 {!isCoteDAzur && !isParis && !isLosAngeles && !isAnnk && foundSubProject.gallery && Array.isArray(foundSubProject.gallery) && (
-                  <div className={isTokyo ? "mt-16 mb-16" : "mt-8 mb-8"}>
+                  <div className={isTokyo ? "mt-16 mb-16 tokyo-gallery" : "mt-8 mb-8"}>
                     {(() => {
                       // Find images by specific filenames
                       const targetFilenames = [
@@ -1729,7 +1729,7 @@ export default async function SubProjectPage({
                 
                 {/* SequentialGallery for Tokyo with description and sakura photo - side by side layout */}
                 {isTokyo && foundSubProject.gallery && foundSubProject.gallery.length > 0 && (
-                  <div className="mb-8 w-full">
+                  <div className="mb-8 md:mb-8 w-full tokyo-gallery">
                     {(() => {
                       // Exclude images that are already shown in previous tokyo galleries
                       const excludedFilenames = [
