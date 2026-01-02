@@ -2226,9 +2226,9 @@ export default async function SubProjectPage({
                       return !isVideo
                     })
                     
-                    // Get the last 24 images for SequentialGallery (to exclude them here)
-                    const last24Images = allNonVideoImages.slice(-24)
-                    const last24Keys = new Set(last24Images.map((item: any) => item._key || item.asset?._ref))
+                    // Get the last 30 images for SequentialGallery (to exclude them here)
+                    const last30Images = allNonVideoImages.slice(-30)
+                    const last30Keys = new Set(last30Images.map((item: any) => item._key || item.asset?._ref))
                     
                     const allImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
@@ -2239,9 +2239,9 @@ export default async function SubProjectPage({
                       const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
                       if (isVideo) return false
                       
-                      // Exclude last 24 images (they go in SequentialGallery)
+                      // Exclude last 30 images (they go in SequentialGallery)
                       const itemKey = item._key || item.asset?._ref
-                      if (last24Keys.has(itemKey)) return false
+                      if (last30Keys.has(itemKey)) return false
                       
                       // Check if it's an image with valid URL
                       const imageUrl = urlFor(item)?.url()
@@ -2364,8 +2364,8 @@ export default async function SubProjectPage({
                       return true
                     })
                     
-                    // Get the last 24 images (including the YSL bag)
-                    const lastImages = allImages.slice(-24)
+                    // Get the last 30 images (including recent additions)
+                    const lastImages = allImages.slice(-30)
                     
                     if (lastImages.length === 0) return null
                     
