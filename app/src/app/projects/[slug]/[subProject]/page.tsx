@@ -2462,27 +2462,35 @@ export default async function SubProjectPage({
                 </div>
                 
                 {/* Third SequentialGallery - paris color & marithe francois girbaud images */}
-                <div className="mt-8 mb-8">
-                  {(() => {
-                    // Get images with captions containing "paris color" or "marithe francois girbaud"
-                    const parisImages = foundSubProject.gallery.filter((item: any) => {
-                      if (!item || !item.asset) return false
-                      const caption = item.caption?.toLowerCase() || ''
-                      return caption.includes('paris color') || caption.includes('marithe francois girbaud')
-                    })
-                    
-                    if (parisImages.length === 0) return null
-                    
-                    return (
-                      <SequentialGallery 
-                        images={parisImages} 
-                        title={foundSubProject.title || 'Gallery'}
-                        description={''}
-                        customMaxWidth={350}
-                        hideCaptions={true}
-                      />
-                    )
-                  })()}
+                <div className="mt-8 mb-8 flex flex-col md:flex-row items-start gap-8">
+                  {/* Description on the left */}
+                  <div className="w-full md:w-48 flex-shrink-0">
+                    <p className="text-sm text-gray-700">other print projects - 2023</p>
+                  </div>
+                  
+                  {/* SequentialGallery on the right */}
+                  <div className="flex-1">
+                    {(() => {
+                      // Get images with captions containing "paris color" or "marithe francois girbaud"
+                      const parisImages = foundSubProject.gallery.filter((item: any) => {
+                        if (!item || !item.asset) return false
+                        const caption = item.caption?.toLowerCase() || ''
+                        return caption.includes('paris color') || caption.includes('marithe francois girbaud')
+                      })
+                      
+                      if (parisImages.length === 0) return null
+                      
+                      return (
+                        <SequentialGallery 
+                          images={parisImages} 
+                          title={foundSubProject.title || 'Gallery'}
+                          description={''}
+                          customMaxWidth={350}
+                          hideCaptions={true}
+                        />
+                      )
+                    })()}
+                  </div>
                 </div>
               </div>
             )}
