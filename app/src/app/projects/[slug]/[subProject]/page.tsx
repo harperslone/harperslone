@@ -883,9 +883,9 @@ export default async function SubProjectPage({
                         })
                         
                         return (
-                          <div className="flex gap-8 justify-center items-start w-full" style={{ flexWrap: 'wrap' }}>
+                          <div className="flex gap-8 justify-center items-start w-full side-by-side-galleries" style={{ flexWrap: 'wrap' }}>
                             {/* First SequentialGallery - larger */}
-                            <div className="flex-1" style={{ minWidth: '300px', maxWidth: '60%' }}>
+                            <div className="flex-1 gallery-column" style={{ minWidth: '300px', maxWidth: '60%' }}>
                               <SequentialGallery 
                                 images={firstGalleryImages} 
                                 title={foundSubProject.title || 'Gallery'}
@@ -896,7 +896,7 @@ export default async function SubProjectPage({
                             
                             {/* Second SequentialGallery - smaller */}
                             {sqImages.length > 0 && (
-                              <div className="flex-1" style={{ minWidth: '400px', maxWidth: '40%' }}>
+                              <div className="flex-1 gallery-column" style={{ minWidth: '400px', maxWidth: '40%' }}>
                                 <SequentialGallery 
                                   images={sqImages} 
                                   title={foundSubProject.title || 'Gallery'}
@@ -1207,10 +1207,10 @@ export default async function SubProjectPage({
                         })
                         
                         return (
-                          <div className="flex gap-8 justify-center items-start w-full" style={{ flexWrap: 'wrap' }}>
+                          <div className="flex gap-8 justify-center items-start w-full side-by-side-galleries" style={{ flexWrap: 'wrap' }}>
                             {/* First SequentialGallery - sq1-sq8 */}
                             {sqImages.length > 0 && (
-                              <div className="flex-1" style={{ minWidth: '300px', maxWidth: '60%' }}>
+                              <div className="flex-1 gallery-column" style={{ minWidth: '300px', maxWidth: '60%' }}>
                                 <SequentialGallery 
                                   images={sqImages} 
                                   title={foundSubProject.title || 'Gallery'}
@@ -1223,7 +1223,7 @@ export default async function SubProjectPage({
                             
                             {/* Second SequentialGallery - ex1-ex14 (smaller) */}
                             {exImages.length > 0 && (
-                              <div className="flex-1" style={{ minWidth: '400px', maxWidth: '40%' }}>
+                              <div className="flex-1 gallery-column" style={{ minWidth: '400px', maxWidth: '40%' }}>
                                 <SequentialGallery 
                                   images={exImages} 
                                   title={foundSubProject.title || 'Gallery'}

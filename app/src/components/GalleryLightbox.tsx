@@ -161,31 +161,41 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
           }
           
           // Calculate minimum width needed for all columns when center is true
+          // On mobile, don't enforce minWidth to allow wrapping
           const minWidth = center && maxImageSize <= 400 
             ? `${columns * maxImageSize + (columns - 1) * gapSize}px`
             : 'auto'
+          
+          // Mobile-responsive: reduce columns on smaller screens
+          // For 4+ columns, use 2 on mobile; for 6+ columns, use 3 on mobile
+          const mobileColumns = columns >= 6 ? 3 : (columns >= 4 ? 2 : columns)
+          const mobileImageSize = Math.min(maxImageSize, 120) // Cap at 120px on mobile
           
           return (
             <div 
               className={`grid gallery-container`} 
               style={{ 
+                // Desktop: use original columns, Mobile: use reduced columns via CSS
                 gridTemplateColumns: gridTemplateColumns,
                 gap: `${gapSize}px`,
                 columnGap: `${gapSize}px`,
                 rowGap: `${gapSize}px`,
-                width: center ? minWidth : '100%',
-                minWidth: center ? minWidth : 'auto',
+                width: '100%',
                 maxWidth: center ? minWidth : '100%',
                 alignItems: 'start',
                 justifyItems: center ? 'center' : 'start',
                 display: 'grid',
                 boxSizing: 'border-box',
-                overflowX: center ? 'visible' : 'auto',
+                overflowX: 'auto',
                 WebkitOverflowScrolling: 'touch',
                 margin: center ? '0 auto' : '0',
                 gridAutoFlow: 'row',
                 gridAutoRows: 'auto'
               }}
+              data-columns={columns}
+              data-mobile-columns={mobileColumns}
+              data-image-size={maxImageSize}
+              data-mobile-image-size={mobileImageSize}
             >
           {images.map((galleryItem: any, index: number) => {
             try {

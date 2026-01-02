@@ -35,3 +35,89 @@ body {
 .cursor-red-dot {
   cursor: none;
 }
+
+/* Mobile-responsive gallery */
+@media (max-width: 768px) {
+  .gallery-container {
+    /* On mobile, use responsive columns */
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: auto !important;
+    overflow-x: hidden !important;
+  }
+  
+  /* For galleries with 6+ columns data attribute, use 3 columns on mobile */
+  .gallery-container[data-columns="6"],
+  .gallery-container[data-columns="5"] {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  
+  /* For single column galleries, keep single column */
+  .gallery-container[data-columns="1"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Scale down image containers on mobile */
+  .gallery-container > div {
+    max-width: 100%;
+  }
+}
+
+/* Even smaller screens */
+@media (max-width: 480px) {
+  .gallery-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+  }
+  
+  .gallery-container[data-columns="6"],
+  .gallery-container[data-columns="5"],
+  .gallery-container[data-columns="4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Mobile-responsive SequentialGallery */
+@media (max-width: 768px) {
+  .sequential-gallery-container {
+    min-height: 200px !important;
+    padding: 10px 0 !important;
+  }
+  
+  .sequential-image-container {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    max-width: 100% !important;
+  }
+  
+  .sequential-arrow-left {
+    left: 4px !important;
+  }
+  
+  .sequential-arrow-right {
+    right: 4px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sequential-image-container {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+/* Make side-by-side galleries stack on mobile */
+@media (max-width: 768px) {
+  .side-by-side-galleries {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  
+  .side-by-side-galleries .gallery-column {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
