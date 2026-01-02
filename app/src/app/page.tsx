@@ -126,13 +126,13 @@ export default async function Home() {
                 />
               ))}
               
-              {/* Vertical text columns along left edge - reading upward */}
+              {/* Text running along left edge, reading left to right (bottom-left to top-right) */}
               <div 
                 className="absolute text-black"
                 style={{
-                  bottom: '50%',
-                  left: '3%',
-                  transform: 'rotate(-45deg) rotate(-90deg)',
+                  bottom: '5%',
+                  left: '5%',
+                  transform: 'rotate(-45deg)',
                   transformOrigin: 'bottom left',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -141,7 +141,7 @@ export default async function Home() {
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: 'clamp(8px, 1.2vw, 16px)',
+                    gap: 'clamp(3px, 0.5vw, 6px)',
                     alignItems: 'flex-start',
                   }}
                 >
@@ -151,9 +151,10 @@ export default async function Home() {
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
                       lineHeight: '1.4',
                       letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
                     }}
                   >
-                    <span>archive design · portfolio 2024 · based in paris · available worldwide</span>
+                    archive design · portfolio 2024 · based in paris · available worldwide
                   </div>
                   
                   {/* Row 2 - Services */}
@@ -162,9 +163,10 @@ export default async function Home() {
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
                       lineHeight: '1.4',
                       letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
                     }}
                   >
-                    <span>image · video · identity · book · magazine · print · poster</span>
+                    image · video · identity · book · magazine · print · poster
                   </div>
                   
                   {/* Row 3 - More Services */}
@@ -173,9 +175,10 @@ export default async function Home() {
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
                       lineHeight: '1.4',
                       letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
                     }}
                   >
-                    <span>retail graphics · brand design · brand strategy · content direction</span>
+                    retail graphics · brand design · brand strategy · content direction
                   </div>
                   
                   {/* Row 4 - Even More Services */}
@@ -184,9 +187,10 @@ export default async function Home() {
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
                       lineHeight: '1.4',
                       letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
                     }}
                   >
-                    <span>type design · product design · creative direction · graphic design · styling</span>
+                    type design · product design · creative direction · graphic design · styling
                   </div>
                   
                   {/* Row 5 - Projects */}
@@ -196,6 +200,7 @@ export default async function Home() {
                       gap: 'clamp(8px, 1vw, 16px)',
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
                       lineHeight: '1.4',
+                      whiteSpace: 'nowrap',
                     }}
                   >
                     {allProjects.map((project, idx) => {
@@ -215,7 +220,7 @@ export default async function Home() {
                 </div>
               </div>
               
-              {/* Large name */}
+              {/* Large name on right side */}
               <div 
                 className="absolute text-black font-bold"
                 style={{
