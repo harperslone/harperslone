@@ -470,7 +470,7 @@ export default async function SubProjectPage({
                 <SequentialGallery 
                   images={foundSubProject.gallery} 
                   customMaxWidth={500}
-                  showCaptions={false}
+                  hideCaptions={true}
                 />
               </div>
             ) : (
