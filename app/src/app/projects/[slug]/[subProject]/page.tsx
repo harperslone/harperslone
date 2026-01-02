@@ -2089,21 +2089,22 @@ export default async function SubProjectPage({
             
             {/* The Parisian Vintage - Layout: 4x3 grid, then TIF files, then sequential gallery */}
             {isParisianVintage && foundSubProject.gallery && (
-              <div>
+              <div className="w-full flex flex-col items-center">
                 {/* First 12 images in 4x3 grid */}
-                <div className="mb-8">
+                <div className="mb-12 w-full flex justify-center">
                   {foundSubProject.gallery.length >= 12 && (
                     <GalleryLightbox 
                       images={foundSubProject.gallery.slice(0, 12)} 
                       title={foundSubProject.title || 'Gallery'}
                       columns={4}
                       imageSize={200}
+                      gap="20px"
                     />
                   )}
                 </div>
                 
                 {/* 3x1 grid with row1, row2, row3 images */}
-                <div className="mb-8">
+                <div className="mb-12 w-full flex justify-center">
                   {(() => {
                     const rowImages = foundSubProject.gallery.filter((item: any) => {
                       const caption = item.caption || ''
@@ -2118,13 +2119,14 @@ export default async function SubProjectPage({
                         title={foundSubProject.title || 'Gallery'}
                         columns={3}
                         imageSize={300}
+                        gap="20px"
                       />
                     )
                   })()}
                 </div>
                 
                 {/* 4x1 grid with third1, third2, third3, third4 images */}
-                <div className="mb-8">
+                <div className="mb-12 w-full flex justify-center">
                   {(() => {
                     const thirdImages = foundSubProject.gallery.filter((item: any) => {
                       const caption = item.caption || ''
@@ -2139,18 +2141,19 @@ export default async function SubProjectPage({
                         title={foundSubProject.title || 'Gallery'}
                         columns={4}
                         imageSize={250}
+                        gap="20px"
                       />
                     )
                   })()}
                 </div>
                 
                 {/* Description box above riso prints gallery */}
-                <div className="mb-6">
+                <div className="mb-6 w-full flex justify-center">
                   <p className="text-sm text-gray-700">riso prints for palette & formes project</p>
                 </div>
                 
                 {/* Main Gallery - TIF files only (riso prints) */}
-                <div className="mb-8">
+                <div className="mb-12 w-full flex justify-center">
                   {(() => {
                     // Get only TIF files (riso prints)
                     const tifImages = foundSubProject.gallery.filter((item: any) => {
@@ -2167,6 +2170,7 @@ export default async function SubProjectPage({
                         images={tifImages} 
                         title={foundSubProject.title || 'Gallery'}
                         columns={5}
+                        gap="20px"
                         imageSize={400}
                       />
                     )
@@ -2174,12 +2178,12 @@ export default async function SubProjectPage({
                 </div>
                 
                 {/* Description box above sequential gallery */}
-                <div className="mt-8 mb-6">
+                <div className="mt-8 mb-6 w-full flex justify-center">
                   <p className="text-sm text-gray-700">imagery/content for social media</p>
                 </div>
                 
                 {/* Sequential Gallery - JPG files only (social media content) */}
-                <div className="mb-8">
+                <div className="mb-12 w-full flex justify-center">
                   {(() => {
                     // Get only JPG files (social media images)
                     const jpgImages = foundSubProject.gallery.filter((item: any) => {
@@ -2208,7 +2212,7 @@ export default async function SubProjectPage({
                 </div>
                 
                 {/* Video gallery - appears as last gallery, muted */}
-                <div className="mt-8 mb-8">
+                <div className="mt-8 mb-12 w-full flex justify-center">
                   {(() => {
                     // Find video files in the gallery
                     const videoItems = foundSubProject.gallery.filter((item: any) => {
