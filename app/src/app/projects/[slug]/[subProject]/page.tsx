@@ -2262,8 +2262,8 @@ export default async function SubProjectPage({
                     
                     if (allImages.length === 0) return null
                     
-                    // Only show first 15 images in the main 5x3 grid
-                    const mainGalleryImages = allImages.slice(0, 15)
+                    // Show first 19 images in the main gallery (to include the riso prints + a few more)
+                    const mainGalleryImages = allImages.slice(0, 19)
                     
                     return (
                       <GalleryLightbox 
