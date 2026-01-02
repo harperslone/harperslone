@@ -464,16 +464,51 @@ export default async function SubProjectPage({
               </div>
             )}
             
-            {/* Special layout for bts - Sequential Gallery */}
-            {isBts && foundSubProject.gallery && foundSubProject.gallery.length > 0 ? (
-              <div className="mb-8 w-full">
-                <SequentialGallery 
-                  images={foundSubProject.gallery} 
-                  customMaxWidth={500}
-                  hideCaptions={true}
-                />
-              </div>
-            ) : (
+            {/* Special layout for bts - Description + Sequential Gallery */}
+            {isBts && (
+              <>
+                {/* Description for bts */}
+                {foundSubProject.description && (
+                  <div 
+                    className="mb-8 text-black font-normal lowercase text-90s"
+                    style={{ 
+                      fontSize: '13px',
+                      lineHeight: '1.85',
+                      letterSpacing: '0.2px',
+                      textAlign: 'left'
+                    }}
+                  >
+                    {foundSubProject.description.split('\n').map((line: string, index: number) => {
+                      const parts = line.split(/(\*\*.*?\*\*)/g)
+                      return (
+                        <div key={index} className="mb-2">
+                          {parts.map((part, partIndex) => {
+                            if (part.startsWith('**') && part.endsWith('**')) {
+                              return <strong key={partIndex}>{part.slice(2, -2)}</strong>
+                            }
+                            return <span key={partIndex}>{part}</span>
+                          })}
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+                
+                {/* Sequential Gallery for bts */}
+                {foundSubProject.gallery && foundSubProject.gallery.length > 0 && (
+                  <div className="mb-8 w-full">
+                    <SequentialGallery 
+                      images={foundSubProject.gallery} 
+                      customMaxWidth={500}
+                      hideCaptions={true}
+                    />
+                  </div>
+                )}
+              </>
+            )}
+            
+            {/* Non-bts content */}
+            {!isBts && (
               <>
                 {/* Description - Special layout for 0fr, otherwise default - skip for sequential galleries */}
                 {/* Show description for palette&formes separately (exhibitions and print) */}
