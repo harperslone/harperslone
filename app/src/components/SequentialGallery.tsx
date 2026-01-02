@@ -222,11 +222,11 @@ export default function SequentialGallery({ images, title, description, maxWidth
                 <div 
                   className="relative aspect-square bg-gray-100 flex items-center justify-center p-8 w-full"
                   style={{ maxWidth: customMaxWidth ? `${customMaxWidth}px` : (
-                    maxWidth === 'xs' ? '600px' : 
-                    maxWidth === 'sm' ? '800px' : 
-                    maxWidth === 'md' ? '1000px' : 
-                    maxWidth === 'xl' ? '1200px' : 
-                    '1100px'
+                    maxWidth === 'xs' ? '300px' : 
+                    maxWidth === 'sm' ? '400px' : 
+                    maxWidth === 'md' ? '500px' : 
+                    maxWidth === 'xl' ? '700px' : 
+                    '600px'
                   ) }}
                 >
                   <audio
@@ -241,11 +241,11 @@ export default function SequentialGallery({ images, title, description, maxWidth
                 <div 
                   className="relative aspect-video bg-black flex items-center justify-center w-full"
                   style={{ maxWidth: customMaxWidth ? `${customMaxWidth}px` : (
-                    maxWidth === 'xs' ? '600px' : 
-                    maxWidth === 'sm' ? '800px' : 
-                    maxWidth === 'md' ? '1000px' : 
-                    maxWidth === 'xl' ? '1200px' : 
-                    '1100px'
+                    maxWidth === 'xs' ? '300px' : 
+                    maxWidth === 'sm' ? '400px' : 
+                    maxWidth === 'md' ? '500px' : 
+                    maxWidth === 'xl' ? '700px' : 
+                    '600px'
                   ) }}
                 >
                   <video
