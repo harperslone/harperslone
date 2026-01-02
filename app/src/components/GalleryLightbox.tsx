@@ -363,7 +363,7 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
           {/* Close Button */}
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 text-black text-4xl hover:opacity-70 transition-opacity z-10"
+            className="absolute top-4 right-4 text-red-500 text-4xl hover:opacity-70 transition-opacity z-10"
             aria-label="Close lightbox"
           >
             ×
