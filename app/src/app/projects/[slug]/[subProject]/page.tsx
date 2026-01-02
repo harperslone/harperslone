@@ -2208,26 +2208,28 @@ export default async function SubProjectPage({
                   <p className="text-sm text-gray-700">imagery/content for social media</p>
                 </div>
                 
-                {/* Sequential Gallery - JPG files only (social media content) */}
+                {/* Sequential Gallery - sm1-sm26 images (social media content) */}
                 <div className="mb-12 w-full flex justify-center">
                   {(() => {
-                    // Get only JPG files (social media images)
-                    const jpgImages = foundSubProject.gallery.filter((item: any) => {
-                      if (!item || !item.asset) return false
-                      const filename = item.asset?.originalFilename || ''
-                      const url = item.asset?.url || ''
-                      // Exclude TIF files (they're in the main gallery)
-                      const isTif = filename.toLowerCase().endsWith('.tif') || url.toLowerCase().includes('.tif')
-                      // Exclude videos
-                      const isVideo = url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
-                      return !isTif && !isVideo
+                    // Get images with captions sm1 through sm26
+                    const smImages = foundSubProject.gallery.filter((item: any) => {
+                      const caption = item.caption || ''
+                      // Match sm1 through sm26
+                      return /^sm([1-9]|1[0-9]|2[0-6])$/.test(caption)
                     })
                     
-                    if (jpgImages.length === 0) return null
+                    // Sort by sm number
+                    smImages.sort((a: any, b: any) => {
+                      const aNum = parseInt((a.caption || '').replace('sm', ''))
+                      const bNum = parseInt((b.caption || '').replace('sm', ''))
+                      return aNum - bNum
+                    })
+                    
+                    if (smImages.length === 0) return null
                     
                     return (
                       <SequentialGallery 
-                        images={jpgImages} 
+                        images={smImages} 
                         title={foundSubProject.title || 'Gallery'}
                         description={''}
                         customMaxWidth={300}
