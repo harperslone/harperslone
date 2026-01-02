@@ -2319,6 +2319,58 @@ export default async function SubProjectPage({
                     )
                   })()}
                 </div>
+                
+                {/* SequentialGallery with last uploaded images */}
+                <div className="mt-8 mb-8 w-full">
+                  {(() => {
+                    // Get the last uploaded images (excluding videos and special images)
+                    const specialFilenames = [
+                      'img20250422_11141080.jpg',
+                      'img20250422_11175977.jpg',
+                      'img20250422_11143742.jpg'
+                    ]
+                    
+                    const allValidImages = foundSubProject.gallery.filter((item: any) => {
+                      if (!item || !item.asset) return false
+                      
+                      // Exclude videos
+                      const mimeType = item.asset?.mimeType || ''
+                      const url = item.asset?.url || ''
+                      const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
+                      if (isVideo) return false
+                      
+                      // Check if it's an image with valid URL
+                      const imageUrl = urlFor(item)?.url()
+                      if (!imageUrl) return false
+                      
+                      // Exclude special images
+                      const originalFilename = item.asset?.originalFilename || ''
+                      const isSpecial = specialFilenames.some(filename => 
+                        originalFilename === filename || originalFilename.endsWith(filename)
+                      )
+                      
+                      // Exclude cherry blossom image
+                      const isCherryBlossom = originalFilename === 'BC4A3E71-C7EF-4CB9-89F2-08A2C1BF4CEF.JPG' || originalFilename.endsWith('BC4A3E71-C7EF-4CB9-89F2-08A2C1BF4CEF.JPG')
+                      
+                      return !isSpecial && !isCherryBlossom
+                    })
+                    
+                    // Get the last 10 images (or all if less than 10)
+                    const lastImages = allValidImages.slice(-10)
+                    
+                    if (lastImages.length === 0) return null
+                    
+                    return (
+                      <SequentialGallery 
+                        images={lastImages} 
+                        title={foundSubProject.title || 'Gallery'}
+                        description={''}
+                        maxWidth="md"
+                        hideCaptions={true}
+                      />
+                    )
+                  })()}
+                </div>
               </div>
             )}
             
