@@ -494,11 +494,22 @@ export default async function SubProjectPage({
                   </div>
                 )}
                 
-                {/* Sequential Gallery for bts */}
+                {/* First Sequential Gallery for bts - first 12 images */}
                 {foundSubProject.gallery && foundSubProject.gallery.length > 0 && (
                   <div className="mb-8 w-full">
                     <SequentialGallery 
-                      images={foundSubProject.gallery} 
+                      images={foundSubProject.gallery.slice(0, 12)} 
+                      customMaxWidth={500}
+                      hideCaptions={true}
+                    />
+                  </div>
+                )}
+                
+                {/* Second Sequential Gallery for bts - last 13 images */}
+                {foundSubProject.gallery && foundSubProject.gallery.length > 12 && (
+                  <div className="mb-8 w-full">
+                    <SequentialGallery 
+                      images={foundSubProject.gallery.slice(-13)} 
                       customMaxWidth={500}
                       hideCaptions={true}
                     />
