@@ -2420,25 +2420,16 @@ export default async function SubProjectPage({
                   </div>
                 </div>
                 
-                {/* Second SequentialGallery - last 6 book/magazine images */}
+                {/* Second SequentialGallery - book/magazine images (book1-book6) */}
                 <div className="mt-8 mb-8">
                   {(() => {
-                    // Get all non-video images
-                    const allNonVideoImages = foundSubProject.gallery.filter((item: any) => {
+                    // Get the 6 book/magazine images by caption (book1-book6)
+                    const bookImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
-                      const mimeType = item.asset?.mimeType || ''
-                      const url = item.asset?.url || ''
-                      const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
-                      return !isVideo
-                    })
-                    
-                    // Get the 6 book/magazine images - last 6 images before row1/row2
-                    // Filter out videos and row1/row2 images, then get last 6
-                    const nonRowImages = allNonVideoImages.filter((item: any) => {
                       const caption = item.caption?.toLowerCase() || ''
-                      return caption !== 'row1' && caption !== 'row2'
+                      return caption === 'book1' || caption === 'book2' || caption === 'book3' || 
+                             caption === 'book4' || caption === 'book5' || caption === 'book6'
                     })
-                    const bookImages = nonRowImages.slice(-6)
                     
                     if (bookImages.length === 0) return null
                     
