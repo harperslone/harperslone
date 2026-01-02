@@ -2123,6 +2123,27 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
+                {/* 4x1 grid with third1, third2, third3, third4 images */}
+                <div className="mb-8">
+                  {(() => {
+                    const thirdImages = foundSubProject.gallery.filter((item: any) => {
+                      const caption = item.caption || ''
+                      return caption === 'third1' || caption === 'third2' || caption === 'third3' || caption === 'third4'
+                    })
+                    
+                    if (thirdImages.length === 0) return null
+                    
+                    return (
+                      <GalleryLightbox 
+                        images={thirdImages} 
+                        title={foundSubProject.title || 'Gallery'}
+                        columns={4}
+                        imageSize={250}
+                      />
+                    )
+                  })()}
+                </div>
+                
                 {/* Description box above riso prints gallery */}
                 <div className="mb-6">
                   <p className="text-sm text-gray-700">riso prints for palette & formes project</p>
