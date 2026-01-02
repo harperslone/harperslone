@@ -218,6 +218,63 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
   }
 }
 
+/* Mobile lightbox optimization */
+@media (max-width: 768px) {
+  /* Lightbox modal - make image smaller on mobile */
+  .fixed.inset-0.z-50 .relative {
+    max-width: 85vw !important;
+    max-height: 70vh !important;
+    padding: 8px !important;
+  }
+  
+  .fixed.inset-0.z-50 img {
+    max-width: 80vw !important;
+    max-height: 60vh !important;
+    object-fit: contain !important;
+  }
+  
+  .fixed.inset-0.z-50 video {
+    max-width: 80vw !important;
+    max-height: 60vh !important;
+  }
+  
+  /* Lightbox arrows - make them more visible on mobile */
+  .fixed.inset-0.z-50 button {
+    font-size: 28px !important;
+  }
+  
+  .fixed.inset-0.z-50 .absolute.left-4 {
+    left: 8px !important;
+  }
+  
+  .fixed.inset-0.z-50 .absolute.right-4 {
+    right: 8px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even smaller lightbox on phones */
+  .fixed.inset-0.z-50 .relative {
+    max-width: 95vw !important;
+    max-height: 65vh !important;
+    padding: 4px !important;
+  }
+  
+  .fixed.inset-0.z-50 img {
+    max-width: 90vw !important;
+    max-height: 55vh !important;
+  }
+  
+  .fixed.inset-0.z-50 video {
+    max-width: 90vw !important;
+    max-height: 55vh !important;
+  }
+  
+  .fixed.inset-0.z-50 button {
+    font-size: 24px !important;
+  }
+}
+
 /* Homepage mobile optimization */
 @media (max-width: 768px) {
   .homepage-projects-text {

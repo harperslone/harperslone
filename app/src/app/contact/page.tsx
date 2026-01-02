@@ -37,43 +37,42 @@ export default function Contact() {
             </p>
           </div>
 
-          {/* Services List - Three Columns */}
-          <div className="p-6 rounded-2xl" style={{
+          {/* Services List - Three Columns on desktop, Two on mobile */}
+          <div className="p-4 md:p-6 rounded-2xl" style={{
             backgroundImage: 'radial-gradient(circle, #bfdbfe 1px, transparent 1px)',
             backgroundSize: '8px 8px',
             backgroundColor: '#bfdbfe',
           }}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            {/* Services header */}
+            <p className="font-normal text-black mb-4" style={{ fontSize: '13px' }}>
+              services_
+            </p>
+            
+            {/* Two columns on mobile, two columns on desktop */}
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-8">
               {/* Left Column */}
               <div>
-                <p className="font-normal text-black mb-4" style={{ fontSize: '13px' }}>
-                  services_
-                </p>
-              </div>
-
-              {/* Middle Column */}
-              <div>
-                <ul className="space-y-2">
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>image</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>video</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>identity</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>book</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>magazine</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>print</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>poster</li>
+                <ul className="space-y-1 md:space-y-2">
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>image</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>video</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>identity</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>book</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>magazine</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>print</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>poster</li>
                 </ul>
               </div>
 
               {/* Right Column */}
               <div>
-                <ul className="space-y-2">
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>retail graphics</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>brand design</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>brand strategy</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>content direction</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>type design</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>product design</li>
-                  <li className="font-normal text-black lowercase" style={{ fontSize: '13px' }}>creative direction</li>
+                <ul className="space-y-1 md:space-y-2">
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>retail graphics</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>brand design</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>brand strategy</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>content direction</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>type design</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>product design</li>
+                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>creative direction</li>
                 </ul>
               </div>
             </div>
