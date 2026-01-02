@@ -2346,7 +2346,7 @@ export default async function SubProjectPage({
                         images={lastImages} 
                         title={foundSubProject.title || 'Gallery'}
                         description={''}
-                        maxWidth="md"
+                        customMaxWidth={300}
                         hideCaptions={true}
                       />
                     )
