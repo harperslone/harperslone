@@ -152,6 +152,11 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
     top: 25% !important;
     right: 15% !important;
   }
+  
+  /* Scale down dots on tablet */
+  .homepage-dot {
+    transform: rotate(-45deg) scale(0.7) !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -173,5 +178,10 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
     font-size: 16px !important;
     top: 28% !important;
     right: 12% !important;
+  }
+  
+  /* Scale down dots even more on phone */
+  .homepage-dot {
+    transform: rotate(-45deg) scale(0.5) !important;
   }
 }
