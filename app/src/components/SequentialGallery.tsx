@@ -150,7 +150,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
         <div 
           className="relative w-full sequential-gallery-container"
           style={{ 
-            minHeight: customMaxWidth ? `${Math.min(customMaxWidth + 100, 400)}px` : '400px',
+            minHeight: customMaxWidth ? `${Math.max(customMaxWidth + 100, 400)}px` : '500px',
             position: 'relative',
             paddingTop: '20px',
             paddingBottom: '20px',
@@ -270,7 +270,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
                       maxWidth === 'xl' ? '700px' : 
                       '600px'
                     ),
-                    maxHeight: customMaxWidth ? `${customMaxWidth + 150}px` : '500px',
+                    maxHeight: '70vh',
                     width: 'auto',
                     height: 'auto',
                     objectFit: 'contain'
