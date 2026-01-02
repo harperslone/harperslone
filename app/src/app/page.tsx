@@ -126,84 +126,71 @@ export default async function Home() {
                 />
               ))}
               
-              {/* Swiss Style diagonal text content */}
+              {/* Swiss Style rotated text content - bottom left */}
               <div 
-                className="absolute"
+                className="absolute text-black"
                 style={{
-                  bottom: 'clamp(8px, 1vw, 16px)',
-                  left: 'clamp(8px, 1vw, 16px)',
+                  bottom: '5%',
+                  left: '5%',
                   transform: 'rotate(-45deg)',
                   transformOrigin: 'bottom left',
+                  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
                 <div 
-                  className="text-black font-normal"
                   style={{
-                    fontSize: 'clamp(9px, 1.1vw, 13px)',
-                    lineHeight: '1.6',
-                    letterSpacing: '0.3px',
-                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                    transform: 'rotate(45deg)',
-                    padding: 'clamp(20px, 2.5vw, 40px)',
+                    transform: 'rotate(-90deg)',
+                    transformOrigin: 'bottom left',
+                    whiteSpace: 'nowrap',
                   }}
                 >
-                  {/* Name */}
-                  <div className="font-bold" style={{ fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '1px', marginBottom: 'clamp(4px, 0.5vw, 8px)', marginLeft: '0', paddingLeft: '0' }}>
+                  {/* Title Block */}
+                  <div style={{ marginBottom: 'clamp(12px, 2vw, 24px)' }}>
+                    <div style={{ fontSize: 'clamp(6px, 0.8vw, 9px)', letterSpacing: '0.5px', marginBottom: '2px' }}>
+                      archive design portfolio
+                    </div>
+                    <div style={{ fontSize: 'clamp(6px, 0.8vw, 9px)', letterSpacing: '0.5px' }}>
+                      2024
+                    </div>
+                  </div>
+                  
+                  {/* Name - Large */}
+                  <div className="font-bold" style={{ fontSize: 'clamp(18px, 3vw, 36px)', letterSpacing: '0px', marginBottom: 'clamp(8px, 1.5vw, 16px)' }}>
                     harper slone
                   </div>
                   
-                  {/* Archive Design Portfolio */}
-                  <div style={{ fontSize: 'clamp(9px, 1.1vw, 13px)', marginBottom: 'clamp(2px, 0.3vw, 4px)', marginLeft: '0', paddingLeft: '0' }}>
-                    archive design portfolio
-        </div>
+                  {/* Services Block */}
+                  <div style={{ fontSize: 'clamp(5px, 0.7vw, 8px)', lineHeight: '1.5', letterSpacing: '0.3px', marginBottom: 'clamp(8px, 1.5vw, 16px)' }}>
+                    <div>image, video, identity</div>
+                    <div>book, magazine, print, poster</div>
+                    <div>retail graphics, brand design</div>
+                    <div>brand strategy, content direction</div>
+                    <div>type design, product design</div>
+                    <div>creative direction, graphic design</div>
+                    <div>styling</div>
+                  </div>
                   
                   {/* Projects */}
-                  <div style={{ marginBottom: 'clamp(8px, 1vw, 16px)', marginLeft: '0', paddingLeft: '0' }}>
+                  <div style={{ fontSize: 'clamp(5px, 0.7vw, 8px)', marginBottom: 'clamp(8px, 1.5vw, 16px)' }}>
                     {allProjects.map((project, idx) => {
                       const slug = project.slug?.current?.toLowerCase() || project.title?.toLowerCase() || ''
-                      let bgColor = 'transparent' // default transparent
+                      let bgColor = 'transparent'
                       
-                      if (slug === 'projects') {
-                        bgColor = '#fef08a' // pale yellow
-                      } else if (slug === 'work') {
-                        bgColor = '#bfdbfe' // pale blue
-                      } else if (slug === 'exhibitions') {
-                        bgColor = '#fce7f3' // pale pink
-                      } else if (slug === 'print') {
-                        bgColor = '#d1fae5' // pale green
-                      }
+                      if (slug === 'projects') bgColor = '#fef08a'
+                      else if (slug === 'work') bgColor = '#bfdbfe'
+                      else if (slug === 'exhibitions') bgColor = '#fce7f3'
+                      else if (slug === 'print') bgColor = '#d1fae5'
                       
                       return (
-                        <ProjectLink
-                          key={idx}
-                          project={project}
-                          bgColor={bgColor}
-                        />
+                        <ProjectLink key={idx} project={project} bgColor={bgColor} />
                       )
                     })}
                   </div>
                   
-                  {/* Services */}
-                  <div style={{ fontSize: 'clamp(8px, 1vw, 12px)', lineHeight: '1.1', letterSpacing: '-0.2px', marginBottom: 'clamp(8px, 1vw, 16px)', marginLeft: '0', paddingLeft: '0' }}>
-                    <div style={{ marginBottom: '0', display: 'block' }}>image, video, identity, book, magazine, print, poster, retail graphics, brand design, brand strategy</div>
-                    <div style={{ marginTop: '0', display: 'block' }}>content direction, type design, product design, creative direction, graphic design, styling</div>
-                  </div>
-                  
-                  {/* Location - on the lower corner */}
-                  <div 
-                    className="text-black font-bold italic"
-                    style={{
-                      fontSize: 'clamp(7px, 0.9vw, 11px)',
-                      lineHeight: '1.6',
-                      letterSpacing: '0.3px',
-                      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                      marginLeft: '0',
-                      paddingLeft: '0',
-                    }}
-                  >
-                    <div style={{ fontSize: 'clamp(7px, 0.9vw, 11px)' }}>
-                      based in paris, available worldwide
-                    </div>
+                  {/* Location */}
+                  <div style={{ fontSize: 'clamp(5px, 0.7vw, 8px)', letterSpacing: '0.3px' }}>
+                    <div>based in paris</div>
+                    <div>available worldwide</div>
                   </div>
                 </div>
               </div>
