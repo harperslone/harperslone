@@ -2431,8 +2431,8 @@ export default async function SubProjectPage({
                 {/* Second SequentialGallery - book/magazine images (book1-book6) */}
                 <div className="mt-8 mb-8 flex flex-col md:flex-row items-start gap-8">
                   {/* Description on the left */}
-                  <div className="w-full md:w-48 flex-shrink-0">
-                    <p className="text-sm text-gray-700">spreads from shoe obsessed zine - 2023</p>
+                  <div className="flex-shrink-0">
+                    <p className="text-sm text-gray-700 whitespace-nowrap">spreads from shoe obsessed zine - 2023</p>
                   </div>
                   
                   {/* SequentialGallery on the right */}
