@@ -2226,9 +2226,10 @@ export default async function SubProjectPage({
                       return !isVideo
                     })
                     
-                    // Get the last 29 images for SequentialGallery (to exclude them here)
-                    const last29Images = allNonVideoImages.slice(-29)
-                    const last29Keys = new Set(last29Images.map((item: any) => item._key || item.asset?._ref))
+                    // Get the last 31 images for SequentialGallery + 2x1 gallery (to exclude them here)
+                    // 29 for sequential gallery + 2 for side-by-side gallery = 31
+                    const last31Images = allNonVideoImages.slice(-31)
+                    const last31Keys = new Set(last31Images.map((item: any) => item._key || item.asset?._ref))
                     
                     const allImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
@@ -2239,9 +2240,9 @@ export default async function SubProjectPage({
                       const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
                       if (isVideo) return false
                       
-                      // Exclude last 29 images (they go in SequentialGallery)
+                      // Exclude last 31 images (they go in SequentialGallery + 2x1 gallery)
                       const itemKey = item._key || item.asset?._ref
-                      if (last29Keys.has(itemKey)) return false
+                      if (last31Keys.has(itemKey)) return false
                       
                       // Check if it's an image with valid URL
                       const imageUrl = urlFor(item)?.url()
