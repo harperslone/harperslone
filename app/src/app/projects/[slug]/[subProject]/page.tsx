@@ -2087,10 +2087,22 @@ export default async function SubProjectPage({
               </div>
             )}
             
-            {/* The Parisian Vintage - Simplified Layout: TIF files in grid, JPG files in sequential gallery */}
+            {/* The Parisian Vintage - Layout: 4x3 grid, then TIF files, then sequential gallery */}
             {isParisianVintage && foundSubProject.gallery && (
               <div>
-                {/* Description box above main gallery */}
+                {/* First 12 images in 4x3 grid */}
+                <div className="mb-8">
+                  {foundSubProject.gallery.length >= 12 && (
+                    <GalleryLightbox 
+                      images={foundSubProject.gallery.slice(0, 12)} 
+                      title={foundSubProject.title || 'Gallery'}
+                      columns={4}
+                      imageSize={200}
+                    />
+                  )}
+                </div>
+                
+                {/* Description box above riso prints gallery */}
                 <div className="mb-6">
                   <p className="text-sm text-gray-700">riso prints for palette & formes project</p>
                 </div>
