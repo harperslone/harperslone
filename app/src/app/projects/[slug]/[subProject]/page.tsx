@@ -2239,6 +2239,41 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
+                {/* Description box above shoes sequential gallery */}
+                <div className="mt-8 mb-6 w-full">
+                  <p className="text-sm text-gray-700">spreads from shoe obsessed zine</p>
+                </div>
+                
+                {/* Sequential Gallery - shoes1-shoes6 images */}
+                <div className="mb-12 w-full flex justify-center">
+                  {(() => {
+                    // Get images with captions shoes1 through shoes6
+                    const shoesImages = foundSubProject.gallery.filter((item: any) => {
+                      const caption = item.caption || ''
+                      return /^shoes[1-6]$/.test(caption)
+                    })
+                    
+                    // Sort by shoes number
+                    shoesImages.sort((a: any, b: any) => {
+                      const aNum = parseInt((a.caption || '').replace('shoes', ''))
+                      const bNum = parseInt((b.caption || '').replace('shoes', ''))
+                      return aNum - bNum
+                    })
+                    
+                    if (shoesImages.length === 0) return null
+                    
+                    return (
+                      <SequentialGallery 
+                        images={shoesImages} 
+                        title={foundSubProject.title || 'Gallery'}
+                        description={''}
+                        customMaxWidth={300}
+                        hideCaptions={true}
+                      />
+                    )
+                  })()}
+                </div>
+                
                 {/* Video gallery - appears as last gallery, muted */}
                 <div className="mt-8 mb-12 w-full flex justify-center">
                   {(() => {
