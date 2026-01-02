@@ -2343,8 +2343,13 @@ export default async function SubProjectPage({
                   })()}
                 </div>
                 
-                {/* SequentialGallery with last 20 uploaded images */}
-                <div className="mt-8 mb-8 w-full">
+                {/* Description box above SequentialGallery */}
+                <div className="mt-8 mb-6">
+                  <p className="text-sm text-gray-700">imagery/content for social media</p>
+                </div>
+                
+                {/* SequentialGallery with last 24 uploaded images */}
+                <div className="mb-8 w-full">
                   {(() => {
                     // Get only images (no videos) from the gallery
                     const allImages = foundSubProject.gallery.filter((item: any) => {
