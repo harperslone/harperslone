@@ -372,6 +372,10 @@ export default async function SubProjectPage({
                          subProject.toLowerCase() === 'grafik(design)' ||
                          subProject.toLowerCase() === 'grafik-design'
   
+  const isCoucou = foundSubProject.title?.toLowerCase() === 'coucou' || 
+                   foundSubProject.pv?.toLowerCase() === 'coucou' ||
+                   subProject.toLowerCase() === 'coucou'
+  
   // Debug log for grafik(design)
   if (foundSubProject.title?.toLowerCase().includes('grafik') || foundSubProject.pv?.toLowerCase().includes('grafik') || subProject.toLowerCase().includes('grafik')) {
     console.log('Grafik(design) sub-project check:', { 
@@ -1481,9 +1485,22 @@ export default async function SubProjectPage({
                     })()}
                   </div>
                 )}
-                
+
+                {/* Coucou - sequential gallery with all images */}
+                {isCoucou && foundSubProject.gallery && foundSubProject.gallery.length > 0 && (
+                  <div className="mb-8 w-full">
+                    <SequentialGallery 
+                      images={foundSubProject.gallery} 
+                      title={foundSubProject.title || 'Gallery'}
+                      description={foundSubProject.description || ''}
+                      customMaxWidth={500}
+                      hideCaptions={true}
+                    />
+                  </div>
+                )}
+
                 {/* All other galleries - only show if NOT bts, NOT les mots bleus, NOT out of sight solo, NOT blue, NOT 東京ハーパー, NOT le bal de debutantes, NOT palette&formes, NOT la mode, NOT los angeles, NOT grafik(design), NOT paris, NOT cote d'azur, NOT boutique romantique, and NOT The Parisian Vintage (all use sequential layout or special layout) */}
-                {!isBts && !isLesMotsBleus && !isOutOfSightSolo && !isBlue && !isTokyoHarper && !isLeBalDeDebutantes && !(isPaletteFormes && slug.toLowerCase() === 'exhibitions') && !(isPaletteFormes && slug.toLowerCase() === 'print') && !isLaMode && !isLosAngeles && !isAnnk && !isGrafikDesign && !isParis && !isCoteDAzur && !isBoutiqueRomantique && !isParisianVintage && (
+                {!isBts && !isLesMotsBleus && !isOutOfSightSolo && !isBlue && !isTokyoHarper && !isLeBalDeDebutantes && !(isPaletteFormes && slug.toLowerCase() === 'exhibitions') && !(isPaletteFormes && slug.toLowerCase() === 'print') && !isLaMode && !isLosAngeles && !isAnnk && !isGrafikDesign && !isParis && !isCoteDAzur && !isBoutiqueRomantique && !isCoucou && !isParisianVintage && (
                   <>
                 
                 {/* Main Gallery - first image at 800x800, then portrait gallery 5x1 */}
