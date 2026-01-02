@@ -2205,11 +2205,25 @@ export default async function SubProjectPage({
                   {(() => {
                     // For The Parisian Vintage, show all images in a 5x3 grid (15 images)
                     // Exclude the special images (tomato tie, blue bag, alaia in the atelier)
+                    // Also exclude the last 23 images (they go in SequentialGallery)
                     const specialFilenames = [
                       'img20250422_11141080.jpg',
                       'img20250422_11175977.jpg',
                       'img20250422_11143742.jpg'
                     ]
+                    
+                    // First, get all non-video images to determine which are the last 23
+                    const allNonVideoImages = foundSubProject.gallery.filter((item: any) => {
+                      if (!item || !item.asset) return false
+                      const mimeType = item.asset?.mimeType || ''
+                      const url = item.asset?.url || ''
+                      const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
+                      return !isVideo
+                    })
+                    
+                    // Get the last 23 images for SequentialGallery (to exclude them here)
+                    const last23Images = allNonVideoImages.slice(-23)
+                    const last23Keys = new Set(last23Images.map((item: any) => item._key || item.asset?._ref))
                     
                     const allImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
@@ -2219,6 +2233,10 @@ export default async function SubProjectPage({
                       const url = item.asset?.url || ''
                       const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
                       if (isVideo) return false
+                      
+                      // Exclude last 23 images (they go in SequentialGallery)
+                      const itemKey = item._key || item.asset?._ref
+                      if (last23Keys.has(itemKey)) return false
                       
                       // Check if it's an image with valid URL
                       const imageUrl = urlFor(item)?.url()
