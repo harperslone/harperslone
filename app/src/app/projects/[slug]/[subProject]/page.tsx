@@ -2432,9 +2432,13 @@ export default async function SubProjectPage({
                       return !isVideo
                     })
                     
-                    // Get the 6 book/magazine images (positioned before the 2x1 gallery images)
-                    // These are at positions -14 to -8 in the gallery
-                    const bookImages = allNonVideoImages.slice(-14, -8)
+                    // Get the 6 book/magazine images - last 6 images before row1/row2
+                    // Filter out videos and row1/row2 images, then get last 6
+                    const nonRowImages = allNonVideoImages.filter((item: any) => {
+                      const caption = item.caption?.toLowerCase() || ''
+                      return caption !== 'row1' && caption !== 'row2'
+                    })
+                    const bookImages = nonRowImages.slice(-6)
                     
                     if (bookImages.length === 0) return null
                     
