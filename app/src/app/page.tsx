@@ -126,14 +126,14 @@ export default async function Home() {
                 />
               ))}
               
-              {/* Text running along left edge, reading left to right (bottom-left to top-right) */}
+              {/* Text running along top-left edge, reading left to right */}
               <div 
                 className="absolute text-black"
                 style={{
-                  bottom: '5%',
-                  left: '5%',
+                  top: '8%',
+                  left: '50%',
                   transform: 'rotate(-45deg)',
-                  transformOrigin: 'bottom left',
+                  transformOrigin: 'top left',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
@@ -141,59 +141,11 @@ export default async function Home() {
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: 'clamp(3px, 0.5vw, 6px)',
-                    alignItems: 'flex-start',
+                    gap: 'clamp(2px, 0.4vw, 5px)',
+                    alignItems: 'flex-end',
                   }}
                 >
-                  {/* Row 1 - Date/Info */}
-                  <div 
-                    style={{
-                      fontSize: 'clamp(7px, 0.9vw, 11px)',
-                      lineHeight: '1.4',
-                      letterSpacing: '0.1px',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    archive design · portfolio 2024 · based in paris · available worldwide
-                  </div>
-                  
-                  {/* Row 2 - Services */}
-                  <div 
-                    style={{
-                      fontSize: 'clamp(7px, 0.9vw, 11px)',
-                      lineHeight: '1.4',
-                      letterSpacing: '0.1px',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    image · video · identity · book · magazine · print · poster
-                  </div>
-                  
-                  {/* Row 3 - More Services */}
-                  <div 
-                    style={{
-                      fontSize: 'clamp(7px, 0.9vw, 11px)',
-                      lineHeight: '1.4',
-                      letterSpacing: '0.1px',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    retail graphics · brand design · brand strategy · content direction
-                  </div>
-                  
-                  {/* Row 4 - Even More Services */}
-                  <div 
-                    style={{
-                      fontSize: 'clamp(7px, 0.9vw, 11px)',
-                      lineHeight: '1.4',
-                      letterSpacing: '0.1px',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    type design · product design · creative direction · graphic design · styling
-                  </div>
-                  
-                  {/* Row 5 - Projects */}
+                  {/* Row 1 - Projects */}
                   <div 
                     style={{
                       display: 'flex',
@@ -216,6 +168,68 @@ export default async function Home() {
                         <ProjectLink key={idx} project={project} bgColor={bgColor} />
                       )
                     })}
+                  </div>
+                  
+                  {/* Row 2 - Services header */}
+                  <div 
+                    style={{
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
+                      marginTop: 'clamp(4px, 0.6vw, 8px)',
+                    }}
+                  >
+                    services
+                  </div>
+                  
+                  {/* Row 3 - Services line 1 */}
+                  <div 
+                    style={{
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    image · video · identity · book · magazine · print · poster · retail graphics
+                  </div>
+                  
+                  {/* Row 4 - Services line 2 */}
+                  <div 
+                    style={{
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    brand design · brand strategy · content direction · type design · product
+                  </div>
+                  
+                  {/* Row 5 - Services line 3 */}
+                  <div 
+                    style={{
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    design · creative direction
+                  </div>
+                  
+                  {/* Row 6 - Location */}
+                  <div 
+                    style={{
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
+                      marginTop: 'clamp(8px, 1vw, 16px)',
+                    }}
+                  >
+                    based in paris · available worldwide
                   </div>
                 </div>
               </div>
