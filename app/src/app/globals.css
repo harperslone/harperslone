@@ -58,9 +58,11 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
     padding: 0 8px !important;
   }
   
-  /* For galleries with 6+ columns data attribute, use 3 columns on mobile */
+  /* For galleries with 6+ columns data attribute, use 2 columns on mobile */
   .gallery-container[data-columns="6"],
-  .gallery-container[data-columns="5"] {
+  .gallery-container[data-columns="5"],
+  .gallery-container[data-columns="4"],
+  .gallery-container[data-columns="3"] {
     grid-template-columns: repeat(2, 1fr) !important;
   }
   
@@ -78,7 +80,7 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
   /* Scale down images in galleries */
   .gallery-container img {
     max-width: 100% !important;
-    max-height: 200px !important;
+    max-height: 150px !important;
     width: auto !important;
     height: auto !important;
     object-fit: contain !important;
@@ -86,7 +88,7 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
   
   .gallery-container video {
     max-width: 100% !important;
-    max-height: 200px !important;
+    max-height: 150px !important;
   }
 }
 
@@ -108,7 +110,7 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
   /* Further scale down images on small phones */
   .gallery-container img {
     max-width: 100% !important;
-    max-height: 150px !important;
+    max-height: 120px !important;
     width: auto !important;
     height: auto !important;
     object-fit: contain !important;
@@ -116,7 +118,7 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
   
   .gallery-container video {
     max-width: 100% !important;
-    max-height: 150px !important;
+    max-height: 120px !important;
   }
 }
 
@@ -218,63 +220,6 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
   }
 }
 
-/* Mobile lightbox optimization */
-@media (max-width: 768px) {
-  /* Lightbox modal - make image smaller on mobile */
-  .fixed.inset-0.z-50 .relative {
-    max-width: 85vw !important;
-    max-height: 70vh !important;
-    padding: 8px !important;
-  }
-  
-  .fixed.inset-0.z-50 img {
-    max-width: 80vw !important;
-    max-height: 60vh !important;
-    object-fit: contain !important;
-  }
-  
-  .fixed.inset-0.z-50 video {
-    max-width: 80vw !important;
-    max-height: 60vh !important;
-  }
-  
-  /* Lightbox arrows - make them more visible on mobile */
-  .fixed.inset-0.z-50 button {
-    font-size: 28px !important;
-  }
-  
-  .fixed.inset-0.z-50 .absolute.left-4 {
-    left: 8px !important;
-  }
-  
-  .fixed.inset-0.z-50 .absolute.right-4 {
-    right: 8px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  /* Even smaller lightbox on phones */
-  .fixed.inset-0.z-50 .relative {
-    max-width: 95vw !important;
-    max-height: 65vh !important;
-    padding: 4px !important;
-  }
-  
-  .fixed.inset-0.z-50 img {
-    max-width: 90vw !important;
-    max-height: 55vh !important;
-  }
-  
-  .fixed.inset-0.z-50 video {
-    max-width: 90vw !important;
-    max-height: 55vh !important;
-  }
-  
-  .fixed.inset-0.z-50 button {
-    font-size: 24px !important;
-  }
-}
-
 /* Homepage mobile optimization */
 @media (max-width: 768px) {
   .homepage-projects-text {
@@ -358,5 +303,63 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
     padding: 3px 8px !important;
     transform: scale(0.6) !important;
     transform-origin: right center !important;
+  }
+}
+
+/* Mobile lightbox optimization */
+@media (max-width: 768px) {
+  /* Lightbox container */
+  .lightbox-container {
+    padding: 16px !important;
+  }
+  
+  /* Lightbox image */
+  .lightbox-image {
+    max-width: 85vw !important;
+    max-height: 65vh !important;
+    object-fit: contain !important;
+  }
+  
+  /* Lightbox video */
+  .lightbox-video {
+    max-width: 85vw !important;
+    max-height: 65vh !important;
+  }
+  
+  /* Lightbox arrows */
+  .lightbox-arrow {
+    font-size: 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even smaller lightbox on phones */
+  .lightbox-image {
+    max-width: 90vw !important;
+    max-height: 60vh !important;
+  }
+  
+  .lightbox-video {
+    max-width: 90vw !important;
+    max-height: 60vh !important;
+  }
+  
+  .lightbox-arrow {
+    font-size: 20px !important;
+  }
+}
+
+/* Project page mobile layout fix */
+@media (max-width: 768px) {
+  /* Ensure content is scrollable */
+  .project-content {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  /* Gallery containers on mobile */
+  .gallery-wrapper {
+    width: 100% !important;
+    overflow-x: hidden !important;
   }
 }

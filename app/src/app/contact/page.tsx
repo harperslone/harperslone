@@ -48,31 +48,31 @@ export default function Contact() {
               services_
             </p>
             
-            {/* Two columns on mobile, two columns on desktop */}
+            {/* Services grid - 2 columns on mobile, 2 on desktop */}
             <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-8">
               {/* Left Column */}
               <div>
                 <ul className="space-y-1 md:space-y-2">
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>image</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>video</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>identity</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>book</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>magazine</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>print</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>poster</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>image</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>video</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>identity</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>book</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>magazine</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>print</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>poster</li>
                 </ul>
               </div>
 
               {/* Right Column */}
               <div>
                 <ul className="space-y-1 md:space-y-2">
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>retail graphics</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>brand design</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>brand strategy</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>content direction</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>type design</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>product design</li>
-                  <li className="font-normal text-black lowercase text-xs md:text-sm" style={{ fontSize: '11px' }}>creative direction</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>retail graphics</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>brand design</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>brand strategy</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>content direction</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>type design</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>product design</li>
+                  <li className="font-normal text-black lowercase" style={{ fontSize: '12px' }}>creative direction</li>
                 </ul>
               </div>
             </div>

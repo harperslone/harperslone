@@ -373,7 +373,7 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
           {selectedImage > 0 && (
             <button
               onClick={goToPrevious}
-              className="absolute left-4 text-red-500 text-4xl hover:opacity-70 transition-opacity z-10"
+              className="absolute left-4 md:left-8 text-red-500 text-3xl md:text-4xl hover:opacity-70 transition-opacity z-10 lightbox-arrow"
               aria-label="Previous image"
             >
               ‹
@@ -384,7 +384,7 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
           {selectedImage < images.length - 1 && (
             <button
               onClick={goToNext}
-              className="absolute right-4 text-red-500 text-4xl hover:opacity-70 transition-opacity z-10"
+              className="absolute right-4 md:right-8 text-red-500 text-3xl md:text-4xl hover:opacity-70 transition-opacity z-10 lightbox-arrow"
               aria-label="Next image"
             >
               ›
@@ -393,7 +393,7 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
 
           {/* Image or Video */}
           <div 
-            className="relative max-w-[60vw] max-h-[60vh] p-4"
+            className="relative max-w-[85vw] md:max-w-[60vw] max-h-[70vh] md:max-h-[60vh] p-2 md:p-4 lightbox-container"
             onClick={(e) => e.stopPropagation()}
           >
             {(() => {
@@ -426,8 +426,8 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
                   <video
                     src={mediaUrl}
                     controls
-                    className="max-w-full max-h-[60vh]"
-                    style={{ maxHeight: '60vh' }}
+                    className="max-w-full max-h-[65vh] md:max-h-[60vh] lightbox-video"
+                    style={{ maxHeight: '65vh' }}
                     crossOrigin="anonymous"
                     onError={(e) => {
                       console.error('Lightbox video load error:', e, mediaUrl)
@@ -442,7 +442,7 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
                   alt={`${title || 'Gallery'} image ${selectedImage + 1}`}
                   width={2000}
                   height={2000}
-                  className="max-w-full max-h-[60vh] object-contain"
+                  className="max-w-full max-h-[65vh] md:max-h-[60vh] object-contain lightbox-image"
                   unoptimized
                 />
               )
