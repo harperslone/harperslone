@@ -48,7 +48,7 @@ export default function ClickableDot({ color, slug, size, top, left }: Clickable
   return (
     <button
       onClick={handleClick}
-      className="absolute rounded-full hover:opacity-80 transition-opacity cursor-red-dot z-20"
+      className="absolute rounded-full hover:opacity-80 transition-opacity cursor-red-dot z-20 homepage-dot"
       style={{
         width: `${size}px`,
         height: `${size}px`,

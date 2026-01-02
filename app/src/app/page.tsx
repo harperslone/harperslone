@@ -113,7 +113,7 @@ export default async function Home() {
                 <Link
                   key={`black-${i}`}
                   href="/contact"
-                  className="absolute rounded-full hover:opacity-80 transition-opacity cursor-red-dot z-20"
+                  className="absolute rounded-full hover:opacity-80 transition-opacity cursor-red-dot z-20 homepage-dot"
                   style={{
                     width: `${dot.size}px`,
                     height: `${dot.size}px`,
