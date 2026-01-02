@@ -142,7 +142,7 @@ export default async function Home() {
                     fontSize: 'clamp(9px, 1.1vw, 13px)',
                     lineHeight: '1.6',
                     letterSpacing: '0.3px',
-                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                     transform: 'rotate(45deg)',
                     padding: 'clamp(20px, 2.5vw, 40px)',
                   }}
@@ -196,7 +196,7 @@ export default async function Home() {
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
                       lineHeight: '1.6',
                       letterSpacing: '0.3px',
-                      fontFamily: 'Arial, Helvetica, sans-serif',
+                      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                       marginLeft: '0',
                       paddingLeft: '0',
                     }}
