@@ -1475,6 +1475,7 @@ export default async function SubProjectPage({
                           title={foundSubProject.title || 'Gallery'}
                           description={foundSubProject.description || ''}
                           customMaxWidth={500}
+                          hideCaptions={true}
                         />
                       )
                     })()}
