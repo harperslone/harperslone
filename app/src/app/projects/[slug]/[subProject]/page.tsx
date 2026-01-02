@@ -2405,9 +2405,9 @@ export default async function SubProjectPage({
                       return true
                     })
                     
-                    // Get the last 29 images, but exclude the last 2 (they're in side-by-side gallery)
+                    // Get the last 29 images, but exclude the last 8 (2 for 2x1 gallery + 6 for second sequential gallery)
                     const totalImages = allImages.length
-                    const lastImages = allImages.slice(Math.max(0, totalImages - 31), totalImages - 2)
+                    const lastImages = allImages.slice(Math.max(0, totalImages - 37), totalImages - 8)
                     
                     if (lastImages.length === 0) return null
                     
@@ -2422,6 +2422,36 @@ export default async function SubProjectPage({
                     )
                   })()}
                   </div>
+                </div>
+                
+                {/* Second SequentialGallery - last 6 book/magazine images */}
+                <div className="mt-8 mb-8">
+                  {(() => {
+                    // Get all non-video images
+                    const allNonVideoImages = foundSubProject.gallery.filter((item: any) => {
+                      if (!item || !item.asset) return false
+                      const mimeType = item.asset?.mimeType || ''
+                      const url = item.asset?.url || ''
+                      const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
+                      return !isVideo
+                    })
+                    
+                    // Get images from position -8 to -2 (6 images before the last 2 which are in 2x1 gallery)
+                    // These are the book/magazine layout images
+                    const bookImages = allNonVideoImages.slice(-8, -2)
+                    
+                    if (bookImages.length === 0) return null
+                    
+                    return (
+                      <SequentialGallery 
+                        images={bookImages} 
+                        title={foundSubProject.title || 'Gallery'}
+                        description={''}
+                        customMaxWidth={350}
+                        hideCaptions={true}
+                      />
+                    )
+                  })()}
                 </div>
               </div>
             )}
