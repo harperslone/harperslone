@@ -128,7 +128,7 @@ export default async function Home() {
               
               {/* Projects on top-left edge - rotated -45deg */}
               <div 
-                className="absolute text-black"
+                className="absolute text-black homepage-projects-text"
                 style={{
                   top: '8%',
                   left: '50%',
@@ -147,6 +147,7 @@ export default async function Home() {
                 >
                   {/* Projects */}
                   <div 
+                    className="homepage-projects-list"
                     style={{
                       display: 'flex',
                       gap: 'clamp(8px, 1vw, 16px)',
@@ -172,6 +173,7 @@ export default async function Home() {
                   
                   {/* Location */}
                   <div 
+                    className="homepage-location"
                     style={{
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
                       lineHeight: '1.4',
@@ -188,7 +190,7 @@ export default async function Home() {
               
               {/* Large name on right side */}
               <div 
-                className="absolute text-black font-bold"
+                className="absolute text-black font-bold homepage-name"
                 style={{
                   top: '20%',
                   right: '20%',
