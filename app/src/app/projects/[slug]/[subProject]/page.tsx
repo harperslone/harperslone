@@ -2104,6 +2104,7 @@ export default async function SubProjectPage({
                       columns={4}
                       imageSize={200}
                       gap={20}
+                      center={true}
                     />
                   )}
                 </div>
@@ -2125,6 +2126,7 @@ export default async function SubProjectPage({
                         columns={3}
                         imageSize={300}
                         gap={20}
+                        center={true}
                       />
                     )
                   })()}
@@ -2147,6 +2149,7 @@ export default async function SubProjectPage({
                         columns={4}
                         imageSize={250}
                         gap={20}
+                        center={true}
                       />
                     )
                   })()}
