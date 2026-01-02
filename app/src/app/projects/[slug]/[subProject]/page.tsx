@@ -2226,9 +2226,9 @@ export default async function SubProjectPage({
                       return !isVideo
                     })
                     
-                    // Get the last 30 images for SequentialGallery (to exclude them here)
-                    const last30Images = allNonVideoImages.slice(-30)
-                    const last30Keys = new Set(last30Images.map((item: any) => item._key || item.asset?._ref))
+                    // Get the last 29 images for SequentialGallery (to exclude them here)
+                    const last29Images = allNonVideoImages.slice(-29)
+                    const last29Keys = new Set(last29Images.map((item: any) => item._key || item.asset?._ref))
                     
                     const allImages = foundSubProject.gallery.filter((item: any) => {
                       if (!item || !item.asset) return false
@@ -2239,9 +2239,9 @@ export default async function SubProjectPage({
                       const isVideo = mimeType.startsWith('video/') || url.match(/\.(mp4|mov|webm|avi|wmv|flv|mkv|m4v|3gp|mpg|mpeg)$/i)
                       if (isVideo) return false
                       
-                      // Exclude last 30 images (they go in SequentialGallery)
+                      // Exclude last 29 images (they go in SequentialGallery)
                       const itemKey = item._key || item.asset?._ref
-                      if (last30Keys.has(itemKey)) return false
+                      if (last29Keys.has(itemKey)) return false
                       
                       // Check if it's an image with valid URL
                       const imageUrl = urlFor(item)?.url()
@@ -2364,8 +2364,8 @@ export default async function SubProjectPage({
                       return true
                     })
                     
-                    // Get the last 30 images (including recent additions)
-                    const lastImages = allImages.slice(-30)
+                    // Get the last 29 images (including recent additions)
+                    const lastImages = allImages.slice(-29)
                     
                     if (lastImages.length === 0) return null
                     
