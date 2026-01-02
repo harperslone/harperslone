@@ -126,7 +126,7 @@ export default async function Home() {
                 />
               ))}
               
-              {/* Text running along top-left edge, reading left to right */}
+              {/* Projects on top-left edge - rotated -45deg */}
               <div 
                 className="absolute text-black"
                 style={{
@@ -145,7 +145,7 @@ export default async function Home() {
                     alignItems: 'flex-end',
                   }}
                 >
-                  {/* Row 1 - Projects */}
+                  {/* Projects */}
                   <div 
                     style={{
                       display: 'flex',
@@ -169,21 +169,41 @@ export default async function Home() {
                       )
                     })}
                   </div>
-                  
-                  {/* Row 2 - Services header */}
+                </div>
+              </div>
+              
+              {/* Services on bottom-right edge - rotated +45deg (opposite) */}
+              <div 
+                className="absolute text-black"
+                style={{
+                  bottom: '8%',
+                  right: '50%',
+                  transform: 'rotate(45deg)',
+                  transformOrigin: 'bottom right',
+                  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                <div 
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 'clamp(2px, 0.4vw, 5px)',
+                    alignItems: 'flex-start',
+                  }}
+                >
+                  {/* Services header */}
                   <div 
                     style={{
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
                       lineHeight: '1.4',
                       letterSpacing: '0.1px',
                       whiteSpace: 'nowrap',
-                      marginTop: 'clamp(4px, 0.6vw, 8px)',
                     }}
                   >
                     services
                   </div>
                   
-                  {/* Row 3 - Services line 1 */}
+                  {/* Services line 1 */}
                   <div 
                     style={{
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
@@ -195,7 +215,7 @@ export default async function Home() {
                     image · video · identity · book · magazine · print · poster · retail graphics
                   </div>
                   
-                  {/* Row 4 - Services line 2 */}
+                  {/* Services line 2 */}
                   <div 
                     style={{
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
@@ -207,7 +227,7 @@ export default async function Home() {
                     brand design · brand strategy · content direction · type design · product
                   </div>
                   
-                  {/* Row 5 - Services line 3 */}
+                  {/* Services line 3 */}
                   <div 
                     style={{
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
@@ -219,14 +239,14 @@ export default async function Home() {
                     design · creative direction
                   </div>
                   
-                  {/* Row 6 - Location */}
+                  {/* Location */}
                   <div 
                     style={{
                       fontSize: 'clamp(7px, 0.9vw, 11px)',
                       lineHeight: '1.4',
                       letterSpacing: '0.1px',
                       whiteSpace: 'nowrap',
-                      marginTop: 'clamp(8px, 1vw, 16px)',
+                      marginTop: 'clamp(4px, 0.6vw, 8px)',
                     }}
                   >
                     based in paris · available worldwide
