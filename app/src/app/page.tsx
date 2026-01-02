@@ -169,6 +169,19 @@ export default async function Home() {
                       )
                     })}
                   </div>
+                  
+                  {/* Location */}
+                  <div 
+                    style={{
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
+                      marginTop: 'clamp(4px, 0.6vw, 8px)',
+                    }}
+                  >
+                    based in paris · available worldwide
+                  </div>
                 </div>
               </div>
               
