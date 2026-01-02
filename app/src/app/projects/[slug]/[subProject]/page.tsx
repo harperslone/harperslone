@@ -2192,7 +2192,7 @@ export default async function SubProjectPage({
                   images={foundSubProject.gallery} 
                   title={foundSubProject.title || 'Gallery'}
                   description={''}
-                  customMaxWidth={448}
+                  customMaxWidth={500}
                 />
               </div>
             )}

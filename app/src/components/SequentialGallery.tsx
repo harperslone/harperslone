@@ -257,23 +257,22 @@ export default function SequentialGallery({ images, title, description, maxWidth
                   />
                 </div>
               ) : (
-                <Image
+                <img
                   src={mediaUrl || ''}
                   alt={currentItem.caption || currentItem.alt || `${title || 'Gallery'} image ${currentIndex + 1}`}
-                  width={1200}
-                  height={1600}
-                  className="w-full h-auto"
                   style={{ 
-                    objectFit: 'contain',
                     maxWidth: customMaxWidth ? `${customMaxWidth}px` : (
                       maxWidth === 'xs' ? '600px' : 
                       maxWidth === 'sm' ? '800px' : 
                       maxWidth === 'md' ? '1000px' : 
                       maxWidth === 'xl' ? '1200px' : 
                       '1100px'
-                    )
+                    ),
+                    maxHeight: '80vh',
+                    width: 'auto',
+                    height: 'auto',
+                    objectFit: 'contain'
                   }}
-                  unoptimized
                 />
               )}
             </div>
