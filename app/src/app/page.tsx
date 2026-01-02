@@ -126,130 +126,56 @@ export default async function Home() {
                 />
               ))}
               
-              {/* Swiss Style rotated text content - bottom left corner */}
+              {/* Swiss Style text content - inside the white diamond */}
               <div 
                 className="absolute text-black"
                 style={{
-                  bottom: '8%',
-                  left: '8%',
+                  bottom: '15%',
+                  left: '15%',
                   transform: 'rotate(-45deg)',
-                  transformOrigin: 'bottom left',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                  maxWidth: '40%',
                 }}
               >
-                {/* Multi-column layout like the Zurich Tonhalle poster */}
-                <div 
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: 'clamp(12px, 2vw, 24px)',
-                    alignItems: 'flex-end',
-                  }}
-                >
-                  {/* Column 1 - Header info */}
-                  <div 
-                    style={{
-                      writingMode: 'vertical-rl',
-                      transform: 'rotate(180deg)',
-                      fontSize: 'clamp(5px, 0.6vw, 7px)',
-                      lineHeight: '1.4',
-                      letterSpacing: '0.3px',
-                    }}
-                  >
-                    <div>archive design</div>
-                    <div>portfolio</div>
-                    <div style={{ marginTop: '8px' }}>2024</div>
-                  </div>
-                  
-                  {/* Column 2 - Name */}
-                  <div 
-                    style={{
-                      writingMode: 'vertical-rl',
-                      transform: 'rotate(180deg)',
-                    }}
-                  >
-                    <div className="font-bold" style={{ fontSize: 'clamp(14px, 2.5vw, 28px)', letterSpacing: '-0.5px' }}>
-                      harper slone
-                    </div>
-                  </div>
-                  
-                  {/* Column 3 - Services */}
-                  <div 
-                    style={{
-                      writingMode: 'vertical-rl',
-                      transform: 'rotate(180deg)',
-                      fontSize: 'clamp(4px, 0.5vw, 6px)',
-                      lineHeight: '1.6',
-                      letterSpacing: '0.2px',
-                    }}
-                  >
-                    <div>image</div>
-                    <div>video</div>
-                    <div>identity</div>
-                    <div>book</div>
-                    <div>magazine</div>
-                    <div>print</div>
-                    <div>poster</div>
-                  </div>
-                  
-                  {/* Column 4 - More Services */}
-                  <div 
-                    style={{
-                      writingMode: 'vertical-rl',
-                      transform: 'rotate(180deg)',
-                      fontSize: 'clamp(4px, 0.5vw, 6px)',
-                      lineHeight: '1.6',
-                      letterSpacing: '0.2px',
-                    }}
-                  >
-                    <div>retail graphics</div>
-                    <div>brand design</div>
-                    <div>brand strategy</div>
-                    <div>content direction</div>
-                    <div>type design</div>
-                    <div>product design</div>
-                    <div>creative direction</div>
-                    <div>graphic design</div>
-                    <div>styling</div>
-                  </div>
-                  
-                  {/* Column 5 - Projects */}
-                  <div 
-                    style={{
-                      writingMode: 'vertical-rl',
-                      transform: 'rotate(180deg)',
-                      fontSize: 'clamp(4px, 0.5vw, 6px)',
-                      lineHeight: '1.6',
-                    }}
-                  >
-                    {allProjects.map((project, idx) => {
-                      const slug = project.slug?.current?.toLowerCase() || project.title?.toLowerCase() || ''
-                      let bgColor = 'transparent'
-                      
-                      if (slug === 'projects') bgColor = '#fef08a'
-                      else if (slug === 'work') bgColor = '#bfdbfe'
-                      else if (slug === 'exhibitions') bgColor = '#fce7f3'
-                      else if (slug === 'print') bgColor = '#d1fae5'
-                      
-                      return (
-                        <ProjectLink key={idx} project={project} bgColor={bgColor} />
-                      )
-                    })}
-                  </div>
-                  
-                  {/* Column 6 - Location */}
-                  <div 
-                    style={{
-                      writingMode: 'vertical-rl',
-                      transform: 'rotate(180deg)',
-                      fontSize: 'clamp(4px, 0.5vw, 6px)',
-                      lineHeight: '1.4',
-                      letterSpacing: '0.2px',
-                    }}
-                  >
-                    <div>based in paris</div>
-                    <div>available worldwide</div>
-                  </div>
+                {/* Header info */}
+                <div style={{ fontSize: 'clamp(6px, 0.8vw, 9px)', lineHeight: '1.4', letterSpacing: '0.3px', marginBottom: 'clamp(4px, 0.5vw, 8px)' }}>
+                  <div>archive design portfolio</div>
+                  <div>2024</div>
+                </div>
+                
+                {/* Name - Large */}
+                <div className="font-bold" style={{ fontSize: 'clamp(16px, 3vw, 32px)', letterSpacing: '-0.5px', marginBottom: 'clamp(8px, 1vw, 16px)' }}>
+                  harper slone
+                </div>
+                
+                {/* Services - horizontal layout */}
+                <div style={{ fontSize: 'clamp(5px, 0.6vw, 7px)', lineHeight: '1.5', letterSpacing: '0.2px', marginBottom: 'clamp(8px, 1vw, 16px)' }}>
+                  <div>image · video · identity · book · magazine</div>
+                  <div>print · poster · retail graphics · brand design</div>
+                  <div>brand strategy · content direction · type design</div>
+                  <div>product design · creative direction · styling</div>
+                </div>
+                
+                {/* Projects */}
+                <div style={{ fontSize: 'clamp(5px, 0.6vw, 7px)', marginBottom: 'clamp(8px, 1vw, 16px)' }}>
+                  {allProjects.map((project, idx) => {
+                    const slug = project.slug?.current?.toLowerCase() || project.title?.toLowerCase() || ''
+                    let bgColor = 'transparent'
+                    
+                    if (slug === 'projects') bgColor = '#fef08a'
+                    else if (slug === 'work') bgColor = '#bfdbfe'
+                    else if (slug === 'exhibitions') bgColor = '#fce7f3'
+                    else if (slug === 'print') bgColor = '#d1fae5'
+                    
+                    return (
+                      <ProjectLink key={idx} project={project} bgColor={bgColor} />
+                    )
+                  })}
+                </div>
+                
+                {/* Location */}
+                <div style={{ fontSize: 'clamp(5px, 0.6vw, 7px)', letterSpacing: '0.2px' }}>
+                  <div>based in paris · available worldwide</div>
                 </div>
               </div>
             </div>
