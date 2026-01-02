@@ -2200,6 +2200,11 @@ export default async function SubProjectPage({
             {/* The Parisian Vintage - Special Layout: Main 5x3 grid, Special 3x1 gallery, Video gallery */}
             {isParisianVintage && foundSubProject.gallery && (
               <div>
+                {/* Description box above main gallery */}
+                <div className="mb-6">
+                  <p className="text-sm text-gray-700">riso prints for palette & formes project</p>
+                </div>
+                
                 {/* Main Gallery - 5x3 grid for The Parisian Vintage */}
                 <div className="mb-8">
                   {(() => {
