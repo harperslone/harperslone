@@ -607,16 +607,17 @@ export default async function SubProjectPage({
                     className="mb-8 text-black font-normal lowercase text-90s"
                     style={{ 
                       fontSize: '13px',
-                      lineHeight: '1.85',
+                      lineHeight: '1.4',
                       letterSpacing: '0.2px',
                       textAlign: 'left'
                     }}
                   >
                     {foundSubProject.description.split('\n').map((line: string, index: number) => {
                       // Handle bold text with ** markers
+                      const isFirstLine = index === 0
                       const parts = line.split(/(\*\*.*?\*\*)/g)
                       return (
-                        <div key={index} className="mb-2">
+                        <div key={index} style={{ marginBottom: isFirstLine ? '12px' : '1px', lineHeight: isFirstLine ? '1.4' : '1.2' }}>
                           {parts.map((part, partIndex) => {
                             if (part.startsWith('**') && part.endsWith('**')) {
                               return <strong key={partIndex}>{part.slice(2, -2)}</strong>
@@ -1301,15 +1302,16 @@ export default async function SubProjectPage({
                         className="mb-8 text-black font-normal lowercase text-90s"
                         style={{ 
                           fontSize: '13px',
-                          lineHeight: '1.85',
+                          lineHeight: '1.4',
                           letterSpacing: '0.2px',
                           textAlign: 'left'
                         }}
                       >
                         {foundSubProject.description.split('\n').map((line: string, index: number) => {
+                          const isFirstLine = index === 0
                           const parts = line.split(/(\*\*.*?\*\*)/g)
                           return (
-                            <div key={index} className="mb-2">
+                            <div key={index} style={{ marginBottom: isFirstLine ? '12px' : '1px', lineHeight: isFirstLine ? '1.4' : '1.2' }}>
                               {parts.map((part, partIndex) => {
                                 if (part.startsWith('**') && part.endsWith('**')) {
                                   return <strong key={partIndex}>{part.slice(2, -2)}</strong>
