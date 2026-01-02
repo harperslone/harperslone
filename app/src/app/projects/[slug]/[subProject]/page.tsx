@@ -2103,7 +2103,7 @@ export default async function SubProjectPage({
                       title={foundSubProject.title || 'Gallery'}
                       columns={4}
                       imageSize={200}
-                      gap="20px"
+                      gap={20}
                     />
                   )}
                 </div>
@@ -2124,7 +2124,7 @@ export default async function SubProjectPage({
                         title={foundSubProject.title || 'Gallery'}
                         columns={3}
                         imageSize={300}
-                        gap="20px"
+                        gap={20}
                       />
                     )
                   })()}
@@ -2146,7 +2146,7 @@ export default async function SubProjectPage({
                         title={foundSubProject.title || 'Gallery'}
                         columns={4}
                         imageSize={250}
-                        gap="20px"
+                        gap={20}
                       />
                     )
                   })()}
@@ -2170,7 +2170,7 @@ export default async function SubProjectPage({
                         images={tifImages} 
                         title={foundSubProject.title || 'Gallery'}
                         columns={5}
-                        gap="20px"
+                        gap={20}
                         imageSize={400}
                       />
                     )
