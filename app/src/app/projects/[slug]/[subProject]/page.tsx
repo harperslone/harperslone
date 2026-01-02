@@ -2436,9 +2436,9 @@ export default async function SubProjectPage({
                       return !isVideo
                     })
                     
-                    // Get images from position -8 to -2 (6 images before the last 2 which are in 2x1 gallery)
-                    // These are the book/magazine layout images
-                    const bookImages = allNonVideoImages.slice(-8, -2)
+                    // Get the 6 book/magazine images (positioned before the 2x1 gallery images)
+                    // These are at positions -14 to -8 in the gallery
+                    const bookImages = allNonVideoImages.slice(-14, -8)
                     
                     if (bookImages.length === 0) return null
                     
