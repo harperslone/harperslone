@@ -464,139 +464,14 @@ export default async function SubProjectPage({
               </div>
             )}
             
-            {/* Special layout for bts - Description and galleries, all galleries aligned to right edge */}
-            {isBts && foundSubProject.description && foundSubProject.gallery && foundSubProject.gallery.length >= 2 ? (
+            {/* Special layout for bts - Sequential Gallery */}
+            {isBts && foundSubProject.gallery && foundSubProject.gallery.length > 0 ? (
               <div className="mb-8 w-full">
-                {/* First 2x1 gallery with description - aligned to right edge */}
-                <div className="flex flex-col md:flex-row items-start gap-8 mb-4 w-full">
-                  {/* Description on the left - "photo assistant bts - 2025 n°1 Saint Laurent in Saint Jean Cap Ferrat" */}
-                  <div 
-                    className="text-black font-normal lowercase text-90s flex-shrink-0"
-                    style={{ 
-                      fontSize: '13px',
-                      lineHeight: '1.85',
-                      letterSpacing: '0.2px',
-                      textAlign: 'left',
-                      width: '100%',
-                      maxWidth: '300px'
-                    }}
-                  >
-                    photo assistant bts - 2025
-                    <br />
-                    n°1 Saint Laurent in Saint Jean Cap Ferrat
-                  </div>
-                  <div className="flex-1 flex justify-start md:justify-end items-start w-full md:w-auto" style={{ minWidth: 0 }}>
-                    <div style={{ flexShrink: 0, width: '100%', maxWidth: 'fit-content' }}>
-                      <GalleryLightbox 
-                        images={foundSubProject.gallery.slice(0, 2)} 
-                        title={foundSubProject.title || 'Gallery'}
-                        columns={2}
-                        imageSize={200}
-                        firstImageSize={300}
-                        rotateImageIndex={0}
-                        gap={32}
-                      />
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Second 2x1 gallery underneath - aligned to right edge */}
-                {foundSubProject.gallery && foundSubProject.gallery.length >= 4 && (
-                  <div className="mb-8 flex items-start gap-8 w-full">
-                    <div className="hidden md:block" style={{ width: '300px', flexShrink: 0, minWidth: '300px' }}></div>
-                    <div className="flex-1 flex justify-start md:justify-end items-start w-full md:w-auto" style={{ minWidth: 0 }}>
-                      <div style={{ flexShrink: 0, width: '100%', maxWidth: 'fit-content' }}>
-                        <GalleryLightbox 
-                          images={foundSubProject.gallery.slice(2, 4)} 
-                          title={foundSubProject.title || 'Gallery'}
-                          columns={2}
-                          imageSize={200}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                {/* 3x2 gallery underneath - aligned to right edge */}
-                {foundSubProject.gallery && foundSubProject.gallery.length >= 10 && (
-                  <div className="flex items-start gap-8 mb-16 w-full">
-                    <div className="hidden md:block" style={{ width: '300px', flexShrink: 0, minWidth: '300px' }}></div>
-                    <div className="flex-1 flex justify-start md:justify-end items-start w-full md:w-auto" style={{ minWidth: 0 }}>
-                      <div style={{ flexShrink: 0, width: '100%', maxWidth: 'fit-content' }}>
-                        <GalleryLightbox 
-                          images={foundSubProject.gallery.slice(4, 10)} 
-                          title={foundSubProject.title || 'Gallery'}
-                          columns={3}
-                          imageSize={200}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                {/* Fourth 2x1 gallery with description - aligned to right edge */}
-                {foundSubProject.gallery && foundSubProject.gallery.length >= 12 && (
-                  <div className="flex flex-col md:flex-row items-start gap-8 mb-8 w-full">
-                    {/* Description on the left - "n°2 Harper`s Bazaar in Hydra" */}
-                    <div 
-                      className="text-black font-normal lowercase text-90s flex-shrink-0"
-                      style={{ 
-                        fontSize: '13px',
-                        lineHeight: '1.85',
-                        letterSpacing: '0.2px',
-                        textAlign: 'left',
-                        width: '100%',
-                        maxWidth: '300px'
-                      }}
-                    >
-                      n°2 Harper`s Bazaar in Hydra
-                    </div>
-                    <div className="flex-1 flex justify-start md:justify-end items-start w-full md:w-auto" style={{ minWidth: 0 }}>
-                      <div style={{ flexShrink: 0, width: '100%', maxWidth: 'fit-content' }}>
-                        <GalleryLightbox 
-                          images={foundSubProject.gallery.slice(10, 12)} 
-                          title={foundSubProject.title || 'Gallery'}
-                          columns={2}
-                          imageSize={200}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                {/* Fifth 2x1 gallery underneath - aligned to right edge */}
-                {foundSubProject.gallery && foundSubProject.gallery.length >= 14 && (
-                  <div className="flex items-start gap-8 mb-8 w-full">
-                    <div className="hidden md:block" style={{ width: '300px', flexShrink: 0, minWidth: '300px' }}></div>
-                    <div className="flex-1 flex justify-start md:justify-end items-start w-full md:w-auto" style={{ minWidth: 0 }}>
-                      <div style={{ flexShrink: 0, width: '100%', maxWidth: 'fit-content' }}>
-                        <GalleryLightbox 
-                          images={foundSubProject.gallery.slice(12, 14)} 
-                          title={foundSubProject.title || 'Gallery'}
-                          columns={2}
-                          imageSize={200}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                {/* Sixth 3x2 gallery underneath - aligned to right edge */}
-                {foundSubProject.gallery && foundSubProject.gallery.length >= 20 && (
-                  <div className="flex items-start gap-8 w-full">
-                    <div className="hidden md:block" style={{ width: '300px', flexShrink: 0, minWidth: '300px' }}></div>
-                    <div className="flex-1 flex justify-start md:justify-end items-start w-full md:w-auto" style={{ minWidth: 0 }}>
-                      <div style={{ flexShrink: 0, width: '100%', maxWidth: 'fit-content' }}>
-                        <GalleryLightbox 
-                          images={foundSubProject.gallery.slice(14, 20)} 
-                          title={foundSubProject.title || 'Gallery'}
-                          columns={3}
-                          imageSize={200}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
+                <SequentialGallery 
+                  images={foundSubProject.gallery} 
+                  customMaxWidth={500}
+                  showCaptions={false}
+                />
               </div>
             ) : (
               <>
