@@ -239,7 +239,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
                 </div>
               ) : isVideoItem ? (
                 <div 
-                  className="relative aspect-video bg-black flex items-center justify-center w-full"
+                  className="relative aspect-video bg-black flex items-center justify-center w-full sequential-gallery-video-container"
                   style={{ maxWidth: customMaxWidth ? `${customMaxWidth}px` : (
                     maxWidth === 'xs' ? '300px' : 
                     maxWidth === 'sm' ? '400px' : 
@@ -250,7 +250,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
                 >
                   <video
                     src={mediaUrl || ''}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain sequential-gallery-video"
                     muted
                     playsInline
                     preload="metadata"
@@ -262,6 +262,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
                 <img
                   src={mediaUrl || ''}
                   alt={currentItem.caption || currentItem.alt || `${title || 'Gallery'} image ${currentIndex + 1}`}
+                  className="sequential-gallery-image"
                   style={{ 
                     maxWidth: customMaxWidth ? `${customMaxWidth}px` : (
                       maxWidth === 'xs' ? '300px' : 
