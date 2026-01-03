@@ -169,7 +169,7 @@ export default async function Home() {
                         <ProjectLink key={idx} project={project} bgColor={bgColor} />
                       )
                     })}
-                  </div>
+        </div>
                   
                   {/* Location */}
                   <div 
