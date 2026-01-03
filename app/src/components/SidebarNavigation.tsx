@@ -26,6 +26,33 @@ interface SidebarNavigationProps {
 export default function SidebarNavigation({ projects }: SidebarNavigationProps) {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set())
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [buttonPosition, setButtonPosition] = useState({ x: 8, y: 42 })
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+
+  // Handle touch start for dragging
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0]
+    setIsDragging(true)
+    setDragStart({
+      x: touch.clientX - buttonPosition.x,
+      y: touch.clientY - buttonPosition.y
+    })
+  }
+
+  // Handle touch move for dragging
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return
+    const touch = e.touches[0]
+    const newX = Math.max(0, Math.min(window.innerWidth - 60, touch.clientX - dragStart.x))
+    const newY = Math.max(40, Math.min(window.innerHeight - 40, touch.clientY - dragStart.y))
+    setButtonPosition({ x: newX, y: newY })
+  }
+
+  // Handle touch end
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+  }
 
   const toggleItem = (itemId: string) => {
     setOpenItems(prev => {
@@ -64,13 +91,20 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
 
   return (
     <>
-      {/* Mobile menu button - light blue, only on mobile */}
+      {/* Mobile menu button - light blue, draggable, only on mobile */}
       <button
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        onClick={() => {
+          if (!isDragging) {
+            setIsMobileMenuOpen(!isMobileMenuOpen)
+          }
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         className="md:hidden fixed z-50 border border-gray-400 rounded mobile-menu-btn"
         style={{ 
-          top: '42px', 
-          left: '8px', 
+          top: `${buttonPosition.y}px`, 
+          left: `${buttonPosition.x}px`, 
           padding: '4px 8px',
           minWidth: '36px',
           minHeight: '28px',
@@ -78,10 +112,12 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#bfdbfe',
+          touchAction: 'none',
+          userSelect: 'none',
         }}
         aria-label="Toggle menu"
       >
-        <span className="text-black" style={{ fontSize: '12px' }}>menu</span>
+        <span className="text-black" style={{ fontSize: '12px', pointerEvents: 'none' }}>menu</span>
       </button>
 
       {/* Mobile overlay */}
