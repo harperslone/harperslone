@@ -243,22 +243,9 @@ export default async function Home() {
                   >
                     design · creative direction
                   </div>
-                  
-                  {/* Location */}
-                  <div 
-                    className="homepage-location"
-                    style={{
-                      fontSize: 'clamp(7px, 0.9vw, 11px)',
-                      lineHeight: '1.4',
-                      letterSpacing: '0.1px',
-                      whiteSpace: 'nowrap',
-                      marginTop: 'clamp(4px, 0.6vw, 8px)',
-                    }}
-                  >
-                    based in paris · available worldwide
-                  </div>
                 </div>
               </div>
+              
               
               {/* Large name on right side */}
               <div 
@@ -275,6 +262,24 @@ export default async function Home() {
               >
                 harper slone
               </div>
+            </div>
+            
+            {/* Location - STRAIGHT text at bottom, outside the diamond */}
+            <div 
+              className="absolute text-black homepage-location-straight"
+              style={{
+                bottom: '2%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSize: 'clamp(8px, 1vw, 11px)',
+                lineHeight: '1.4',
+                letterSpacing: '0.1px',
+                whiteSpace: 'nowrap',
+                textAlign: 'center',
+              }}
+            >
+              based in paris · available worldwide
             </div>
         </div>
       </main>
