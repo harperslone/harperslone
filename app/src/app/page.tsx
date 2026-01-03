@@ -187,11 +187,11 @@ export default async function Home() {
                 </div>
               </div>
               
-              {/* MOBILE: Projects centered inside diamond */}
+              {/* MOBILE: Projects centered inside diamond - TINY */}
               <div 
                 className="absolute text-black md:hidden"
                 style={{
-                  bottom: '18%',
+                  bottom: '20%',
                   left: '50%',
                   transform: 'rotate(-45deg) translateX(-50%)',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
@@ -204,17 +204,19 @@ export default async function Home() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '3px',
+                    gap: '2px',
+                    transform: 'scale(0.5)',
+                    transformOrigin: 'center center',
                   }}
                 >
-                  {/* Projects in 2x2 grid on mobile - SMALL */}
+                  {/* Projects in 2x2 grid on mobile - TINY */}
                   <div 
                     style={{
                       display: 'grid',
                       gridTemplateColumns: 'repeat(2, auto)',
-                      gap: '2px 4px',
-                      fontSize: '6px',
-                      lineHeight: '1.2',
+                      gap: '1px 3px',
+                      fontSize: '8px',
+                      lineHeight: '1.1',
                     }}
                   >
                     {allProjects.map((project, idx) => {
@@ -232,10 +234,10 @@ export default async function Home() {
                           href={`/projects/${project.slug?.current || ''}`}
                           className="hover:opacity-70 transition-opacity"
                           style={{
-                            fontSize: '5px',
-                            padding: '1px 4px',
+                            fontSize: '8px',
+                            padding: '2px 6px',
                             backgroundColor: bgColor,
-                            borderRadius: '8px',
+                            borderRadius: '6px',
                             display: 'inline-block',
                           }}
                         >
@@ -248,11 +250,11 @@ export default async function Home() {
                   {/* Location on mobile */}
                   <div 
                     style={{
-                      fontSize: '5px',
-                      lineHeight: '1.2',
-                      letterSpacing: '0.05px',
-                      marginTop: '2px',
-                      opacity: 0.7,
+                      fontSize: '6px',
+                      lineHeight: '1.1',
+                      letterSpacing: '0.02px',
+                      marginTop: '1px',
+                      opacity: 0.6,
                     }}
                   >
                     based in paris · available worldwide
