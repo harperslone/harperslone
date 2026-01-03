@@ -41,6 +41,11 @@ body {
   .cursor-red-dot {
     cursor: none;
   }
+  
+  /* Hide mobile menu button on desktop */
+  .mobile-menu-btn {
+    display: none !important;
+  }
 }
 
 /* Normal cursor on mobile/touch devices */
