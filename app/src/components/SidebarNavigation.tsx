@@ -64,10 +64,10 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
 
   return (
     <>
-      {/* Mobile menu button - compact */}
+      {/* Mobile menu button - light blue, only on mobile */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="md:hidden fixed z-50 bg-white border border-black rounded mobile-menu-btn"
+        className="md:hidden fixed z-50 border border-gray-400 rounded mobile-menu-btn"
         style={{ 
           top: '42px', 
           left: '8px', 
@@ -77,6 +77,7 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          backgroundColor: '#bfdbfe',
         }}
         aria-label="Toggle menu"
       >
