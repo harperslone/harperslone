@@ -64,23 +64,23 @@ export default function SidebarNavigation({ projects }: SidebarNavigationProps) 
 
   return (
     <>
-      {/* Mobile menu button - visible hamburger icon */}
+      {/* Mobile menu button - compact */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="md:hidden fixed z-50 bg-white border-2 border-black rounded-md shadow-lg mobile-menu-btn"
+        className="md:hidden fixed z-50 bg-white border border-black rounded mobile-menu-btn"
         style={{ 
-          top: '52px', 
-          left: '10px', 
-          padding: '8px 12px',
-          minWidth: '44px',
-          minHeight: '44px',
+          top: '42px', 
+          left: '8px', 
+          padding: '4px 8px',
+          minWidth: '36px',
+          minHeight: '28px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}
         aria-label="Toggle menu"
       >
-        <span className="text-black font-bold" style={{ fontSize: '18px' }}>☰</span>
+        <span className="text-black" style={{ fontSize: '12px' }}>menu</span>
       </button>
 
       {/* Mobile overlay */}
