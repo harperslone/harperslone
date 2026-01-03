@@ -23,7 +23,6 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "Helvetica Neue", Helvetica, sans-serif;
-  cursor: none; /* Hide default cursor */
 }
 
 /* Force Helvetica on all elements */
@@ -31,92 +30,54 @@ body {
   font-family: "Helvetica Neue", Helvetica, sans-serif !important;
 }
 
-html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5, h6 {
-  font-family: "Helvetica Neue", Helvetica, sans-serif !important;
-}
-
-/* Hide default cursor on all elements - desktop only */
+/* Custom red circle cursor for images - DESKTOP ONLY */
 @media (min-width: 769px) {
+  body {
+    cursor: none;
+  }
   * {
     cursor: none !important;
   }
+  .cursor-red-dot {
+    cursor: none;
+  }
 }
 
-/* Show normal cursor on mobile/touch devices */
+/* Normal cursor on mobile/touch devices */
 @media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
   * {
     cursor: auto !important;
   }
-  
-  a, button {
+  a, button, [onclick], .cursor-pointer {
     cursor: pointer !important;
   }
 }
 
-/* Custom red circle cursor for images */
-.cursor-red-dot {
-  cursor: none;
-}
-
-/* Mobile-responsive gallery */
-@media (max-width: 768px) {
-  .gallery-container {
-    /* On mobile, use responsive columns */
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 6px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: auto !important;
+/* ============================================
+   MOBILE OPTIMIZATION - 768px and below
+   ============================================ */
+@media screen and (max-width: 768px) {
+  /* Prevent horizontal scroll */
+  html, body {
     overflow-x: hidden !important;
-    padding: 0 8px !important;
-  }
-  
-  /* For galleries with 6+ columns data attribute, use 2 columns on mobile */
-  .gallery-container[data-columns="6"],
-  .gallery-container[data-columns="5"],
-  .gallery-container[data-columns="4"],
-  .gallery-container[data-columns="3"] {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  
-  /* For single column galleries, keep single column */
-  .gallery-container[data-columns="1"] {
-    grid-template-columns: 1fr !important;
-  }
-  
-  /* Scale down image containers on mobile */
-  .gallery-container > div {
-    max-width: 100% !important;
+    max-width: 100vw !important;
     width: 100% !important;
   }
   
-  /* Scale down images in galleries - smaller for mobile */
-  .gallery-container img {
-    max-width: 100% !important;
-    max-height: 130px !important;
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain !important;
+  .min-h-screen {
+    overflow-x: hidden !important;
   }
-  
-  .gallery-container video {
-    max-width: 100% !important;
-    max-height: 130px !important;
-  }
-  
-  /* Tokyo project specific - reduce spacing */
-  .tokyo-gallery {
-    margin-top: 16px !important;
-    margin-bottom: 16px !important;
-  }
-}
 
-/* Even smaller screens */
-@media (max-width: 480px) {
+  /* ===== GALLERY GRID MOBILE ===== */
   .gallery-container {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 4px !important;
-    padding: 0 4px !important;
+    gap: 8px !important;
+    padding: 0 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   
   .gallery-container[data-columns="6"],
@@ -126,93 +87,152 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
     grid-template-columns: repeat(2, 1fr) !important;
   }
   
-  /* Further scale down images on small phones */
-  .gallery-container img {
-    max-width: 100% !important;
-    max-height: 100px !important;
-    width: auto !important;
-    height: auto !important;
+  .gallery-container img,
+  .gallery-container video {
+    max-height: 140px !important;
+    width: 100% !important;
     object-fit: contain !important;
   }
-  
-  .gallery-container video {
-    max-width: 100% !important;
-    max-height: 100px !important;
-  }
-  
-  /* Tokyo project specific - even smaller spacing */
-  .tokyo-gallery {
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
-  }
-}
 
-/* Mobile-responsive SequentialGallery */
-@media (max-width: 768px) {
+  /* ===== SEQUENTIAL GALLERY MOBILE ===== */
   .sequential-gallery-container {
-    min-height: 180px !important;
-    max-height: 350px !important;
-    padding: 10px 0 !important;
+    min-height: 200px !important;
+    max-height: 400px !important;
+    padding: 16px 0 !important;
   }
   
   .sequential-image-container {
-    padding-left: 30px !important;
-    padding-right: 30px !important;
-    max-width: 100% !important;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
   }
   
   .sequential-gallery-image {
-    max-height: 280px !important;
-    max-width: 75vw !important;
+    max-height: 300px !important;
+    max-width: 70vw !important;
     width: auto !important;
     height: auto !important;
-    object-fit: contain !important;
-  }
-  
-  .sequential-gallery-video-container {
-    max-width: 75vw !important;
-  }
-  
-  .sequential-gallery-video {
-    max-height: 280px !important;
   }
   
   .sequential-arrow-left {
-    left: 4px !important;
+    left: 8px !important;
   }
   
   .sequential-arrow-right {
-    right: 4px !important;
+    right: 8px !important;
   }
-}
 
-@media (max-width: 480px) {
-  .sequential-gallery-container {
-    min-height: 120px !important;
-    max-height: 280px !important;
+  /* ===== LIGHTBOX MOBILE ===== */
+  .lightbox-container {
+    padding: 12px !important;
   }
   
-  .sequential-image-container {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+  .lightbox-image,
+  .lightbox-video {
+    max-width: 88vw !important;
+    max-height: 70vh !important;
+    object-fit: contain !important;
   }
   
-  .sequential-gallery-image {
-    max-height: 220px !important;
-    max-width: 70vw !important;
+  .lightbox-arrow {
+    font-size: 28px !important;
+    padding: 8px !important;
   }
-  
-  .sequential-gallery-video-container {
-    max-width: 70vw !important;
-  }
-  
-  .sequential-gallery-video {
-    max-height: 220px !important;
-  }
-}
 
-/* Make side-by-side galleries stack on mobile */
-@media (max-width: 768px) {
+  /* ===== HOMEPAGE MOBILE ===== */
+  .homepage-diamond {
+    width: 85% !important;
+    height: 85% !important;
+  }
+  
+  .homepage-main {
+    padding: 8px !important;
+  }
+  
+  .homepage-projects-text {
+    top: 6% !important;
+    left: 48% !important;
+  }
+  
+  .homepage-projects-list {
+    font-size: 8px !important;
+    gap: 4px !important;
+  }
+  
+  .homepage-location {
+    font-size: 7px !important;
+  }
+  
+  .homepage-name {
+    font-size: 20px !important;
+    top: 28% !important;
+    right: 16% !important;
+  }
+  
+  .homepage-dot {
+    transform: rotate(-45deg) scale(0.6) !important;
+  }
+  
+  .homepage-project-link {
+    font-size: 7px !important;
+    padding: 2px 6px !important;
+    transform: scale(0.7) !important;
+    transform-origin: center !important;
+  }
+
+  /* ===== NAVIGATION MOBILE ===== */
+  nav {
+    padding: 6px 8px !important;
+  }
+  
+  nav a, nav button, nav span {
+    font-size: 11px !important;
+  }
+  
+  aside {
+    width: 220px !important;
+  }
+  
+  .mobile-menu-btn {
+    top: 46px !important;
+    left: 6px !important;
+    padding: 6px 10px !important;
+  }
+
+  /* ===== MAIN CONTENT MOBILE ===== */
+  main {
+    padding: 8px !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ===== GENERAL MOBILE SPACING ===== */
+  .p-8, .p-12, .p-16 {
+    padding: 12px !important;
+  }
+  
+  .mt-16, .mb-16 {
+    margin-top: 16px !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .mt-8, .mb-8 {
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* ===== TOKYO GALLERY MOBILE ===== */
+  .tokyo-gallery {
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* ===== TEXT SIZING MOBILE ===== */
+  .project-description {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* ===== SIDE-BY-SIDE GALLERIES ===== */
   .side-by-side-galleries {
     flex-direction: column !important;
     gap: 16px !important;
@@ -221,79 +241,78 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
   .side-by-side-galleries .gallery-column {
     min-width: 100% !important;
     max-width: 100% !important;
-    width: 100% !important;
   }
-  
-  /* Project page content on mobile */
-  main {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
+
+  /* ===== FORCE ALL IMAGES TO FIT ===== */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
   }
-  
-  /* Project descriptions on mobile */
-  .project-description {
-    font-size: 12px !important;
-    line-height: 1.4 !important;
-    padding: 0 8px !important;
+
+  /* ===== FORCE GRIDS TO 2 COLUMNS ===== */
+  [style*="grid-template-columns"]:not(.homepage-projects-list) {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
-@media (max-width: 480px) {
-  main {
-    padding-left: 4px !important;
-    padding-right: 4px !important;
+/* ============================================
+   SMALL PHONE OPTIMIZATION - 480px and below
+   ============================================ */
+@media screen and (max-width: 480px) {
+  /* ===== GALLERY GRID PHONE ===== */
+  .gallery-container {
+    gap: 4px !important;
+    padding: 0 4px !important;
   }
-}
+  
+  .gallery-container img,
+  .gallery-container video {
+    max-height: 100px !important;
+  }
 
-/* Homepage mobile optimization */
-@media (max-width: 768px) {
-  .homepage-projects-text {
-    top: 5% !important;
-    left: 48% !important;
+  /* ===== SEQUENTIAL GALLERY PHONE ===== */
+  .sequential-gallery-container {
+    min-height: 150px !important;
+    max-height: 300px !important;
   }
   
-  .homepage-projects-list {
-    font-size: 7px !important;
-    gap: 3px !important;
+  .sequential-image-container {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
   }
   
-  .homepage-projects-list a {
-    font-size: 7px !important;
-    padding: 2px 6px !important;
+  .sequential-gallery-image {
+    max-height: 220px !important;
+    max-width: 75vw !important;
+  }
+
+  /* ===== LIGHTBOX PHONE ===== */
+  .lightbox-image,
+  .lightbox-video {
+    max-width: 92vw !important;
+    max-height: 65vh !important;
   }
   
-  .homepage-location {
-    font-size: 7px !important;
-  }
-  
-  .homepage-name {
+  .lightbox-arrow {
     font-size: 22px !important;
-    top: 30% !important;
-    right: 18% !important;
+  }
+
+  /* ===== HOMEPAGE PHONE ===== */
+  .homepage-diamond {
+    width: 92% !important;
+    height: 92% !important;
   }
   
-  /* Scale down dots on tablet */
-  .homepage-dot {
-    transform: rotate(-45deg) scale(0.6) !important;
-  }
-}
-
-@media (max-width: 480px) {
   .homepage-projects-text {
-    top: 2% !important;
-    left: 52% !important;
+    top: 3% !important;
+    left: 50% !important;
   }
   
   .homepage-projects-list {
-    font-size: 5px !important;
+    font-size: 6px !important;
     gap: 2px !important;
-    flex-direction: column !important;
-    align-items: flex-end !important;
-  }
-  
-  .homepage-projects-list a {
-    font-size: 5px !important;
-    padding: 1px 4px !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-end !important;
   }
   
   .homepage-location {
@@ -302,356 +321,67 @@ html, body, div, span, p, a, button, input, textarea, select, h1, h2, h3, h4, h5
   }
   
   .homepage-name {
-    font-size: 20px !important;
-    top: 35% !important;
-    right: 15% !important;
+    font-size: 18px !important;
+    top: 32% !important;
+    right: 14% !important;
   }
   
-  /* Scale down dots even more on phone */
   .homepage-dot {
-    transform: rotate(-45deg) scale(0.4) !important;
+    transform: rotate(-45deg) scale(0.45) !important;
   }
   
-  /* Make project links half size on mobile */
   .homepage-project-link {
     font-size: 5px !important;
-    padding: 2px 6px !important;
-    transform: scale(0.5) !important;
-    transform-origin: right center !important;
+    padding: 1px 4px !important;
+    transform: scale(0.55) !important;
   }
-}
 
-@media (max-width: 768px) {
-  /* Make project links smaller on tablets */
-  .homepage-project-link {
-    font-size: 7px !important;
-    padding: 3px 8px !important;
-    transform: scale(0.6) !important;
-    transform-origin: right center !important;
-  }
-}
-
-/* Mobile lightbox optimization */
-@media (max-width: 768px) {
-  /* Lightbox container */
-  .lightbox-container {
-    padding: 16px !important;
-  }
-  
-  /* Lightbox image */
-  .lightbox-image {
-    max-width: 85vw !important;
-    max-height: 65vh !important;
-    object-fit: contain !important;
-  }
-  
-  /* Lightbox video */
-  .lightbox-video {
-    max-width: 85vw !important;
-    max-height: 65vh !important;
-  }
-  
-  /* Lightbox arrows */
-  .lightbox-arrow {
-    font-size: 24px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  /* Even smaller lightbox on phones */
-  .lightbox-image {
-    max-width: 90vw !important;
-    max-height: 60vh !important;
-  }
-  
-  .lightbox-video {
-    max-width: 90vw !important;
-    max-height: 60vh !important;
-  }
-  
-  .lightbox-arrow {
-    font-size: 20px !important;
-  }
-}
-
-/* Project page mobile layout fix */
-@media (max-width: 768px) {
-  /* Ensure content is scrollable */
-  .project-content {
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  
-  /* Gallery containers on mobile */
-  .gallery-wrapper {
-    width: 100% !important;
-    overflow-x: hidden !important;
-  }
-}
-
-/* Mobile navigation optimization */
-@media (max-width: 768px) {
-  /* Top navigation bar */
-  nav {
-    padding: 6px 8px !important;
-  }
-  
-  nav a, nav button {
-    font-size: 11px !important;
-    padding: 4px 8px !important;
-  }
-  
-  /* Sidebar navigation */
-  aside {
-    width: 200px !important;
-  }
-  
-  aside .p-8 {
-    padding: 16px !important;
-  }
-  
-  aside li span {
-    font-size: 12px !important;
-  }
-  
-  /* Mobile menu button */
-  .mobile-menu-btn {
-    top: 48px !important;
-    left: 4px !important;
-    padding: 6px 10px !important;
-    background: white !important;
-    border-radius: 4px !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-  }
-}
-
-@media (max-width: 480px) {
-  nav {
-    padding: 4px 6px !important;
-  }
-  
-  nav a, nav button {
+  /* ===== NAVIGATION PHONE ===== */
+  nav a, nav button, nav span {
     font-size: 10px !important;
-    padding: 3px 6px !important;
   }
   
   aside {
     width: 180px !important;
   }
-}
 
-/* About page mobile */
-@media (max-width: 768px) {
-  .about-content {
-    padding: 16px !important;
+  /* ===== MAIN CONTENT PHONE ===== */
+  main {
+    padding: 4px !important;
   }
-  
-  .about-content p {
-    font-size: 12px !important;
-    line-height: 1.5 !important;
-  }
-}
 
-/* Contact page mobile */
-@media (max-width: 768px) {
-  .contact-content {
-    padding: 16px !important;
-  }
-  
-  .contact-content p, .contact-content li {
-    font-size: 11px !important;
-  }
-  
-  .services-grid {
-    gap: 16px !important;
-  }
-}
-
-/* Homepage mobile - diamond and layout */
-@media (max-width: 768px) {
-  /* Make the diamond smaller on mobile */
-  .homepage-diamond {
-    width: 85% !important;
-    height: 85% !important;
-  }
-  
-  /* Reduce main content padding */
-  .homepage-main {
-    padding: 12px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .homepage-diamond {
-    width: 90% !important;
-    height: 90% !important;
-  }
-  
-  .homepage-main {
+  /* ===== SPACING PHONE ===== */
+  .p-8, .p-12, .p-16 {
     padding: 8px !important;
   }
-}
-
-/* Touch-friendly tap targets */
-@media (max-width: 768px) {
-  a, button {
-    min-height: 32px;
-    min-width: 32px;
-  }
   
-  /* Return home dots - make them easier to tap */
-  .fixed.bottom-4.right-4 a {
-    width: 16px !important;
-    height: 16px !important;
+  .mt-16, .mb-16, .mt-8, .mb-8 {
+    margin: 8px 0 !important;
   }
-}
 
-/* Prevent horizontal scroll on mobile */
-@media (max-width: 768px) {
-  html, body {
-    overflow-x: hidden !important;
-    max-width: 100vw !important;
+  /* ===== TOKYO GALLERY PHONE ===== */
+  .tokyo-gallery {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
   }
-  
-  .min-h-screen {
-    overflow-x: hidden !important;
+
+  /* ===== FORCE SMALLER IMAGES ===== */
+  img:not(.lightbox-image) {
+    max-height: 180px !important;
   }
 }
 
 /* ============================================
-   AGGRESSIVE MOBILE OVERRIDES
-   These styles use high specificity to ensure 
-   they apply on all mobile devices
+   TOUCH-FRIENDLY TAP TARGETS
    ============================================ */
-
-@media screen and (max-width: 768px) {
-  /* Force all images to fit within viewport */
-  img {
-    max-width: 100% !important;
-    height: auto !important;
+@media (max-width: 768px) {
+  a, button {
+    min-height: 36px;
+    min-width: 36px;
   }
   
-  /* Force all grids to be 2 columns max */
-  [style*="grid-template-columns"] {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  
-  /* Reduce all gaps */
-  [style*="gap"] {
-    gap: 8px !important;
-  }
-  
-  /* Reduce all padding */
-  [class*="p-8"], [class*="p-12"], [class*="p-16"] {
-    padding: 12px !important;
-  }
-  
-  /* Reduce margins on galleries */
-  [class*="mt-16"], [class*="mb-16"] {
-    margin-top: 12px !important;
-    margin-bottom: 12px !important;
-  }
-  
-  /* Make sure main content doesn't overflow */
-  main {
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
-    padding: 8px !important;
-  }
-  
-  /* Side-by-side layouts should stack */
-  .flex-row, [style*="flex-direction: row"] {
-    flex-direction: column !important;
-  }
-  
-  /* Gallery images smaller */
-  .gallery-container img,
-  .gallery-container video {
-    max-height: 120px !important;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  /* Even more aggressive for small phones */
-  img {
-    max-width: 100% !important;
-    max-height: 150px !important;
-  }
-  
-  /* Force single or double column */
-  [style*="grid-template-columns"] {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  
-  /* Very small gaps */
-  [style*="gap"] {
-    gap: 4px !important;
-  }
-  
-  /* Minimal padding */
-  [class*="p-8"], [class*="p-12"], [class*="p-16"] {
-    padding: 8px !important;
-  }
-  
-  /* Minimal margins */
-  [class*="mt-16"], [class*="mb-16"], [class*="mt-8"], [class*="mb-8"] {
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
-  }
-  
-  main {
-    padding: 4px !important;
-  }
-  
-  /* Gallery images even smaller */
-  .gallery-container img,
-  .gallery-container video {
-    max-height: 90px !important;
-  }
-  
-  /* Sequential gallery smaller */
-  .sequential-gallery-container {
-    min-height: 150px !important;
-    max-height: 250px !important;
-  }
-  
-  .sequential-gallery-image {
-    max-height: 180px !important;
-    max-width: 80vw !important;
-  }
-}
-
-/* FINAL MOBILE FIX - Maximum specificity */
-@media only screen and (max-width: 767px) {
-  /* All containers */
-  div, section, article, main, aside {
-    max-width: 100vw !important;
-    box-sizing: border-box !important;
-  }
-  
-  /* All images - force small */
-  img, video {
-    max-width: 100% !important;
-    object-fit: contain !important;
-  }
-  
-  /* Text sizing */
-  p, span, a, li {
-    font-size: 12px !important;
-    line-height: 1.4 !important;
-  }
-  
-  h1, h2, h3 {
-    font-size: 18px !important;
-  }
-  
-  /* Navigation */
-  nav {
-    font-size: 11px !important;
-  }
-  
-  /* No overflow ever */
-  * {
-    max-width: 100vw !important;
+  .fixed.bottom-4.right-4 a {
+    width: 18px !important;
+    height: 18px !important;
   }
 }

@@ -359,11 +359,13 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
         <div 
           className="fixed inset-0 z-50 bg-white flex items-center justify-center"
           onClick={closeLightbox}
+          style={{ padding: '8px' }}
         >
           {/* Close Button */}
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 text-red-500 text-4xl hover:opacity-70 transition-opacity z-10"
+            className="absolute text-red-500 hover:opacity-70 transition-opacity z-20 lightbox-arrow"
+            style={{ top: '12px', right: '12px', fontSize: '32px', padding: '8px' }}
             aria-label="Close lightbox"
           >
             ×
@@ -373,7 +375,8 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
           {selectedImage > 0 && (
             <button
               onClick={goToPrevious}
-              className="absolute left-4 md:left-8 text-red-500 text-3xl md:text-4xl hover:opacity-70 transition-opacity z-10 lightbox-arrow"
+              className="absolute text-red-500 hover:opacity-70 transition-opacity z-20 lightbox-arrow"
+              style={{ left: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '28px', padding: '12px' }}
               aria-label="Previous image"
             >
               ‹
@@ -384,7 +387,8 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
           {selectedImage < images.length - 1 && (
             <button
               onClick={goToNext}
-              className="absolute right-4 md:right-8 text-red-500 text-3xl md:text-4xl hover:opacity-70 transition-opacity z-10 lightbox-arrow"
+              className="absolute text-red-500 hover:opacity-70 transition-opacity z-20 lightbox-arrow"
+              style={{ right: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '28px', padding: '12px' }}
               aria-label="Next image"
             >
               ›
@@ -393,7 +397,8 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
 
           {/* Image or Video */}
           <div 
-            className="relative max-w-[85vw] md:max-w-[60vw] max-h-[70vh] md:max-h-[60vh] p-2 md:p-4 lightbox-container"
+            className="relative lightbox-container"
+            style={{ maxWidth: '90vw', maxHeight: '80vh', padding: '8px' }}
             onClick={(e) => e.stopPropagation()}
           >
             {(() => {
@@ -426,8 +431,8 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
                   <video
                     src={mediaUrl}
                     controls
-                    className="max-w-full max-h-[65vh] md:max-h-[60vh] lightbox-video"
-                    style={{ maxHeight: '65vh' }}
+                    className="lightbox-video"
+                    style={{ maxWidth: '85vw', maxHeight: '70vh', objectFit: 'contain' }}
                     crossOrigin="anonymous"
                     onError={(e) => {
                       console.error('Lightbox video load error:', e, mediaUrl)
@@ -442,7 +447,8 @@ export default function GalleryLightbox({ images, title, columns = 5, imageSize 
                   alt={`${title || 'Gallery'} image ${selectedImage + 1}`}
                   width={2000}
                   height={2000}
-                  className="max-w-full max-h-[65vh] md:max-h-[60vh] object-contain lightbox-image"
+                  className="lightbox-image"
+                  style={{ maxWidth: '85vw', maxHeight: '70vh', objectFit: 'contain', width: 'auto', height: 'auto' }}
                   unoptimized
                 />
               )

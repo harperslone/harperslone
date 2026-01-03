@@ -150,10 +150,10 @@ export default function SequentialGallery({ images, title, description, maxWidth
         <div 
           className="relative w-full sequential-gallery-container"
           style={{ 
-            minHeight: customMaxWidth ? `${Math.max(customMaxWidth + 100, 400)}px` : '500px',
+            minHeight: customMaxWidth ? `${Math.min(Math.max(customMaxWidth + 100, 300), 450)}px` : '400px',
             position: 'relative',
-            paddingTop: '20px',
-            paddingBottom: '20px',
+            paddingTop: '16px',
+            paddingBottom: '16px',
             maxWidth: '100%',
             margin: '0 auto',
             display: 'flex',
@@ -163,17 +163,22 @@ export default function SequentialGallery({ images, title, description, maxWidth
         >
           {/* Left arrow - fixed position at center of container */}
           {validImages.length > 1 && (
-            <div 
-              className="flex items-center justify-center cursor-pointer hover:opacity-70 transition-opacity z-10 sequential-arrow-left"
+            <button 
+              className="flex items-center justify-center hover:opacity-70 transition-opacity z-10 sequential-arrow-left"
               onClick={goToPrevious}
               style={{ 
                 position: 'absolute',
                 top: '50%',
-                left: '40px',
+                left: '8px',
                 transform: 'translateY(-50%)',
-                width: '24px',
-                height: '24px'
+                width: '40px',
+                height: '40px',
+                padding: '8px',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer'
               }}
+              aria-label="Previous image"
             >
               <svg 
                 width="24" 
@@ -191,7 +196,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
                   strokeLinejoin="round"
                 />
               </svg>
-            </div>
+            </button>
           )}
           
           {/* Image, Video, or Audio - always centered in container */}
@@ -264,14 +269,14 @@ export default function SequentialGallery({ images, title, description, maxWidth
                   alt={currentItem.caption || currentItem.alt || `${title || 'Gallery'} image ${currentIndex + 1}`}
                   className="sequential-gallery-image"
                   style={{ 
-                    maxWidth: customMaxWidth ? `${customMaxWidth}px` : (
-                      maxWidth === 'xs' ? '300px' : 
-                      maxWidth === 'sm' ? '400px' : 
-                      maxWidth === 'md' ? '500px' : 
-                      maxWidth === 'xl' ? '700px' : 
-                      '600px'
+                    maxWidth: customMaxWidth ? `min(${customMaxWidth}px, 75vw)` : (
+                      maxWidth === 'xs' ? 'min(300px, 75vw)' : 
+                      maxWidth === 'sm' ? 'min(400px, 75vw)' : 
+                      maxWidth === 'md' ? 'min(500px, 75vw)' : 
+                      maxWidth === 'xl' ? 'min(700px, 80vw)' : 
+                      'min(600px, 80vw)'
                     ),
-                    maxHeight: '70vh',
+                    maxHeight: '60vh',
                     width: 'auto',
                     height: 'auto',
                     objectFit: 'contain'
@@ -313,17 +318,22 @@ export default function SequentialGallery({ images, title, description, maxWidth
           
           {/* Right arrow - fixed position at center of container */}
           {validImages.length > 1 && (
-            <div 
-              className="flex items-center justify-center cursor-pointer hover:opacity-70 transition-opacity z-10 sequential-arrow-right"
+            <button 
+              className="flex items-center justify-center hover:opacity-70 transition-opacity z-10 sequential-arrow-right"
               onClick={goToNext}
               style={{ 
                 position: 'absolute',
                 top: '50%',
-                right: '40px',
+                right: '8px',
                 transform: 'translateY(-50%)',
-                width: '24px',
-                height: '24px'
+                width: '40px',
+                height: '40px',
+                padding: '8px',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer'
               }}
+              aria-label="Next image"
             >
               <svg 
                 width="24" 
@@ -341,7 +351,7 @@ export default function SequentialGallery({ images, title, description, maxWidth
                   strokeLinejoin="round"
                 />
               </svg>
-            </div>
+            </button>
           )}
         </div>
       </div>
@@ -349,15 +359,16 @@ export default function SequentialGallery({ images, title, description, maxWidth
       {/* Lightbox Modal */}
       {lightboxImage && lightboxIndex !== null && (
         <div 
-          className="fixed inset-0 bg-white z-50 flex items-center justify-center cursor-pointer"
+          className="fixed inset-0 bg-white z-50 flex items-center justify-center"
           onClick={closeLightbox}
+          style={{ padding: '8px' }}
         >
-          <div className="relative w-full h-full flex items-center justify-center p-4">
+          <div className="relative w-full h-full flex items-center justify-center" style={{ padding: '12px' }}>
             {/* Close button */}
             <button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 text-black text-2xl font-bold z-10 hover:opacity-70"
-              style={{ fontSize: '32px', lineHeight: '1' }}
+              className="absolute text-red-500 z-20 hover:opacity-70"
+              style={{ top: '12px', right: '12px', fontSize: '32px', padding: '8px' }}
             >
               ×
             </button>
@@ -366,8 +377,8 @@ export default function SequentialGallery({ images, title, description, maxWidth
             {lightboxIndex > 0 && (
               <button
                 onClick={lightboxGoToPrevious}
-                className="absolute left-4 text-black text-4xl font-bold z-10 hover:opacity-70"
-                style={{ fontSize: '28px', lineHeight: '1' }}
+                className="absolute text-red-500 z-20 hover:opacity-70"
+                style={{ left: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '28px', padding: '12px' }}
               >
                 ‹
               </button>
@@ -377,8 +388,8 @@ export default function SequentialGallery({ images, title, description, maxWidth
             {lightboxIndex < validImages.length - 1 && (
               <button
                 onClick={lightboxGoToNext}
-                className="absolute right-4 text-black text-4xl font-bold z-10 hover:opacity-70"
-                style={{ fontSize: '28px', lineHeight: '1' }}
+                className="absolute text-red-500 z-20 hover:opacity-70"
+                style={{ right: '8px', top: '50%', transform: 'translateY(-50%)', fontSize: '28px', padding: '12px' }}
               >
                 ›
               </button>
@@ -388,7 +399,8 @@ export default function SequentialGallery({ images, title, description, maxWidth
             <img
               src={lightboxImage}
               alt={`${title || 'Gallery'} image ${lightboxIndex + 1}`}
-              className="max-w-4xl max-h-[80vh] object-contain"
+              className="lightbox-image"
+              style={{ maxWidth: '85vw', maxHeight: '75vh', objectFit: 'contain' }}
               onClick={(e) => e.stopPropagation()}
             />
           </div>
