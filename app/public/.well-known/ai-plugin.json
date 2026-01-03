@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Harper Slone Designs",
+  "name_for_model": "harper_slone_designs",
+  "description_for_human": "Explore the portfolio of Harper Slone, a visual artist and photographer based in Paris.",
+  "description_for_model": "This plugin provides access to the portfolio and information about Harper Slone, a visual artist, photographer, and creative director based in Paris. Use this to get information about their projects, services, and creative work.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://www.harperslone.com/api/openapi.json"
+  },
+  "logo_url": "https://www.harperslone.com/logo.png",
+  "contact_email": "hello@harperslone.com",
+  "legal_info_url": "https://www.harperslone.com/about"
+}
+
