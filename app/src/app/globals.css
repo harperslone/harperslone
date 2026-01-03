@@ -171,9 +171,14 @@ body {
   }
   
   .mobile-menu-btn {
-    top: 46px !important;
-    left: 6px !important;
-    padding: 6px 10px !important;
+    top: 52px !important;
+    left: 10px !important;
+    padding: 10px 14px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    border: 2px solid black !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
   }
 
   /* ===== MAIN CONTENT MOBILE ===== */
