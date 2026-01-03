@@ -78,7 +78,7 @@ export default async function Home() {
 
         {/* Main Content Area - Swiss Style Poster Design */}
         <main className="flex-1 relative z-10 flex items-center justify-center p-4 md:p-16 homepage-main">
-          <div className="relative w-full max-w-4xl" style={{ aspectRatio: '1/1', maxHeight: '90vh' }}>
+          <div className="relative w-full max-w-4xl homepage-container" style={{ aspectRatio: '1/1', maxHeight: '90vh' }}>
             {/* Dark gray corners */}
             <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-gray-400 z-0" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}></div>
             <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gray-400 z-0" style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 0)' }}></div>
@@ -126,9 +126,9 @@ export default async function Home() {
                 />
               ))}
               
-              {/* Projects on top-left edge - rotated -45deg - DESKTOP ONLY */}
+              {/* Projects on top-left edge - rotated -45deg */}
               <div 
-                className="absolute text-black homepage-projects-text hidden md:block"
+                className="absolute text-black homepage-projects-text"
                 style={{
                   top: '8%',
                   left: '50%',
@@ -170,6 +170,79 @@ export default async function Home() {
                       )
                     })}
                   </div>
+                </div>
+              </div>
+              
+              {/* Services on bottom-right edge - rotated +45deg (opposite) */}
+              <div 
+                className="absolute text-black homepage-services"
+                style={{
+                  bottom: '8%',
+                  right: '50%',
+                  transform: 'rotate(45deg)',
+                  transformOrigin: 'bottom right',
+                  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                <div 
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 'clamp(2px, 0.4vw, 5px)',
+                    alignItems: 'flex-start',
+                  }}
+                >
+                  {/* Services header */}
+                  <div 
+                    className="homepage-services-line"
+                    style={{
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    services
+                  </div>
+                  
+                  {/* Services line 1 */}
+                  <div 
+                    className="homepage-services-line"
+                    style={{
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    image · video · identity · book · magazine · print · poster · retail graphics
+                  </div>
+                  
+                  {/* Services line 2 */}
+                  <div 
+                    className="homepage-services-line"
+                    style={{
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    brand design · brand strategy · content direction · type design · product
+                  </div>
+                  
+                  {/* Services line 3 */}
+                  <div 
+                    className="homepage-services-line"
+                    style={{
+                      fontSize: 'clamp(7px, 0.9vw, 11px)',
+                      lineHeight: '1.4',
+                      letterSpacing: '0.1px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    design · creative direction
+                  </div>
                   
                   {/* Location */}
                   <div 
@@ -187,84 +260,9 @@ export default async function Home() {
                 </div>
               </div>
               
-              {/* MOBILE: Projects centered inside diamond - TINY */}
+              {/* Large name on right side */}
               <div 
-                className="absolute text-black md:hidden"
-                style={{
-                  bottom: '20%',
-                  left: '50%',
-                  transform: 'rotate(-45deg) translateX(-50%)',
-                  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                  textAlign: 'center',
-                  width: '100%',
-                }}
-              >
-                <div 
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '2px',
-                    transform: 'scale(0.5)',
-                    transformOrigin: 'center center',
-                  }}
-                >
-                  {/* Projects in 2x2 grid on mobile - TINY */}
-                  <div 
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(2, auto)',
-                      gap: '1px 3px',
-                      fontSize: '8px',
-                      lineHeight: '1.1',
-                    }}
-                  >
-                    {allProjects.map((project, idx) => {
-                      const slug = project.slug?.current?.toLowerCase() || project.title?.toLowerCase() || ''
-                      let bgColor = 'transparent'
-                      
-                      if (slug === 'projects') bgColor = '#fef08a'
-                      else if (slug === 'work') bgColor = '#bfdbfe'
-                      else if (slug === 'exhibitions') bgColor = '#fce7f3'
-                      else if (slug === 'print') bgColor = '#d1fae5'
-                      
-                      return (
-                        <Link 
-                          key={`mobile-${idx}`} 
-                          href={`/projects/${project.slug?.current || ''}`}
-                          className="hover:opacity-70 transition-opacity"
-                          style={{
-                            fontSize: '8px',
-                            padding: '2px 6px',
-                            backgroundColor: bgColor,
-                            borderRadius: '6px',
-                            display: 'inline-block',
-                          }}
-                        >
-                          {project.title?.toLowerCase() || ''}
-                        </Link>
-                      )
-                    })}
-                  </div>
-                  
-                  {/* Location on mobile */}
-                  <div 
-                    style={{
-                      fontSize: '6px',
-                      lineHeight: '1.1',
-                      letterSpacing: '0.02px',
-                      marginTop: '1px',
-                      opacity: 0.6,
-                    }}
-                  >
-                    based in paris · available worldwide
-                  </div>
-                </div>
-              </div>
-              
-              {/* Large name - DESKTOP */}
-              <div 
-                className="absolute text-black font-bold homepage-name hidden md:block"
+                className="absolute text-black font-bold homepage-name"
                 style={{
                   top: '20%',
                   right: '20%',
@@ -273,23 +271,6 @@ export default async function Home() {
                   fontSize: 'clamp(24px, 5vw, 56px)',
                   letterSpacing: '-1px',
                   whiteSpace: 'nowrap',
-                }}
-              >
-                harper slone
-              </div>
-              
-              {/* Large name - MOBILE: centered */}
-              <div 
-                className="absolute text-black font-bold md:hidden"
-                style={{
-                  top: '35%',
-                  left: '50%',
-                  transform: 'rotate(-45deg) translateX(-50%)',
-                  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                  fontSize: '22px',
-                  letterSpacing: '-0.5px',
-                  whiteSpace: 'nowrap',
-                  textAlign: 'center',
                 }}
               >
                 harper slone

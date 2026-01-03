@@ -140,12 +140,17 @@ body {
 
   /* ===== HOMEPAGE MOBILE ===== */
   .homepage-diamond {
-    width: 80% !important;
-    height: 80% !important;
+    width: 75% !important;
+    height: 75% !important;
   }
   
   .homepage-main {
     padding: 8px !important;
+  }
+  
+  .homepage-container {
+    transform: scale(0.9);
+    transform-origin: center center;
   }
   
   .homepage-dot {
@@ -153,8 +158,38 @@ body {
   }
   
   .homepage-project-link {
-    font-size: 8px !important;
-    padding: 3px 8px !important;
+    font-size: 6px !important;
+    padding: 2px 5px !important;
+  }
+  
+  .homepage-projects-text {
+    transform: rotate(-45deg) scale(0.7) !important;
+    transform-origin: top left !important;
+  }
+  
+  .homepage-projects-list {
+    font-size: 6px !important;
+    gap: 4px !important;
+  }
+  
+  .homepage-services {
+    transform: rotate(45deg) scale(0.55) !important;
+    transform-origin: bottom right !important;
+  }
+  
+  .homepage-services-line {
+    font-size: 5px !important;
+    line-height: 1.2 !important;
+  }
+  
+  .homepage-location {
+    font-size: 5px !important;
+  }
+  
+  .homepage-name {
+    font-size: 18px !important;
+    top: 25% !important;
+    right: 22% !important;
   }
 
   /* ===== NAVIGATION MOBILE ===== */
@@ -282,17 +317,49 @@ body {
 
   /* ===== HOMEPAGE PHONE ===== */
   .homepage-diamond {
-    width: 85% !important;
-    height: 85% !important;
+    width: 72% !important;
+    height: 72% !important;
+  }
+  
+  .homepage-container {
+    transform: scale(0.85);
   }
   
   .homepage-dot {
-    transform: rotate(-45deg) scale(0.4) !important;
+    transform: rotate(-45deg) scale(0.35) !important;
   }
   
   .homepage-project-link {
-    font-size: 7px !important;
-    padding: 2px 6px !important;
+    font-size: 5px !important;
+    padding: 1px 4px !important;
+  }
+  
+  .homepage-projects-text {
+    transform: rotate(-45deg) scale(0.6) !important;
+  }
+  
+  .homepage-projects-list {
+    font-size: 5px !important;
+    gap: 3px !important;
+  }
+  
+  .homepage-services {
+    transform: rotate(45deg) scale(0.45) !important;
+  }
+  
+  .homepage-services-line {
+    font-size: 4px !important;
+    line-height: 1.1 !important;
+  }
+  
+  .homepage-location {
+    font-size: 4px !important;
+  }
+  
+  .homepage-name {
+    font-size: 16px !important;
+    top: 28% !important;
+    right: 20% !important;
   }
 
   /* ===== NAVIGATION PHONE ===== */
