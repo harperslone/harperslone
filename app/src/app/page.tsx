@@ -191,7 +191,7 @@ export default async function Home() {
               <div 
                 className="absolute text-black md:hidden"
                 style={{
-                  bottom: '15%',
+                  bottom: '18%',
                   left: '50%',
                   transform: 'rotate(-45deg) translateX(-50%)',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
@@ -204,17 +204,17 @@ export default async function Home() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '6px',
+                    gap: '3px',
                   }}
                 >
-                  {/* Projects in 2x2 grid on mobile */}
+                  {/* Projects in 2x2 grid on mobile - SMALL */}
                   <div 
                     style={{
                       display: 'grid',
                       gridTemplateColumns: 'repeat(2, auto)',
-                      gap: '4px 8px',
-                      fontSize: '9px',
-                      lineHeight: '1.3',
+                      gap: '2px 4px',
+                      fontSize: '6px',
+                      lineHeight: '1.2',
                     }}
                   >
                     {allProjects.map((project, idx) => {
@@ -227,7 +227,20 @@ export default async function Home() {
                       else if (slug === 'print') bgColor = '#d1fae5'
                       
                       return (
-                        <ProjectLink key={`mobile-${idx}`} project={project} bgColor={bgColor} />
+                        <Link 
+                          key={`mobile-${idx}`} 
+                          href={`/projects/${project.slug?.current || ''}`}
+                          className="hover:opacity-70 transition-opacity"
+                          style={{
+                            fontSize: '5px',
+                            padding: '1px 4px',
+                            backgroundColor: bgColor,
+                            borderRadius: '8px',
+                            display: 'inline-block',
+                          }}
+                        >
+                          {project.title?.toLowerCase() || ''}
+                        </Link>
                       )
                     })}
                   </div>
@@ -235,11 +248,11 @@ export default async function Home() {
                   {/* Location on mobile */}
                   <div 
                     style={{
-                      fontSize: '7px',
-                      lineHeight: '1.3',
-                      letterSpacing: '0.1px',
-                      marginTop: '4px',
-                      opacity: 0.8,
+                      fontSize: '5px',
+                      lineHeight: '1.2',
+                      letterSpacing: '0.05px',
+                      marginTop: '2px',
+                      opacity: 0.7,
                     }}
                   >
                     based in paris · available worldwide
