@@ -268,15 +268,16 @@ export default async function Home() {
             <div 
               className="absolute text-black homepage-location-straight"
               style={{
-                bottom: '2%',
+                bottom: '5%',
                 left: '50%',
                 transform: 'translateX(-50%)',
                 fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSize: 'clamp(8px, 1vw, 11px)',
+                fontSize: 'clamp(9px, 1.1vw, 12px)',
                 lineHeight: '1.4',
                 letterSpacing: '0.1px',
                 whiteSpace: 'nowrap',
                 textAlign: 'center',
+                zIndex: 20,
               }}
             >
               based in paris · available worldwide

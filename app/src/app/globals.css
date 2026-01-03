@@ -193,8 +193,8 @@ body {
   }
   
   .homepage-location-straight {
-    font-size: 7px !important;
-    bottom: 0% !important;
+    font-size: 8px !important;
+    bottom: 3% !important;
   }
 
   /* ===== NAVIGATION MOBILE ===== */
@@ -378,8 +378,8 @@ body {
   }
   
   .homepage-location-straight {
-    font-size: 6px !important;
-    bottom: -2% !important;
+    font-size: 7px !important;
+    bottom: 2% !important;
   }
 
   /* ===== NAVIGATION PHONE ===== */
