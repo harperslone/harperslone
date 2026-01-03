@@ -126,9 +126,9 @@ export default async function Home() {
                 />
               ))}
               
-              {/* Projects on top-left edge - rotated -45deg */}
+              {/* Projects on top-left edge - rotated -45deg - DESKTOP ONLY */}
               <div 
-                className="absolute text-black homepage-projects-text"
+                className="absolute text-black homepage-projects-text hidden md:block"
                 style={{
                   top: '8%',
                   left: '50%',
@@ -169,7 +169,7 @@ export default async function Home() {
                         <ProjectLink key={idx} project={project} bgColor={bgColor} />
                       )
                     })}
-        </div>
+                  </div>
                   
                   {/* Location */}
                   <div 
@@ -187,10 +187,69 @@ export default async function Home() {
                 </div>
               </div>
               
-              
-              {/* Large name on right side */}
+              {/* MOBILE: Projects centered inside diamond */}
               <div 
-                className="absolute text-black font-bold homepage-name"
+                className="absolute text-black md:hidden"
+                style={{
+                  bottom: '15%',
+                  left: '50%',
+                  transform: 'rotate(-45deg) translateX(-50%)',
+                  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                  textAlign: 'center',
+                  width: '100%',
+                }}
+              >
+                <div 
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  {/* Projects in 2x2 grid on mobile */}
+                  <div 
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(2, auto)',
+                      gap: '4px 8px',
+                      fontSize: '9px',
+                      lineHeight: '1.3',
+                    }}
+                  >
+                    {allProjects.map((project, idx) => {
+                      const slug = project.slug?.current?.toLowerCase() || project.title?.toLowerCase() || ''
+                      let bgColor = 'transparent'
+                      
+                      if (slug === 'projects') bgColor = '#fef08a'
+                      else if (slug === 'work') bgColor = '#bfdbfe'
+                      else if (slug === 'exhibitions') bgColor = '#fce7f3'
+                      else if (slug === 'print') bgColor = '#d1fae5'
+                      
+                      return (
+                        <ProjectLink key={`mobile-${idx}`} project={project} bgColor={bgColor} />
+                      )
+                    })}
+                  </div>
+                  
+                  {/* Location on mobile */}
+                  <div 
+                    style={{
+                      fontSize: '7px',
+                      lineHeight: '1.3',
+                      letterSpacing: '0.1px',
+                      marginTop: '4px',
+                      opacity: 0.8,
+                    }}
+                  >
+                    based in paris · available worldwide
+                  </div>
+                </div>
+              </div>
+              
+              {/* Large name - DESKTOP */}
+              <div 
+                className="absolute text-black font-bold homepage-name hidden md:block"
                 style={{
                   top: '20%',
                   right: '20%',
@@ -199,6 +258,23 @@ export default async function Home() {
                   fontSize: 'clamp(24px, 5vw, 56px)',
                   letterSpacing: '-1px',
                   whiteSpace: 'nowrap',
+                }}
+              >
+                harper slone
+              </div>
+              
+              {/* Large name - MOBILE: centered */}
+              <div 
+                className="absolute text-black font-bold md:hidden"
+                style={{
+                  top: '35%',
+                  left: '50%',
+                  transform: 'rotate(-45deg) translateX(-50%)',
+                  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                  fontSize: '22px',
+                  letterSpacing: '-0.5px',
+                  whiteSpace: 'nowrap',
+                  textAlign: 'center',
                 }}
               >
                 harper slone

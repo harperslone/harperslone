@@ -140,43 +140,21 @@ body {
 
   /* ===== HOMEPAGE MOBILE ===== */
   .homepage-diamond {
-    width: 85% !important;
-    height: 85% !important;
+    width: 80% !important;
+    height: 80% !important;
   }
   
   .homepage-main {
     padding: 8px !important;
   }
   
-  .homepage-projects-text {
-    top: 6% !important;
-    left: 48% !important;
-  }
-  
-  .homepage-projects-list {
-    font-size: 8px !important;
-    gap: 4px !important;
-  }
-  
-  .homepage-location {
-    font-size: 7px !important;
-  }
-  
-  .homepage-name {
-    font-size: 20px !important;
-    top: 28% !important;
-    right: 16% !important;
-  }
-  
   .homepage-dot {
-    transform: rotate(-45deg) scale(0.6) !important;
+    transform: rotate(-45deg) scale(0.5) !important;
   }
   
   .homepage-project-link {
-    font-size: 7px !important;
-    padding: 2px 6px !important;
-    transform: scale(0.7) !important;
-    transform-origin: center !important;
+    font-size: 8px !important;
+    padding: 3px 8px !important;
   }
 
   /* ===== NAVIGATION MOBILE ===== */
@@ -299,41 +277,17 @@ body {
 
   /* ===== HOMEPAGE PHONE ===== */
   .homepage-diamond {
-    width: 92% !important;
-    height: 92% !important;
-  }
-  
-  .homepage-projects-text {
-    top: 3% !important;
-    left: 50% !important;
-  }
-  
-  .homepage-projects-list {
-    font-size: 6px !important;
-    gap: 2px !important;
-    flex-wrap: wrap !important;
-    justify-content: flex-end !important;
-  }
-  
-  .homepage-location {
-    font-size: 5px !important;
-    margin-top: 2px !important;
-  }
-  
-  .homepage-name {
-    font-size: 18px !important;
-    top: 32% !important;
-    right: 14% !important;
+    width: 85% !important;
+    height: 85% !important;
   }
   
   .homepage-dot {
-    transform: rotate(-45deg) scale(0.45) !important;
+    transform: rotate(-45deg) scale(0.4) !important;
   }
   
   .homepage-project-link {
-    font-size: 5px !important;
-    padding: 1px 4px !important;
-    transform: scale(0.55) !important;
+    font-size: 7px !important;
+    padding: 2px 6px !important;
   }
 
   /* ===== NAVIGATION PHONE ===== */
