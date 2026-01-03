@@ -247,40 +247,42 @@ export default async function Home() {
               </div>
               
               
-              {/* Large name on right side */}
+              {/* Large name on right side with location underneath */}
               <div 
-                className="absolute text-black font-bold homepage-name"
+                className="absolute text-black homepage-name-container"
                 style={{
                   top: '20%',
                   right: '20%',
                   transform: 'rotate(-45deg)',
                   fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                  fontSize: 'clamp(24px, 5vw, 56px)',
-                  letterSpacing: '-1px',
-                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
                 }}
               >
-                harper slone
+                <div 
+                  className="font-bold homepage-name"
+                  style={{
+                    fontSize: 'clamp(24px, 5vw, 56px)',
+                    letterSpacing: '-1px',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  harper slone
+                </div>
+                <div 
+                  className="homepage-location-under-name"
+                  style={{
+                    fontSize: 'clamp(8px, 1vw, 12px)',
+                    letterSpacing: '0.1px',
+                    whiteSpace: 'nowrap',
+                    marginTop: 'clamp(2px, 0.5vw, 6px)',
+                    fontWeight: 'normal',
+                  }}
+                >
+                  based in paris · available worldwide
+                </div>
               </div>
-            </div>
-            
-            {/* Location - STRAIGHT text at bottom, outside the diamond */}
-            <div 
-              className="absolute text-black homepage-location-straight"
-              style={{
-                bottom: '5%',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSize: 'clamp(9px, 1.1vw, 12px)',
-                lineHeight: '1.4',
-                letterSpacing: '0.1px',
-                whiteSpace: 'nowrap',
-                textAlign: 'center',
-                zIndex: 20,
-              }}
-            >
-              based in paris · available worldwide
             </div>
         </div>
       </main>

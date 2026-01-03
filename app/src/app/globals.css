@@ -188,13 +188,16 @@ body {
   
   .homepage-name {
     font-size: 18px !important;
-    top: 25% !important;
-    right: 22% !important;
   }
   
-  .homepage-location-straight {
-    font-size: 8px !important;
-    bottom: 3% !important;
+  .homepage-name-container {
+    top: 28% !important;
+    right: 20% !important;
+  }
+  
+  .homepage-location-under-name {
+    font-size: 6px !important;
+    margin-top: 2px !important;
   }
 
   /* ===== NAVIGATION MOBILE ===== */
@@ -372,14 +375,17 @@ body {
   }
   
   .homepage-name {
-    font-size: 16px !important;
-    top: 28% !important;
-    right: 20% !important;
+    font-size: 14px !important;
   }
   
-  .homepage-location-straight {
-    font-size: 7px !important;
-    bottom: 2% !important;
+  .homepage-name-container {
+    top: 30% !important;
+    right: 18% !important;
+  }
+  
+  .homepage-location-under-name {
+    font-size: 5px !important;
+    margin-top: 1px !important;
   }
 
   /* ===== NAVIGATION PHONE ===== */
