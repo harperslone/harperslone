@@ -203,16 +203,16 @@ export default function SequentialGallery({ images, title, description, maxWidth
           <div 
             className="flex flex-col justify-center items-center sequential-image-container"
             style={{ 
-              maxWidth: customMaxWidth ? `${customMaxWidth + 160}px` : (
-                maxWidth === 'xs' ? '460px' : 
-                maxWidth === 'sm' ? '560px' : 
-                maxWidth === 'md' ? '660px' : 
-                maxWidth === 'xl' ? '860px' : 
-                '760px'
+              maxWidth: customMaxWidth ? `min(${customMaxWidth + 100}px, 90vw)` : (
+                maxWidth === 'xs' ? 'min(400px, 90vw)' : 
+                maxWidth === 'sm' ? 'min(500px, 90vw)' : 
+                maxWidth === 'md' ? 'min(600px, 90vw)' : 
+                maxWidth === 'xl' ? 'min(800px, 95vw)' : 
+                'min(700px, 90vw)'
               ),
               width: 'auto',
-              paddingLeft: validImages.length > 1 ? '80px' : '0',
-              paddingRight: validImages.length > 1 ? '80px' : '0',
+              paddingLeft: validImages.length > 1 ? '48px' : '0',
+              paddingRight: validImages.length > 1 ? '48px' : '0',
               boxSizing: 'border-box',
               display: 'flex',
               alignItems: 'center',
