@@ -6,46 +6,53 @@ export default function Navigation() {
   return (
     <div className="relative z-20">
       {/* Primary Navigation - Always Displayed */}
-      <nav className="py-2 px-4" style={{
+      <nav className="py-1 px-2 md:py-2 md:px-4" style={{
         backgroundImage: 'radial-gradient(circle, #bfdbfe 1px, transparent 1px)',
         backgroundSize: '30px 30px',
         backgroundColor: '#ffefd5',
       }}>
-        <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4" style={{ fontSize: '13px' }}>
-          <Link href="/" className="text-black font-normal hover:opacity-70 px-2 py-1" style={{
+        <div className="flex flex-wrap items-center justify-between gap-2 md:gap-4" style={{ fontSize: '11px' }}>
+          <Link href="/" className="text-black font-normal hover:opacity-70 nav-link" style={{
             backgroundImage: 'radial-gradient(circle, #bfdbfe 1px, transparent 1px)',
-            backgroundSize: '8px 8px',
+            backgroundSize: '6px 6px',
             backgroundColor: '#bfdbfe',
-            fontSize: '13px',
+            fontSize: '11px',
+            padding: '2px 6px',
+            lineHeight: '1.2',
           }}>
             harper slone
           </Link>
-          <div className="flex flex-wrap items-center gap-3 md:gap-4 text-black font-normal" style={{ fontSize: '13px' }}>
-            <Link href="/about" className="hover:opacity-70 px-2 py-1" style={{
+          <div className="flex flex-wrap items-center gap-2 md:gap-4 text-black font-normal" style={{ fontSize: '11px' }}>
+            <Link href="/about" className="hover:opacity-70 nav-link" style={{
               backgroundImage: 'radial-gradient(circle, #bfdbfe 1px, transparent 1px)',
-              backgroundSize: '8px 8px',
+              backgroundSize: '6px 6px',
               backgroundColor: '#bfdbfe',
-              fontSize: '13px',
+              fontSize: '11px',
+              padding: '2px 6px',
+              lineHeight: '1.2',
             }}>
               about
             </Link>
-            <Link href="/contact" className="hover:opacity-70 px-2 py-1" style={{
+            <Link href="/contact" className="hover:opacity-70 nav-link" style={{
               backgroundImage: 'radial-gradient(circle, #bfdbfe 1px, transparent 1px)',
-              backgroundSize: '8px 8px',
+              backgroundSize: '6px 6px',
               backgroundColor: '#bfdbfe',
-              fontSize: '13px',
+              fontSize: '11px',
+              padding: '2px 6px',
+              lineHeight: '1.2',
             }}>
               contact
             </Link>
-            <Link href="/cart" className="hover:opacity-70 px-2 py-1 flex items-center justify-center" style={{
+            <Link href="/cart" className="hover:opacity-70 flex items-center justify-center nav-link" style={{
               backgroundImage: 'radial-gradient(circle, #bfdbfe 1px, transparent 1px)',
-              backgroundSize: '8px 8px',
+              backgroundSize: '6px 6px',
               backgroundColor: '#bfdbfe',
-              fontSize: '13px',
+              padding: '2px 6px',
+              lineHeight: '1.2',
             }}>
               <svg 
-                width="16" 
-                height="16" 
+                width="12" 
+                height="12" 
                 viewBox="0 0 24 24" 
                 fill="none" 
                 stroke="currentColor" 
@@ -65,4 +72,3 @@ export default function Navigation() {
     </div>
   )
 }
-
