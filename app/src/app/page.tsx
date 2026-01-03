@@ -173,9 +173,9 @@ export default async function Home() {
                 </div>
               </div>
               
-              {/* Services on bottom-right edge - rotated +45deg (opposite) */}
+              {/* Services on bottom-right edge - MOBILE ONLY */}
               <div 
-                className="absolute text-black homepage-services"
+                className="absolute text-black homepage-services md:hidden"
                 style={{
                   bottom: '8%',
                   right: '50%',
