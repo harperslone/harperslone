@@ -173,9 +173,9 @@ export default async function Home() {
                 </div>
               </div>
               
-              {/* Services on bottom-right edge - HIDDEN ON MOBILE */}
+              {/* Services on bottom-right edge - HIDDEN */}
               <div 
-                className="absolute text-black homepage-services hidden md:block"
+                className="absolute text-black homepage-services hidden"
                 style={{
                   bottom: '8%',
                   right: '50%',
