@@ -76,6 +76,22 @@ body {
     overflow-x: hidden !important;
   }
 
+  /* ===== NAVIGATION MOBILE ===== */
+  .nav-bar {
+    padding: 4px 8px !important;
+  }
+  
+  .nav-link-box {
+    font-size: 10px !important;
+    padding: 2px 5px !important;
+    background-size: 5px 5px !important;
+  }
+  
+  .nav-cart-icon {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
   /* ===== GALLERY GRID MOBILE ===== */
   .gallery-container {
     grid-template-columns: repeat(2, 1fr) !important;
